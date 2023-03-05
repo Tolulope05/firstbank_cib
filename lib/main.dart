@@ -1,6 +1,9 @@
+import 'package:firstbank_cib/bindings/initial_bindings.dart';
+import 'package:firstbank_cib/constants/colors.dart';
+import 'package:firstbank_cib/view/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import 'constants/colors.dart';
 import 'utils/routes/routes.dart';
 import 'utils/routes/routes_name.dart';
 
@@ -14,13 +17,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return GetMaterialApp(
+      title: 'First Bank',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: AppColors.primaryColor,
       ),
-      initialRoute: RoutesName.splash,
-      onGenerateRoute: Routes.generateRoute,
+      home: const SplashScreen(),
+      initialBinding: InitialBindings(),
+      getPages: Routes.getPages,
     );
   }
 }
