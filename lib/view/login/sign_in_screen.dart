@@ -13,8 +13,9 @@ class SignInScreen extends GetView<SignInViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false, // option 1
       body: SingleChildScrollView(
+        // to avoid keyboard covering the text field // option 2
         child: Column(
           children: [
             Container(
