@@ -1,28 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
-class FilledRoundedPinPut extends StatefulWidget {
+import '../view_model/pin_confirmation_model.dart';
+
+class FilledRoundedPinPut extends GetView<PinConfirmationModel> {
   const FilledRoundedPinPut({Key? key}) : super(key: key);
-
-  @override
-  _FilledRoundedPinPutState createState() => _FilledRoundedPinPutState();
-
-  @override
-  String toStringShort() => 'Rounded Filled';
-}
-
-class _FilledRoundedPinPutState extends State<FilledRoundedPinPut> {
-  final controller = TextEditingController();
-  final focusNode = FocusNode();
-
-  @override
-  void dispose() {
-    controller.dispose();
-    focusNode.dispose();
-    super.dispose();
-  }
-
-  bool showError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -40,31 +23,37 @@ class _FilledRoundedPinPutState extends State<FilledRoundedPinPut> {
       decoration: BoxDecoration(
         // color: fillColor,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Color(0xffDCDCDC)),
+        border: Border.all(color: const Color(0xffDCDCDC)),
       ),
     );
-
     return SizedBox(
       height: 68,
-      child: Pinput(
-        length: length,
-        controller: controller,
-        focusNode: focusNode,
-        defaultPinTheme: defaultPinTheme,
-        onCompleted: (pin) {
-          setState(() => showError = pin != '5555');
-        },
-        focusedPinTheme: defaultPinTheme.copyWith(
-          height: 68,
-          width: 64,
-          decoration: defaultPinTheme.decoration!.copyWith(
-            border: Border.all(color: borderColor),
+      child: Obx(
+        () => Pinput(
+          length: length,
+          controller: controller.roundedPinController.value,
+          focusNode: controller.roundedPinFocusNode.value,
+          defaultPinTheme: defaultPinTheme,
+          onCompleted: (pin) {
+            if (pin == controller.passKey) {
+              controller.navigateToHomePage();
+            } else {
+              controller.roundedPinshowError.value = true;
+              // setState(() => showError = pin != '5555');
+            }
+          },
+          focusedPinTheme: defaultPinTheme.copyWith(
+            height: 68,
+            width: 64,
+            decoration: defaultPinTheme.decoration!.copyWith(
+              border: Border.all(color: borderColor),
+            ),
           ),
-        ),
-        errorPinTheme: defaultPinTheme.copyWith(
-          decoration: BoxDecoration(
-            color: errorColor,
-            borderRadius: BorderRadius.circular(8),
+          errorPinTheme: defaultPinTheme.copyWith(
+            decoration: BoxDecoration(
+              color: errorColor,
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
         ),
       ),
