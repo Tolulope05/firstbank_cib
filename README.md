@@ -1,16 +1,33 @@
-# firstbank_cib
+## Flutter Beautiful Login Page UI Design and Animation - Day 1
 
-A new Flutter project.
+```dart
+class FirstBank extends TestProject {
+  video() {
+    return {
+      "title": "First Bank App",
+      "description": "An interview app",
+      "day": 2,
+      "developer": "https://github.com/Tolulope05"
+    }
+  }
+}
+```
 
-## Getting Started
+[Whatsapp](https://wa.link/4clrdv)
+<br><br>
+## Development Setup
+Clone the repository and run the following commands:
+```
+flutter pub get
+flutter run
+```
 
-This project is a starting point for a Flutter application.
+## ScreenShots
 
-A few resources to get you started if this is your first Flutter project:
+<img src="assets/screenshots/home.png" height="500em" />
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Links
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* [Website](https://github.com/Tolulope05)
+* [Twitter](https://twitter.com/FakunleTolu)
+* [Instagram](https://instagram.com/tolucodes)
