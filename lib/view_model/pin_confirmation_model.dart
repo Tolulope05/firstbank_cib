@@ -7,10 +7,18 @@ class PinConfirmationModel extends GetxController {
   final TextEditingController pinController = TextEditingController();
 
   // Rounded pin
-  final roundedPinController = TextEditingController().obs;
-  final roundedPinFocusNode = FocusNode().obs;
+  final Rx<TextEditingController> roundedPinController =
+      TextEditingController().obs;
+  final Rx<FocusNode> roundedPinFocusNode = FocusNode().obs;
   RxBool roundedPinshowError = false.obs;
   String passKey = '123456';
+
+  @override
+  void onClose() {
+    pinController.dispose();
+    roundedPinController.value.dispose();
+    super.onClose();
+  }
 
   // navigate back to signIn page
   void goToSignInPage() {
@@ -19,6 +27,6 @@ class PinConfirmationModel extends GetxController {
 
 // navigate to homePage
   void navigateToHomePage() {
-    Get.toNamed(RoutesName.homePage);
+    Get.offAllNamed(RoutesName.dashBoard);
   }
 }
