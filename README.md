@@ -1,4 +1,4 @@
-## Flutter Beautiful Login Page UI Design and Animation - Day 1
+## First Bank App
 
 ```dart
 class FirstBank extends TestProject {
