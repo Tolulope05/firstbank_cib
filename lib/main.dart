@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'First Bank',
       theme: ThemeData(
         primaryColor: AppColors.primaryColor,
+        fontFamily: "Inter",
       ),
       home: const SplashScreen(),
       initialBinding: InitialBindings(),

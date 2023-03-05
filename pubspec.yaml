@@ -31,6 +31,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/fonts/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -41,7 +42,20 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+      - family: Inter
+        fonts:
+          - asset: assets/fonts/Inter-Regular.ttf
+          - asset: assets/fonts/Inter-Medium.ttf
+            weight: 500
+          - asset: assets/fonts/Inter-SemiBold.ttf
+            weight: 600
+          - asset: assets/fonts/Inter-Bold.ttf
+            weight: 700
+          - asset: assets/fonts/Inter-ExtraBold.ttf
+            weight: 800
+          - asset: assets/fonts/Inter-Black.ttf
+            weight: 900
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

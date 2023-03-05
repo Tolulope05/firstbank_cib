@@ -62,9 +62,10 @@ class Logincreen extends GetView<LoginViewModel> {
             left: 20,
             right: 20,
             child: SizedBox(
-              height: 453 + 68 + 24,
+              height: 453 + 68,
               child: PageView(controller: controller.pageController, children: [
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.asset(
                       "assets/images/login_1.png",
@@ -74,7 +75,9 @@ class Logincreen extends GetView<LoginViewModel> {
                     const Text(
                       "Welcome to our corporate banking app!",
                       style: TextStyle(
+                        fontWeight: FontWeight.w500,
                         fontSize: 24,
+                        color: AppColors.blackColor,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -90,7 +93,9 @@ class Logincreen extends GetView<LoginViewModel> {
                     const Text(
                       "Access a wide range of banking services.",
                       style: TextStyle(
+                        fontWeight: FontWeight.w500,
                         fontSize: 24,
+                        color: AppColors.blackColor,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -106,7 +111,9 @@ class Logincreen extends GetView<LoginViewModel> {
                     const Text(
                       "Manage your finances on-the-go with ease",
                       style: TextStyle(
+                        fontWeight: FontWeight.w500,
                         fontSize: 24,
+                        color: AppColors.blackColor,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -122,7 +129,9 @@ class Logincreen extends GetView<LoginViewModel> {
                     const Text(
                       "Streamline your banking experience.",
                       style: TextStyle(
+                        fontWeight: FontWeight.w500,
                         fontSize: 24,
+                        color: AppColors.blackColor,
                       ),
                       textAlign: TextAlign.center,
                     ),
