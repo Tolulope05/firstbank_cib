@@ -40,7 +40,7 @@ class Logincreen extends GetView<LoginViewModel> {
                   bgColor: AppColors.primaryColor,
                   text: "Sign in",
                   textColor: AppColors.whiteColor,
-                  onTap: () {},
+                  onTap: () => controller.goToSignInPage(),
                 ),
               ),
               Padding(

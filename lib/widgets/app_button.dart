@@ -1,5 +1,4 @@
 import 'package:firstbank_cib/constants/colors.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
