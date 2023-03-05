@@ -2,11 +2,16 @@ import 'package:firstbank_cib/bindings/initial_bindings.dart';
 import 'package:firstbank_cib/constants/colors.dart';
 import 'package:firstbank_cib/view/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'utils/routes/routes.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(const MyApp());
 }
 

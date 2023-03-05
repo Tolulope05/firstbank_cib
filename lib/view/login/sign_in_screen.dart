@@ -117,8 +117,45 @@ class SignInScreen extends GetView<SignInViewModel> {
               ],
             ),
           ),
-          AppTextFieldInput(),
-          AppTextFieldInput(),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 12.0,
+              horizontal: 24.0,
+            ),
+            child: AppTextFieldInput(
+              controller: controller.organizationCodeController,
+              headerText: 'Organization Code',
+              hintText: 'Organization code',
+              obscureText: false,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 12.0,
+              horizontal: 24.0,
+            ),
+            child: AppTextFieldInput(
+              controller: controller.usernameController,
+              headerText: 'Username',
+              hintText: 'Corporate ID',
+              obscureText: false,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 12.0,
+              horizontal: 24.0,
+            ),
+            child: AppTextFieldInput(
+              controller: controller.passwordController,
+              headerText: 'Password',
+              hintText: 'Password',
+              obscureText: false,
+              suffixIcon: const Icon(
+                Icons.visibility_off,
+              ),
+            ),
+          ),
         ],
       ),
     );
