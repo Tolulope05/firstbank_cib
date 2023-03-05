@@ -18,25 +18,7 @@ class SignInScreen extends GetView<SignInViewModel> {
         // to avoid keyboard covering the text field // option 2
         child: Column(
           children: [
-            Container(
-              height: kToolbarHeight + 50,
-              color: AppColors.primaryColor,
-              width: double.maxFinite,
-              child: const Align(
-                alignment: Alignment.bottomLeft,
-                child: Padding(
-                  padding: EdgeInsets.all(24.0),
-                  child: Text(
-                    'Logo',
-                    style: TextStyle(
-                      color: AppColors.whiteColor,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            AppBar(),
             Container(
               height: 150,
               padding: const EdgeInsets.symmetric(horizontal: 24),
