@@ -67,6 +67,21 @@ class PinConfirmationScreen extends GetView<PinConfirmationModel> {
               child: FilledRoundedPinPut(),
             ),
           ),
+          // cant get access to key
+          const Padding(
+            padding: EdgeInsets.only(
+              left: 24,
+              right: 24,
+            ),
+            child: Center(
+              child: Text(
+                "I can't get access to my Token",
+                style: TextStyle(
+                  color: AppColors.textColor3,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
