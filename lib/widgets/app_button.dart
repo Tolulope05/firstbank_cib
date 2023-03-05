@@ -3,28 +3,38 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
-  const AppButton({Key? key}) : super(key: key);
+  const AppButton({
+    Key? key,
+    required this.onTap,
+    required this.text,
+    this.bgColor,
+    this.textColor,
+    this.borderColor,
+  }) : super(key: key);
+  final VoidCallback onTap;
+  final String text;
+  final Color? bgColor;
+  final Color? textColor;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 48,
       decoration: BoxDecoration(
-        color: AppColors.primaryColor,
-        borderRadius: BorderRadius.circular(4),
-      ),
+          color: bgColor ?? AppColors.primaryColor,
+          borderRadius: BorderRadius.circular(4),
+          border: Border.all(
+            color: borderColor ?? AppColors.primaryColor,
+            width: 1,
+          )),
       child: InkWell(
-        onTap: () {
-          if (kDebugMode) {
-            // debug print
-            print("Button tapped");
-          }
-        },
-        child: const Center(
+        onTap: onTap,
+        child: Center(
             child: Text(
-          "Sign in",
+          text,
           style: TextStyle(
-            color: Colors.white,
+            color: textColor ?? Colors.white,
             fontSize: 16,
           ),
         )),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../view_model/login_view_model.dart';
+import '../../view_model/login_view_model.dart';
 
 class Logincreen extends GetView<LoginViewModel> {
   const Logincreen({Key? key}) : super(key: key);
@@ -32,9 +32,16 @@ class Logincreen extends GetView<LoginViewModel> {
                   expansionFactor: 1.5,
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 32),
-                child: AppButton(),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32),
+                child: AppButton(
+                  borderColor: AppColors.primaryColor,
+                  bgColor: AppColors.primaryColor,
+                  text: "Sign in",
+                  textColor: AppColors.whiteColor,
+                  onTap: () {},
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 32),

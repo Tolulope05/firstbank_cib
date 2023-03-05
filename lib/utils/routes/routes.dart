@@ -1,5 +1,5 @@
 import 'package:firstbank_cib/utils/routes/routes_name.dart';
-import 'package:firstbank_cib/view/login_screen.dart';
+import 'package:firstbank_cib/view/login/login_screen.dart';
 import 'package:firstbank_cib/view/splash_screen.dart';
 import 'package:get/get.dart';
 
