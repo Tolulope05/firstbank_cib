@@ -1,3 +1,4 @@
+import 'package:firstbank_cib/widgets/app_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,6 +9,13 @@ class PinConfirmationScreen extends GetView<PinConfirmationModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Column(
+        children: const [
+          AppAppBar(),
+          Text('PinConfirmationScreen'),
+        ],
+      ),
+    );
   }
 }

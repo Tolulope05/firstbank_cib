@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../utils/utils.dart';
 import '../../view_model/sign_in_view_model.dart';
+import '../../widgets/app_app_bar.dart';
 
 class SignInScreen extends GetView<SignInViewModel> {
   const SignInScreen({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class SignInScreen extends GetView<SignInViewModel> {
         // to avoid keyboard covering the text field // option 2
         child: Column(
           children: [
-            AppBar(),
+            const AppAppBar(),
             Container(
               height: 150,
               padding: const EdgeInsets.symmetric(horizontal: 24),
