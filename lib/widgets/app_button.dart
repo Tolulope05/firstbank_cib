@@ -1,4 +1,5 @@
 import 'package:firstbank_cib/constants/colors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
@@ -14,7 +15,10 @@ class AppButton extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          print("Button tapped");
+          if (kDebugMode) {
+            // debug print
+            print("Button tapped");
+          }
         },
         child: const Center(
             child: Text(

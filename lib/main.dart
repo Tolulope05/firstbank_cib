@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'utils/routes/routes.dart';
-import 'utils/routes/routes_name.dart';
 
 void main() {
   runApp(const MyApp());
