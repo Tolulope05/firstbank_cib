@@ -184,7 +184,7 @@ class SignInScreen extends GetView<SignInViewModel> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: AppButton(
-                onTap: () {},
+                onTap: () => controller.navigateToPinConfirmationScreen(),
                 text: "Sign In to your account ",
               ),
             ),
@@ -195,7 +195,7 @@ class SignInScreen extends GetView<SignInViewModel> {
                 top: 16,
               ),
               child: AppButton(
-                onTap: () {},
+                onTap: () => controller.navigateToPinConfirmationScreen(),
                 bgColor: Colors.transparent,
                 textColor: AppColors.primaryColor,
                 // text: "Sign in with face ID",

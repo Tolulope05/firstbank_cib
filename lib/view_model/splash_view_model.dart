@@ -12,7 +12,7 @@ class SplashViewmodel extends GetxController {
     var hasLoggedInUser = false;
     await Future.delayed(const Duration(seconds: 1));
     if (hasLoggedInUser == true) {
-      Get.toNamed(RoutesName.home);
+      Get.toNamed(RoutesName.homePage);
     } else {
       Get.toNamed(RoutesName.login);
     }
