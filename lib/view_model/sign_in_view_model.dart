@@ -8,6 +8,14 @@ class SignInViewModel extends GetxController {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  @override
+  void onClose() {
+    organizationCodeController.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
+    super.onClose();
+  }
+
 // navigate to pin confirmation screen
   void navigateToPinConfirmationScreen() {
     Get.toNamed(RoutesName.pinConfirmation);
