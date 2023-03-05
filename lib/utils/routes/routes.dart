@@ -1,7 +1,9 @@
 import 'package:firstbank_cib/utils/routes/routes_name.dart';
 import 'package:firstbank_cib/view/dashboard/dash_board_screen.dart';
+import 'package:firstbank_cib/view/home_screen.dart';
 import 'package:firstbank_cib/view/login/login_screen.dart';
 import 'package:firstbank_cib/view/splash_screen.dart';
+import 'package:firstbank_cib/view_model/home_view_model.dart';
 import 'package:get/get.dart';
 
 import '../../view/login/pin_confirmation_screen.dart';
@@ -34,6 +36,15 @@ class Routes {
       binding: BindingsBuilder(
         () {
           Get.lazyPut(() => PinConfirmationModel());
+        },
+      ),
+    ),
+    GetPage<dynamic>(
+      name: RoutesName.homeScreen,
+      page: () => const HomeScreen(),
+      binding: BindingsBuilder(
+        () {
+          Get.lazyPut(() => HomeViewModel());
         },
       ),
     ),

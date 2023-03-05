@@ -27,6 +27,6 @@ class PinConfirmationModel extends GetxController {
 
 // navigate to homePage
   void navigateToHomePage() {
-    Get.offAllNamed(RoutesName.dashBoard);
+    Get.offAllNamed(RoutesName.homeScreen);
   }
 }

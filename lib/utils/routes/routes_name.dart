@@ -3,5 +3,6 @@ class RoutesName {
   static const login = "/login";
   static const signIn = "/signIn";
   static const pinConfirmation = "/pin-confirmation";
+  static const homeScreen = "/homeScreen";
   static const dashBoard = "/dashBoard";
 }
