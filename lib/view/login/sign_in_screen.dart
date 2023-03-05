@@ -1,4 +1,5 @@
 import 'package:firstbank_cib/constants/colors.dart';
+import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:firstbank_cib/widgets/text_field_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ class SignInScreen extends GetView<SignInViewModel> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             height: kToolbarHeight + 50,
@@ -118,9 +120,11 @@ class SignInScreen extends GetView<SignInViewModel> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 12.0,
-              horizontal: 24.0,
+            padding: const EdgeInsets.only(
+              bottom: 12.0,
+              top: 24,
+              right: 24.0,
+              left: 24.0,
             ),
             child: AppTextFieldInput(
               controller: controller.organizationCodeController,
@@ -153,6 +157,67 @@ class SignInScreen extends GetView<SignInViewModel> {
               obscureText: false,
               suffixIcon: const Icon(
                 Icons.visibility_off,
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                bottom: 40.0,
+                left: 24,
+                top: 12,
+              ),
+              child: GestureDetector(
+                onTap: () {},
+                child: const Text(
+                  "Forgot password?",
+                  style: TextStyle(
+                    color: AppColors.yellowColor2,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: AppButton(
+              onTap: () {},
+              text: "Sign In to your account ",
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              right: 24,
+              left: 24,
+              top: 16,
+            ),
+            child: AppButton(
+              onTap: () {},
+              bgColor: Colors.transparent,
+              textColor: AppColors.primaryColor,
+              // text: "Sign in with face ID",
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Utils.renderSVGImage(
+                      assetName: 'assets/svg/face_id.svg',
+                      width: 16.0,
+                      height: 16.0,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 12),
+                      child: Text(
+                        "Sign in with face ID",
+                        style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontSize: 16,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

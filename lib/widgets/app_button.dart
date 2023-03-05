@@ -5,16 +5,18 @@ class AppButton extends StatelessWidget {
   const AppButton({
     Key? key,
     required this.onTap,
-    required this.text,
+    this.text,
     this.bgColor,
     this.textColor,
     this.borderColor,
+    this.child,
   }) : super(key: key);
   final VoidCallback onTap;
-  final String text;
+  final String? text;
   final Color? bgColor;
   final Color? textColor;
   final Color? borderColor;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +31,15 @@ class AppButton extends StatelessWidget {
           )),
       child: InkWell(
         onTap: onTap,
-        child: Center(
-            child: Text(
-          text,
-          style: TextStyle(
-            color: textColor ?? Colors.white,
-            fontSize: 16,
-          ),
-        )),
+        child: child ??
+            Center(
+                child: Text(
+              text ?? 'Enter',
+              style: TextStyle(
+                color: textColor ?? Colors.white,
+                fontSize: 16,
+              ),
+            )),
       ),
     );
   }
