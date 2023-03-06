@@ -160,7 +160,7 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                       ApprovalTabView(),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

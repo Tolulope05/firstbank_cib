@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ActionCenterModel extends GetxController {
-// TransactionDetilsScreenTbBar
-  final int pageCount = 2;
-  final PageController pageController = PageController(initialPage: 10);
-
-  //naavigation logics
+  //navigation logics
   navigateback() {
     Get.back();
   }
