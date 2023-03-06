@@ -21,8 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final PageController _pageController = PageController();
   int selectedIndex = 0;
-  Color selectedIconColor = AppColors.primaryColor;
-  Color unselectedIconColor = const Color(0XFF898A8D);
+
   Color color = AppColors.whiteColor2;
 
   @override
@@ -91,8 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 24.0,
                 width: 24.0,
                 color: index == selectedIndex
-                    ? selectedIconColor
-                    : unselectedIconColor,
+                    ? AppColors.primaryColor
+                    : AppColors.unselectedIconColor,
               ),
             ),
           ),
@@ -103,8 +102,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(
                   fontSize: 14,
                   color: index == selectedIndex
-                      ? selectedIconColor
-                      : unselectedIconColor,
+                      ? AppColors.primaryColor
+                      : AppColors.unselectedIconColor,
                 ),
               ))
         ],

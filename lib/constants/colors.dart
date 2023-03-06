@@ -16,4 +16,5 @@ class AppColors {
   static const Color chevronBlackColor = Color(0xFF200E32);
   static const Color lightGreyColor = Color(0xFFB2B2B2);
   static const Color greyColor2 = Color(0XFF333333);
+  static const Color unselectedIconColor = Color(0XFF898A8D);
 }

@@ -31,7 +31,6 @@ class TransactionCard extends StatelessWidget {
                 Text(
                   "Layor Salami",
                   style: TextStyle(
-                    // fontSize: 14,
                     color: AppColors.blackColor,
                     fontWeight: FontWeight.w500,
                   ),
@@ -43,8 +42,13 @@ class TransactionCard extends StatelessWidget {
           //column 3
           Flexible(
             child: Column(
-              children: [
-                Text("NGN 10,000"),
+              children: const [
+                Text("NGN 10,000",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: AppColors.unselectedIconColor,
+                      fontWeight: FontWeight.w500,
+                    )),
                 Text("Processed"),
               ],
             ),
