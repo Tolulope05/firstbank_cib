@@ -5,4 +5,5 @@ class RoutesName {
   static const pinConfirmation = "/pin-confirmation";
   static const homeScreen = "/homeScreen";
   static const dashBoard = "/dashBoard";
+  static const actionCenter = "/actionCenter";
 }

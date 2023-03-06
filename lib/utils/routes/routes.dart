@@ -3,9 +3,11 @@ import 'package:firstbank_cib/view/dashboard/dash_board_screen.dart';
 import 'package:firstbank_cib/view/home_screen.dart';
 import 'package:firstbank_cib/view/login/login_screen.dart';
 import 'package:firstbank_cib/view/splash_screen.dart';
+import 'package:firstbank_cib/view_model/dashboard_view_model.dart';
 import 'package:firstbank_cib/view_model/home_view_model.dart';
 import 'package:get/get.dart';
 
+import '../../view/dashboard/action_center_screen.dart';
 import '../../view/login/pin_confirmation_screen.dart';
 import '../../view/login/sign_in_screen.dart';
 import '../../view_model/pin_confirmation_model.dart';
@@ -45,12 +47,17 @@ class Routes {
       binding: BindingsBuilder(
         () {
           Get.lazyPut(() => HomeViewModel());
+          Get.put(DashBoardviewModel());
         },
       ),
     ),
     GetPage<dynamic>(
       name: RoutesName.dashBoard,
       page: () => const DashBoardScreen(),
+    ),
+    GetPage<dynamic>(
+      name: RoutesName.actionCenter,
+      page: () => const ActionCenterScreen(),
     ),
   ];
 }

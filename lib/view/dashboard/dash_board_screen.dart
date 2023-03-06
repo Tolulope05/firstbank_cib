@@ -1,10 +1,12 @@
 import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:firstbank_cib/widgets/transaction_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
+import '../../view_model/dashboard_view_model.dart';
 
-class DashBoardScreen extends StatelessWidget {
+class DashBoardScreen extends GetView<DashBoardviewModel> {
   const DashBoardScreen({Key? key}) : super(key: key);
 
   @override
@@ -151,47 +153,53 @@ class DashBoardScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: AppColors.yellowColor3,
-                            ),
-                            padding: const EdgeInsets.all(12),
-                            child: Row(children: [
-                              const Text(
-                                "Action Center",
-                                style: TextStyle(
-                                  color: AppColors.greyColor2,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                          child: GestureDetector(
+                            onTap: () {
+                              controller.navigateToActionCenter();
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: AppColors.yellowColor3,
                               ),
-                              const Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  right: 0, //8 => Already taaken by IconButton
-                                ),
-                                child: Container(
-                                  height: 24,
-                                  width: 24,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffE4E4E4),
-                                    borderRadius: BorderRadius.circular(16),
+                              padding: const EdgeInsets.all(12),
+                              child: Row(children: [
+                                const Text(
+                                  "Action Center",
+                                  style: TextStyle(
+                                    color: AppColors.greyColor2,
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  child: const Center(
-                                      child: Text(
-                                    "8",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                    ),
-                                  )),
                                 ),
-                              ),
-                              GestureDetector(
-                                  onTap: () {},
-                                  child: const Icon(
-                                    Icons.chevron_right,
-                                  ))
-                            ]),
+                                const Spacer(),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    right:
+                                        0, //8 => Already taaken by IconButton
+                                  ),
+                                  child: Container(
+                                    height: 24,
+                                    width: 24,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xffE4E4E4),
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: const Center(
+                                        child: Text(
+                                      "8",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                    )),
+                                  ),
+                                ),
+                                GestureDetector(
+                                    onTap: () {},
+                                    child: const Icon(
+                                      Icons.chevron_right,
+                                    ))
+                              ]),
+                            ),
                           ),
                         ),
                         InkWell(
