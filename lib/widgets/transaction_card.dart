@@ -70,9 +70,10 @@ class TransactionCard extends StatelessWidget {
             children: [
               Text(
                 "${isIncome ? "+" : "-"} NGN $amount",
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
-                  color: AppColors.successColor,
+                  color:
+                      isIncome ? AppColors.successColor : AppColors.failedColor,
                   fontWeight: FontWeight.w500,
                 ),
               ),
