@@ -5,9 +5,11 @@ class TextColorWrap extends StatelessWidget {
       {Key? key,
       required this.text,
       required this.textColor,
+      required this.textfontSize,
       required this.color})
       : super(key: key);
   final String text;
+  final double textfontSize;
   final Color textColor;
   final Color color;
 
@@ -18,11 +20,12 @@ class TextColorWrap extends StatelessWidget {
         color: color,
         borderRadius: BorderRadius.circular(18),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       child: Text(
         text,
         style: TextStyle(
           fontWeight: FontWeight.w500,
+          fontSize: textfontSize,
           color: textColor,
         ),
       ),

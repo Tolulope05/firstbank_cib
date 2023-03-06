@@ -158,6 +158,7 @@ class ActionCenterCard extends StatelessWidget {
                     text: "Approved",
                     textColor: Color(0xff0A5139),
                     color: Color(0xffE6F7E9),
+                    textfontSize: 12,
                   )
                 : AppButton(
                     onTap: onApprove,

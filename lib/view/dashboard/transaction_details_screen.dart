@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../view_model/actioncenter_view_model.dart';
+import '../../widgets/text_color_wrap.dart';
 
 class TransactionDetailsScreen extends GetView<ActionCenterModel> {
   const TransactionDetailsScreen({Key? key}) : super(key: key);
@@ -89,6 +90,12 @@ class TransactionDetailsScreen extends GetView<ActionCenterModel> {
                 fontWeight: FontWeight.w400,
               ),
             ),
+            const TextColorWrap(
+              text: "Awaiting Approval",
+              textColor: AppColors.yellowColor3,
+              color: Color(0xffECE4CD),
+              textfontSize: 12,
+            )
           ],
         ),
       ),
