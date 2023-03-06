@@ -310,6 +310,48 @@ class FirstBankTabview extends StatelessWidget {
               top: 24,
               right: 16.0,
               left: 16.0,
+            ),
+            child: AppTextFieldInput(
+              controller: controller.firstBankPaymentTypeController,
+              headerText: 'Value Date',
+              hintText: '24/02/2023',
+              suffixIcon: const Icon(Icons.calendar_month_rounded),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: AppButton(
+              onTap: () {},
+              bgColor: Colors.transparent,
+              borderColor: AppColors.primaryColor,
+              textColor: AppColors.primaryColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(
+                    Icons.add_to_photos_rounded,
+                    color: AppColors.primaryColor,
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    "Add another transaction",
+                    style: TextStyle(
+                      color: AppColors.primaryColor,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
               bottom: 100,
             ),
             child: AppButton(
