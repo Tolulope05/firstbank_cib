@@ -110,8 +110,9 @@ class ActionCenterScreen extends GetView<ActionCenterModel> {
                       recieverName: 'Layor Pan Enterprises',
                       recieverNumber: '0245728039',
                       narration: 'Website Payment Installment 2',
-                      amount: '100,000.00',
+                      amount: '5,129,000.00',
                       paymentMethod: 'Intant Payment',
+                      isApproved: false,
                       onApprove: () {
                         print("Hello World");
                       },
@@ -134,11 +135,12 @@ class ActionCenterScreen extends GetView<ActionCenterModel> {
                       horizontal: 24,
                     ),
                     child: ActionCenterCard(
-                      recieverName: 'Layor Pan Enterprises',
+                      recieverName: '...on Yaga Ukechukwu',
                       recieverNumber: '0245728039',
-                      narration: 'Website Payment Installment 2',
-                      amount: '100,000.00',
+                      narration: 'Refund for sales run',
+                      amount: '5,129,000.00',
                       paymentMethod: 'Intant Payment',
+                      isApproved: false,
                       onApprove: () {
                         print("Hello World");
                       },
@@ -150,11 +152,12 @@ class ActionCenterScreen extends GetView<ActionCenterModel> {
                       horizontal: 24,
                     ),
                     child: ActionCenterCard(
-                      recieverName: 'Layor Pan Enterprises',
-                      recieverNumber: '0245728039',
+                      recieverName: 'Bazzi Foundation',
+                      recieverNumber: '08342742912',
                       narration: 'Website Payment Installment 2',
-                      amount: '100,000.00',
-                      paymentMethod: 'Intant Payment',
+                      amount: '250,129,000',
+                      paymentMethod: 'RTGS',
+                      isApproved: true,
                       onApprove: () {
                         print("Hello World");
                       },

@@ -12,6 +12,7 @@ class ActionCenterCard extends StatelessWidget {
     required this.amount,
     required this.paymentMethod,
     required this.onApprove,
+    required this.isApproved,
   }) : super(key: key);
 
   final String recieverName;
@@ -20,6 +21,7 @@ class ActionCenterCard extends StatelessWidget {
   final String amount;
   final String paymentMethod;
   final VoidCallback onApprove;
+  final bool isApproved;
 
   @override
   Widget build(BuildContext context) {
@@ -150,13 +152,29 @@ class ActionCenterCard extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.only(top: 12),
-            child: AppButton(
-              onTap: onApprove,
-              text: "Take Action",
-              bgColor: Colors.transparent,
-              textColor: const Color(0xff2C2727),
-              borderColor: AppColors.primaryColor,
-            ),
+            child: isApproved
+                ? Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xffE6F7E9),
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: const Text(
+                      "Approved",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff0A5139),
+                      ),
+                    ),
+                  )
+                : AppButton(
+                    onTap: onApprove,
+                    text: "Take Action",
+                    bgColor: Colors.transparent,
+                    textColor: const Color(0xff2C2727),
+                    borderColor: AppColors.primaryColor,
+                  ),
           ),
         ],
       ),
