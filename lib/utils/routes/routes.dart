@@ -3,6 +3,7 @@ import 'package:firstbank_cib/view/dashboard/dash_board_screen.dart';
 import 'package:firstbank_cib/view/home_screen.dart';
 import 'package:firstbank_cib/view/login/login_screen.dart';
 import 'package:firstbank_cib/view/splash_screen.dart';
+import 'package:firstbank_cib/view_model/actioncenter_view_model.dart';
 import 'package:firstbank_cib/view_model/dashboard_view_model.dart';
 import 'package:firstbank_cib/view_model/home_view_model.dart';
 import 'package:get/get.dart';
@@ -58,6 +59,11 @@ class Routes {
     GetPage<dynamic>(
       name: RoutesName.actionCenter,
       page: () => const ActionCenterScreen(),
+      binding: BindingsBuilder(
+        () {
+          Get.put(ActionCenterModel());
+        },
+      ),
     ),
   ];
 }
