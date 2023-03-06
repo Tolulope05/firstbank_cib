@@ -55,12 +55,11 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         _pageController.jumpToPage(selectedIndex);
         selectedIndex = index;
-        print("index: $index");
+        debugPrint("index: $index");
       });
       setState(() {
         _pageController.jumpToPage(selectedIndex);
         selectedIndex = index;
-        print("index: $index");
       });
     }
 
@@ -122,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: Container(
+      body: SizedBox(
         width: size.width * 100,
         height: size.height * 100,
         child: Stack(
@@ -143,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16.0,
                 ),
-                child: Container(
+                child: SizedBox(
                   height: 74,
                   width: MediaQuery.of(context).size.width,
                   child: Card(

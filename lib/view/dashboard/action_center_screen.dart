@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
 import '../../view_model/actioncenter_view_model.dart';
+import '../../widgets/action_center_card.dart';
 
 class ActionCenterScreen extends GetView<ActionCenterModel> {
   const ActionCenterScreen({Key? key}) : super(key: key);
@@ -83,7 +84,25 @@ class ActionCenterScreen extends GetView<ActionCenterModel> {
                 ),
               ],
             ),
-          )
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 24),
+            child: Text(
+              "Feb 28 2023",
+              style: TextStyle(
+                color: AppColors.unselectedIconColor,
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: 24,
+              horizontal: 24,
+            ),
+            child: ActionCenterCard(),
+          ),
         ],
       ),
     );

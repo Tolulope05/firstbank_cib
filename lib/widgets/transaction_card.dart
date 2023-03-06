@@ -2,7 +2,7 @@ import 'package:firstbank_cib/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class TransactionCard extends StatelessWidget {
-  TransactionCard({
+  const TransactionCard({
     Key? key,
     required this.userName,
     required this.date,

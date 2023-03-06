@@ -386,21 +386,21 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                             Expanded(child: SizedBox()),
                           ],
                         ),
-                        TransactionCard(
+                        const TransactionCard(
                           userName: "Layor Salami",
                           date: "Jan 10 2023",
                           amount: "10,000",
                           // status: "Processed",
                           isIncome: true,
                         ),
-                        TransactionCard(
+                        const TransactionCard(
                           userName: "Layor Pan Enterprises",
                           date: "Jan 10 2023",
                           amount: "5,129,000",
                           status: "Processed",
                           isIncome: false,
                         ),
-                        TransactionCard(
+                        const TransactionCard(
                           userName: "Transfer Commission",
                           date: "Jan 10 2023",
                           amount: "50",
