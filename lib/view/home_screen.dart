@@ -84,21 +84,17 @@ class _HomeScreenState extends State<HomeScreen> {
               changePage(index);
             },
             child: Container(
-                padding: const EdgeInsets.all(6),
-                width: 50,
-                child: Utils.renderSVGImage(
-                  assetName: item.iconSvgName,
-                  height: 24.0,
-                  width: 24.0,
-                  color: index == selectedIndex
-                      ? selectedIconColor
-                      : unselectedIconColor,
-                )
-                // child: Icon(
-                //   item.iconData,
-                //   color: index == index ? selectedIconColor : unselectedIconColor,
-                // ),
-                ),
+              padding: const EdgeInsets.all(6),
+              width: 50,
+              child: Utils.renderSVGImage(
+                assetName: item.iconSvgName,
+                height: 24.0,
+                width: 24.0,
+                color: index == selectedIndex
+                    ? selectedIconColor
+                    : unselectedIconColor,
+              ),
+            ),
           ),
           AnimatedContainer(
               duration: const Duration(milliseconds: 100),
