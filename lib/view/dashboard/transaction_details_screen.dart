@@ -18,6 +18,7 @@ class TransactionDetailsScreen extends StatefulWidget {
 class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
     with TickerProviderStateMixin {
   late TabController _tabController;
+  bool isSubmitted = false;
 
   @override
   void initState() {
@@ -171,26 +172,60 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                   width: MediaQuery.of(context).size.width,
                   height: 70,
                   padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Row(
-                    children: [
-                      Flexible(
-                        child: AppButton(
-                          onTap: () {},
-                          text: "Approve",
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Flexible(
-                        child: AppButton(
-                          onTap: () {},
-                          text: "Decline",
-                          textColor: AppColors.failedColor,
-                          borderColor: AppColors.failedColor,
-                          bgColor: Colors.transparent,
-                        ),
-                      ),
-                    ],
-                  )),
+                  child: !isSubmitted
+                      ? Row(
+                          children: [
+                            Flexible(
+                              child: AppButton(
+                                onTap: () {
+                                  setState(() {
+                                    isSubmitted = true;
+                                  });
+                                },
+                                text: "Approve",
+                              ),
+                            ),
+                            const SizedBox(width: 20),
+                            Flexible(
+                              child: AppButton(
+                                onTap: () {},
+                                text: "Decline",
+                                textColor: AppColors.failedColor,
+                                borderColor: AppColors.failedColor,
+                                bgColor: Colors.transparent,
+                              ),
+                            ),
+                          ],
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: AppButton(
+                            onTap: () {
+                              setState(() {
+                                isSubmitted = false;
+                              });
+                            },
+                            bgColor: Colors.transparent,
+                            borderColor: AppColors.primaryColor,
+                            textColor: AppColors.primaryColor,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.print_sharp,
+                                  color: AppColors.primaryColor,
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  "Download",
+                                  style: TextStyle(
+                                    color: AppColors.primaryColor,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )),
             ),
           )
         ],
