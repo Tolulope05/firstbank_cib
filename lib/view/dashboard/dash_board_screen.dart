@@ -131,12 +131,9 @@ class DashBoardScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 24),
-                  child: Text(
-                    "NGN 7,000,481 available",
-                    style: TextStyle(color: Color(0xFF898A8D)),
-                  ),
+                const Text(
+                  "NGN 7,000,481 available",
+                  style: TextStyle(color: Color(0xFF898A8D)),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
