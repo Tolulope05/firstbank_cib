@@ -3,13 +3,34 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../view_model/actioncenter_view_model.dart';
+import '../../widgets/tab_child_position.dart';
 import '../../widgets/text_color_wrap.dart';
 
-class TransactionDetailsScreen extends GetView<ActionCenterModel> {
+class TransactionDetailsScreen extends StatefulWidget {
   const TransactionDetailsScreen({Key? key}) : super(key: key);
 
   @override
+  State<TransactionDetailsScreen> createState() =>
+      _TransactionDetailsScreenState();
+}
+
+class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
+    with TickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: 2,
+      vsync: this,
+    );
+    // _tabController.animateTo(1);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final controller = Get.find<ActionCenterModel>();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -48,39 +69,42 @@ class TransactionDetailsScreen extends GetView<ActionCenterModel> {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
-                Text(
-                  "Receiver: ",
-                  style: TextStyle(
-                    color: AppColors.unselectedIconColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                Text.rich(
-                  TextSpan(
-                    text: 'Layor Pan Enterprises',
+            Padding(
+              padding: const EdgeInsets.only(top: 8, bottom: 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: const [
+                  Text(
+                    "Receiver: ",
                     style: TextStyle(
-                      color: AppColors.primaryColor,
+                      color: AppColors.unselectedIconColor,
                       fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      overflow: TextOverflow.ellipsis,
+                      fontWeight: FontWeight.w400,
                     ),
-                    children: <InlineSpan>[
-                      TextSpan(
-                        text: ' - 0245728039',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff4B4B4B),
-                        ),
-                      )
-                    ],
                   ),
-                ),
-              ],
+                  Text.rich(
+                    TextSpan(
+                      text: 'Layor Pan Enterprises',
+                      style: TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      children: <InlineSpan>[
+                        TextSpan(
+                          text: ' - 0245728039',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xff4B4B4B),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             const Text(
               "Feb 28 2023",
@@ -90,12 +114,205 @@ class TransactionDetailsScreen extends GetView<ActionCenterModel> {
                 fontWeight: FontWeight.w400,
               ),
             ),
-            const TextColorWrap(
-              text: "Awaiting Approval",
-              textColor: AppColors.yellowColor3,
-              color: Color(0xffECE4CD),
-              textfontSize: 12,
+            const Padding(
+              padding: EdgeInsets.only(top: 16, bottom: 4),
+              child: TextColorWrap(
+                text: "Awaiting Approval",
+                textColor: AppColors.yellowColor3,
+                color: Color(0xffECE4CD),
+                textfontSize: 12,
+              ),
+            ),
+            SizedBox(
+              child: TabBar(
+                controller: _tabController,
+                labelColor: Colors.black,
+                indicatorColor: AppColors.yellowColor3,
+                unselectedLabelColor: AppColors.unselectedIconColor,
+                unselectedLabelStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                ),
+                labelStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+                tabs: const [
+                  Tab(
+                    text: "Transaction Details",
+                  ),
+                  Tab(
+                    text: "Approval Involved",
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  TransactionDetaailsTab(),
+                  Container(
+                    child: const Text("Two"),
+                  ),
+                ],
+              ),
             )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TransactionDetaailsTab extends StatelessWidget {
+  const TransactionDetaailsTab({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Flexible(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+              decoration: BoxDecoration(
+                color: AppColors.whiteColor2,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text(
+                          "Source Account",
+                          style: TextStyle(
+                            color: AppColors.unselectedIconColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Text.rich(
+                          TextSpan(
+                            text: 'Float Account ',
+                            style: TextStyle(
+                              color: AppColors.primaryColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            children: <InlineSpan>[
+                              TextSpan(
+                                text: '- 0245728039',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xff4B4B4B),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const CustomCardChildPosition(
+                    prefixText: "Available Balance",
+                    suffixText: "₦17,870,902",
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+              decoration: BoxDecoration(
+                color: AppColors.whiteColor2,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                children: const [
+                  CustomCardChildPosition(
+                    prefixText: "Payment to",
+                    suffixText: "Layor Pan Enterprises",
+                  ),
+                  CustomCardChildPosition(
+                    prefixText: "Account Number",
+                    suffixText: "0245728039",
+                  ),
+                  CustomCardChildPosition(
+                    prefixText: "Bank Name",
+                    suffixText: "X Bank",
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+              decoration: BoxDecoration(
+                color: AppColors.whiteColor2,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                children: const [
+                  CustomCardChildPosition(
+                    prefixText: "Ampunt",
+                    suffixText: "₦5,129,000",
+                  ),
+                  CustomCardChildPosition(
+                    prefixText: "Fee",
+                    suffixText: "₦718",
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+              decoration: BoxDecoration(
+                color: AppColors.whiteColor2,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                children: const [
+                  CustomCardChildPosition(
+                    prefixText: "Narration",
+                    suffixText: "Payment for Cox Communications",
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+              decoration: BoxDecoration(
+                color: AppColors.whiteColor2,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                children: const [
+                  CustomCardChildPosition(
+                    prefixText: "Method",
+                    suffixText: "Instant Payment",
+                  ),
+                  CustomCardChildPosition(
+                    prefixText: "Type",
+                    suffixText: "Other Payment",
+                  ),
+                  CustomCardChildPosition(
+                    prefixText: "Value Date",
+                    suffixText: "24/02/2023",
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
