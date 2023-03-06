@@ -114,7 +114,7 @@ class ActionCenterScreen extends GetView<ActionCenterModel> {
                       paymentMethod: 'Intant Payment',
                       isApproved: false,
                       onApprove: () {
-                        print("Hello World");
+                        controller.navigateTotransactionDetails();
                       },
                     ),
                   ),
@@ -142,7 +142,7 @@ class ActionCenterScreen extends GetView<ActionCenterModel> {
                       paymentMethod: 'Intant Payment',
                       isApproved: false,
                       onApprove: () {
-                        print("Hello World");
+                        controller.navigateTotransactionDetails();
                       },
                     ),
                   ),
@@ -159,7 +159,7 @@ class ActionCenterScreen extends GetView<ActionCenterModel> {
                       paymentMethod: 'RTGS',
                       isApproved: true,
                       onApprove: () {
-                        print("Hello World");
+                        controller.navigateTotransactionDetails();
                       },
                     ),
                   ),

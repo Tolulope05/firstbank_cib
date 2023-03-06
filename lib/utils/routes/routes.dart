@@ -1,5 +1,6 @@
 import 'package:firstbank_cib/utils/routes/routes_name.dart';
 import 'package:firstbank_cib/view/dashboard/dash_board_screen.dart';
+import 'package:firstbank_cib/view/dashboard/transaction_details_screen.dart';
 import 'package:firstbank_cib/view/home_screen.dart';
 import 'package:firstbank_cib/view/login/login_screen.dart';
 import 'package:firstbank_cib/view/splash_screen.dart';
@@ -64,6 +65,15 @@ class Routes {
           Get.put(ActionCenterModel());
         },
       ),
+    ),
+    GetPage<dynamic>(
+      name: RoutesName.transactionDetails,
+      page: () => const TransactionDetailsScreen(),
+      // binding: BindingsBuilder(
+      //   () {
+      //     Get.put(ActionCenterModel());
+      //   },
+      // ),
     ),
   ];
 }
