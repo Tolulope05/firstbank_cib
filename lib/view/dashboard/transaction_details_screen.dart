@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../view_model/actioncenter_view_model.dart';
+import '../../widgets/approval_child_position.dart';
 import '../../widgets/tab_child_position.dart';
 import '../../widgets/text_color_wrap.dart';
 
@@ -154,11 +155,9 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                 Expanded(
                   child: TabBarView(
                     controller: _tabController,
-                    children: [
-                      TransactionDetaailsTab(),
-                      Container(
-                        child: const Text("Two"),
-                      ),
+                    children: const [
+                      TransactionDetailsTab(),
+                      ApprovalTabView(),
                     ],
                   ),
                 )
@@ -234,8 +233,54 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
   }
 }
 
-class TransactionDetaailsTab extends StatelessWidget {
-  const TransactionDetaailsTab({
+class ApprovalTabView extends StatelessWidget {
+  const ApprovalTabView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Flexible(
+        child: Column(
+          children: const [
+            ApprovalchildPosition(
+              statusColor: AppColors.primaryColor,
+              userStatus: "Initiated",
+              time: "Feb 30, 2023 05:18",
+              usename: "Dada Sparco",
+              userPosition: "Accountant",
+            ),
+            ApprovalchildPosition(
+              statusColor: AppColors.successColor,
+              userStatus: "●  Approved",
+              time: "Feb 29, 2023 19:28",
+              usename: "Muharrem Kavak",
+              userPosition: "Admin",
+            ),
+            ApprovalchildPosition(
+              statusColor: AppColors.failedColor,
+              userStatus: "●  Declined",
+              time: "Feb 27, 2023 23:26",
+              usename: "DFadime Yalcinkaya",
+              userPosition: "Accountant",
+            ),
+            ApprovalchildPosition(
+              statusColor: AppColors.primaryColor,
+              userStatus: "●  Awaiting Response",
+              // time: "Feb 30, 2023 05:18",
+              usename: "Dada Sparco",
+              userPosition: "Accountant",
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TransactionDetailsTab extends StatelessWidget {
+  const TransactionDetailsTab({
     super.key,
   });
 
