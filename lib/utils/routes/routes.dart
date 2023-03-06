@@ -4,6 +4,7 @@ import 'package:firstbank_cib/view/dashboard/transaction_details_screen.dart';
 import 'package:firstbank_cib/view/home_screen.dart';
 import 'package:firstbank_cib/view/login/login_screen.dart';
 import 'package:firstbank_cib/view/splash_screen.dart';
+import 'package:firstbank_cib/view/transfers/transfers_screen.dart';
 import 'package:firstbank_cib/view_model/actioncenter_view_model.dart';
 import 'package:firstbank_cib/view_model/dashboard_view_model.dart';
 import 'package:firstbank_cib/view_model/home_view_model.dart';
@@ -14,6 +15,7 @@ import '../../view/login/pin_confirmation_screen.dart';
 import '../../view/login/sign_in_screen.dart';
 import '../../view_model/pin_confirmation_model.dart';
 import '../../view_model/sign_in_view_model.dart';
+import '../../view_model/transfer_screen_view_model.dart';
 
 class Routes {
   static List<GetPage<dynamic>>? getPages = [
@@ -50,6 +52,7 @@ class Routes {
         () {
           Get.lazyPut(() => HomeViewModel());
           Get.put(DashBoardviewModel());
+          Get.put(TransferScreenViewModel());
         },
       ),
     ),
@@ -69,11 +72,10 @@ class Routes {
     GetPage<dynamic>(
       name: RoutesName.transactionDetails,
       page: () => const TransactionDetailsScreen(),
-      // binding: BindingsBuilder(
-      //   () {
-      //     Get.put(ActionCenterModel());
-      //   },
-      // ),
+    ),
+    GetPage<dynamic>(
+      name: RoutesName.transferScreen,
+      page: () => const TransfersScreen(),
     ),
   ];
 }

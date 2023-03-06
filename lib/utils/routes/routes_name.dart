@@ -7,4 +7,5 @@ class RoutesName {
   static const dashBoard = "/dashBoard";
   static const actionCenter = "/actionCenter";
   static const transactionDetails = "/transactionDetails";
+  static const transferScreen = "/transferScreen";
 }
