@@ -225,7 +225,7 @@ class FirstBankTabview extends StatelessWidget {
               left: 16.0,
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Flexible(
                   child: AppTextFieldInput(
@@ -237,21 +237,32 @@ class FirstBankTabview extends StatelessWidget {
                 InkWell(
                   onTap: () {},
                   child: Container(
-                    margin: const EdgeInsets.only(left: 8),
+                    margin: const EdgeInsets.only(left: 8, top: 20),
+                    padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: AppColors.primaryColorDeep,
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    height: 50,
-                    width: 50,
+                    height: 58,
+                    width: 55,
                     child: Utils.renderSVGImage(
-                        assetName: "assets/images/three_head.svg",
-                        height: 20.0,
-                        width: 20.0,
-                        color: Color(0xffffffff)),
+                      assetName: "assets/svg/three_head.svg",
+                    ),
                   ),
                 ),
               ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: AppTextFieldInput(
+              controller: controller.firstBankBeneficialAccountnameController,
+              headerText: 'Accout name',
+              hintText: '',
             ),
           ),
           Padding(
@@ -273,26 +284,44 @@ class FirstBankTabview extends StatelessWidget {
               left: 16.0,
             ),
             child: AppTextFieldInput(
-              controller: controller.beneficialAccountController,
+              controller: controller.firstBankAmountAccountControllerMemo,
               headerText: 'Payment memo',
               hintText: '',
             ),
           ),
           Padding(
-              padding: const EdgeInsets.only(
-                top: 24,
-                right: 16.0,
-                left: 16.0,
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: AppTextFieldInput(
+              controller: controller.firstBankPaymentTypeController,
+              headerText: 'Payment Type',
+              hintText: 'Select option',
+              suffixIcon: const RotatedBox(
+                quarterTurns: 45,
+                child: Icon(Icons.chevron_right),
               ),
-              child: AppButton(
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => const InitiatePaymentDialogue(),
-                  );
-                },
-                text: 'Initiate Payment',
-              )),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+              bottom: 100,
+            ),
+            child: AppButton(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const InitiatePaymentDialogue(),
+                );
+              },
+              text: 'Initiate Payment',
+            ),
+          ),
         ],
       ),
     );

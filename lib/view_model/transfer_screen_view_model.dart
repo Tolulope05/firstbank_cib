@@ -10,6 +10,10 @@ class TransferScreenViewModel extends GetxController {
   TextEditingController firstBankAccountController = TextEditingController();
   TextEditingController firstBankBeneficialAccountController =
       TextEditingController();
-  TextEditingController firstBankAmountAccountController =
+  TextEditingController firstBankBeneficialAccountnameController =
+      TextEditingController();
+  TextEditingController firstBankPaymentTypeController =
+      TextEditingController();
+  TextEditingController firstBankAmountAccountControllerMemo =
       TextEditingController();
 }
