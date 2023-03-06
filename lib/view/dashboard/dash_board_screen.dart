@@ -86,8 +86,9 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                   child: GestureDetector(
                     onTap: () {
                       showDialog(
-                          context: context,
-                          builder: (context) => const SelectAccountDialogue());
+                        context: context,
+                        builder: (context) => const SelectAccountDialogue(),
+                      );
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.min,

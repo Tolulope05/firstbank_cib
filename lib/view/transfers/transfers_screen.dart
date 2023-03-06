@@ -1,4 +1,5 @@
 import 'package:firstbank_cib/widgets/app_button.dart';
+import 'package:firstbank_cib/widgets/initiate_payment_dialogue.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -111,75 +112,84 @@ class OwnAccountTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<TransferScreenViewModel>();
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 24,
-            right: 16.0,
-            left: 16.0,
-          ),
-          child: AppTextFieldInput(
-            controller: controller.sourceAccountController,
-            headerText: 'Source Account',
-            hintText: 'Select Account',
-            suffixIcon: const RotatedBox(
-              quarterTurns: 45,
-              child: Icon(Icons.chevron_right),
+    return SingleChildScrollView(
+      child: Flexible(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 24,
+                right: 16.0,
+                left: 16.0,
+              ),
+              child: AppTextFieldInput(
+                controller: controller.sourceAccountController,
+                headerText: 'Source Account',
+                hintText: 'Select Account',
+                suffixIcon: const RotatedBox(
+                  quarterTurns: 45,
+                  child: Icon(Icons.chevron_right),
+                ),
+              ),
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 24,
-            right: 16.0,
-            left: 16.0,
-          ),
-          child: AppTextFieldInput(
-            controller: controller.beneficialAccountController,
-            headerText: 'Account to credit',
-            hintText: 'Select Account',
-            suffixIcon: const RotatedBox(
-              quarterTurns: 45,
-              child: Icon(Icons.chevron_right),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 24,
+                right: 16.0,
+                left: 16.0,
+              ),
+              child: AppTextFieldInput(
+                controller: controller.beneficialAccountController,
+                headerText: 'Account to credit',
+                hintText: 'Select Account',
+                suffixIcon: const RotatedBox(
+                  quarterTurns: 45,
+                  child: Icon(Icons.chevron_right),
+                ),
+              ),
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 24,
-            right: 16.0,
-            left: 16.0,
-          ),
-          child: AppTextFieldInput(
-            controller: controller.beneficialAccountController,
-            headerText: 'Amount',
-            hintText: 'NGN',
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 24,
-            right: 16.0,
-            left: 16.0,
-          ),
-          child: AppTextFieldInput(
-            controller: controller.beneficialAccountController,
-            headerText: 'Payment memo',
-            hintText: '',
-          ),
-        ),
-        Padding(
-            padding: const EdgeInsets.only(
-              top: 24,
-              right: 16.0,
-              left: 16.0,
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 24,
+                right: 16.0,
+                left: 16.0,
+              ),
+              child: AppTextFieldInput(
+                controller: controller.beneficialAccountController,
+                headerText: 'Amount',
+                hintText: 'NGN',
+              ),
             ),
-            child: AppButton(
-              onTap: () {},
-              text: 'Initiate Payment',
-            )),
-      ],
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 24,
+                right: 16.0,
+                left: 16.0,
+              ),
+              child: AppTextFieldInput(
+                controller: controller.beneficialAccountController,
+                headerText: 'Payment memo',
+                hintText: '',
+              ),
+            ),
+            Padding(
+                padding: const EdgeInsets.only(
+                  top: 24,
+                  right: 16.0,
+                  left: 16.0,
+                ),
+                child: AppButton(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const InitiatePaymentDialogue(),
+                    );
+                  },
+                  text: 'Initiate Payment',
+                )),
+          ],
+        ),
+      ),
     );
   }
 }

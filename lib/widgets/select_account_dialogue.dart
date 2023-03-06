@@ -10,7 +10,6 @@ class SelectAccountDialogue extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       child: Container(
-        // constraints: const BoxConstraints(maxHeight: 390),
         padding: const EdgeInsets.symmetric(vertical: 32),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
