@@ -1,3 +1,4 @@
+import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -122,7 +123,6 @@ class OwnAccountTabView extends StatelessWidget {
             controller: controller.sourceAccountController,
             headerText: 'Source Account',
             hintText: 'Select Account',
-            obscureText: false,
             suffixIcon: const RotatedBox(
               quarterTurns: 45,
               child: Icon(Icons.chevron_right),
@@ -139,7 +139,6 @@ class OwnAccountTabView extends StatelessWidget {
             controller: controller.beneficialAccountController,
             headerText: 'Account to credit',
             hintText: 'Select Account',
-            obscureText: false,
             suffixIcon: const RotatedBox(
               quarterTurns: 45,
               child: Icon(Icons.chevron_right),
@@ -156,11 +155,6 @@ class OwnAccountTabView extends StatelessWidget {
             controller: controller.beneficialAccountController,
             headerText: 'Amount',
             hintText: 'NGN',
-            obscureText: false,
-            suffixIcon: const RotatedBox(
-              quarterTurns: 45,
-              child: Icon(Icons.chevron_right),
-            ),
           ),
         ),
         Padding(
@@ -173,13 +167,18 @@ class OwnAccountTabView extends StatelessWidget {
             controller: controller.beneficialAccountController,
             headerText: 'Payment memo',
             hintText: '',
-            obscureText: false,
-            suffixIcon: const RotatedBox(
-              quarterTurns: 45,
-              child: Icon(Icons.chevron_right),
-            ),
           ),
         ),
+        Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: AppButton(
+              onTap: () {},
+              text: 'Initiate Payment',
+            )),
       ],
     );
   }

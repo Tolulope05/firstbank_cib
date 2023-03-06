@@ -8,7 +8,7 @@ class AppTextFieldInput extends StatefulWidget {
     required this.headerText,
     required this.hintText,
     required this.controller,
-    required this.obscureText,
+    this.obscureText = false,
   }) : super(key: key);
   final String headerText;
   final String hintText;
@@ -56,10 +56,12 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
             ),
             suffixIcon: GestureDetector(
               onTap: () {
-                if (widget.suffixIcon != null) {
+                if (widget.suffixIcon != null && widget.obscureText == true) {
                   setState(() {
                     widget.obscureText = !widget.obscureText;
                   });
+                } else {
+                  // we can pass every other function here
                 }
               },
               child: widget.suffixIcon ?? const SizedBox.shrink(),
