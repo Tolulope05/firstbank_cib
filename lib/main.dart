@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: AppColors.primaryColor,
         fontFamily: "Inter",
+        scaffoldBackgroundColor: AppColors.scaffoldBgColor,
       ),
       home: const SplashScreen(),
       initialBinding: InitialBindings(),

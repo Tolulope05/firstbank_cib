@@ -2,6 +2,7 @@ import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
+import 'text_color_wrap.dart';
 
 class ActionCenterCard extends StatelessWidget {
   const ActionCenterCard({
@@ -153,20 +154,10 @@ class ActionCenterCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(top: 12),
             child: isApproved
-                ? Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xffE6F7E9),
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    child: const Text(
-                      "Approved",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xff0A5139),
-                      ),
-                    ),
+                ? const TextColorWrap(
+                    text: "Approved",
+                    textColor: Color(0xff0A5139),
+                    color: Color(0xffE6F7E9),
                   )
                 : AppButton(
                     onTap: onApprove,
