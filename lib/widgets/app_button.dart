@@ -23,12 +23,13 @@ class AppButton extends StatelessWidget {
     return Container(
       height: 48,
       decoration: BoxDecoration(
-          color: bgColor ?? AppColors.primaryColor,
-          borderRadius: BorderRadius.circular(4),
-          border: Border.all(
-            color: borderColor ?? AppColors.primaryColor,
-            width: 1,
-          )),
+        color: bgColor ?? AppColors.primaryColor,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(
+          color: borderColor ?? AppColors.primaryColor,
+          width: 1,
+        ),
+      ),
       child: InkWell(
         onTap: onTap,
         child: child ??

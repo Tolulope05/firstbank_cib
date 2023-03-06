@@ -108,7 +108,7 @@ class ActionCenterScreen extends GetView<ActionCenterModel> {
               amount: '100,000.00',
               paymentMethod: 'Intant Payment',
               onApprove: () {
-                print("Give me money");
+                print("Hello World");
               },
             ),
           ),
