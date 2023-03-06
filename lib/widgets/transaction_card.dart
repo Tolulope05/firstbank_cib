@@ -66,28 +66,26 @@ class TransactionCard extends StatelessWidget {
           ),
           const Spacer(),
           //column 3
-          Flexible(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  "${isIncome ? "+" : "-"} NGN $amount",
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: AppColors.successColor,
-                    fontWeight: FontWeight.w500,
-                  ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                "${isIncome ? "+" : "-"} NGN $amount",
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: AppColors.successColor,
+                  fontWeight: FontWeight.w500,
                 ),
-                Text(
-                  status ?? "",
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: AppColors.blackColor,
-                    fontWeight: FontWeight.w500,
-                  ),
+              ),
+              Text(
+                status ?? "",
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: AppColors.blackColor,
+                  fontWeight: FontWeight.w500,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),

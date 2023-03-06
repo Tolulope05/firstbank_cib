@@ -382,12 +382,27 @@ class DashBoardScreen extends StatelessWidget {
                           userName: "Layor Salami",
                           date: "Jan 10 2023",
                           amount: "10,000",
-                          status: "Processed",
+                          // status: "Processed",
                           isIncome: true,
+                        ),
+                        TransactionCard(
+                          userName: "Layor Pan Enterprises",
+                          date: "Jan 10 2023",
+                          amount: "5,129,000",
+                          status: "Processed",
+                          isIncome: false,
+                        ),
+                        TransactionCard(
+                          userName: "Transfer Commission",
+                          date: "Jan 10 2023",
+                          amount: "50",
+                          status: "Processed",
+                          isIncome: false,
                         ),
                       ],
                     ),
                   ),
+                  const SizedBox(height: 100), // to be removed soon
                 ],
               ),
             )
