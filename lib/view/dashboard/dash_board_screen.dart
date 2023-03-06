@@ -350,7 +350,7 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                                       ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(right: 20),
+                                            const EdgeInsets.only(right: 40),
                                         child: AppButton(
                                           onTap: () {},
                                           text: "Calculate",
