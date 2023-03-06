@@ -1,4 +1,5 @@
 import 'package:firstbank_cib/constants/colors.dart';
+import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,120 +47,153 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "- ₦5,129,000",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.failedColor,
-                  ),
-                ),
-                Image.asset(
-                  "assets/images/outgoing.png",
-                  width: 32,
-                  height: 32,
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 4),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  Text(
-                    "Receiver: ",
-                    style: TextStyle(
-                      color: AppColors.unselectedIconColor,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  Text.rich(
-                    TextSpan(
-                      text: 'Layor Pan Enterprises',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "- ₦5,129,000",
                       style: TextStyle(
-                        color: AppColors.primaryColor,
-                        fontSize: 14,
+                        fontSize: 24,
                         fontWeight: FontWeight.w500,
-                        overflow: TextOverflow.ellipsis,
+                        color: AppColors.failedColor,
                       ),
-                      children: <InlineSpan>[
+                    ),
+                    Image.asset(
+                      "assets/images/outgoing.png",
+                      width: 32,
+                      height: 32,
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 4),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Receiver: ",
+                        style: TextStyle(
+                          color: AppColors.unselectedIconColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Text.rich(
                         TextSpan(
-                          text: ' - 0245728039',
+                          text: 'Layor Pan Enterprises',
                           style: TextStyle(
+                            color: AppColors.primaryColor,
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xff4B4B4B),
+                            overflow: TextOverflow.ellipsis,
                           ),
-                        )
-                      ],
+                          children: <InlineSpan>[
+                            TextSpan(
+                              text: ' - 0245728039',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xff4B4B4B),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Text(
+                  "Feb 28 2023",
+                  style: TextStyle(
+                    color: AppColors.unselectedIconColor,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 16, bottom: 4),
+                  child: TextColorWrap(
+                    text: "Awaiting Approval",
+                    textColor: AppColors.yellowColor3,
+                    color: Color(0xffECE4CD),
+                    textfontSize: 12,
+                  ),
+                ),
+                SizedBox(
+                  child: TabBar(
+                    controller: _tabController,
+                    labelColor: Colors.black,
+                    indicatorColor: AppColors.yellowColor3,
+                    unselectedLabelColor: AppColors.unselectedIconColor,
+                    unselectedLabelStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
                     ),
+                    labelStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    tabs: const [
+                      Tab(
+                        text: "Transaction Details",
+                      ),
+                      Tab(
+                        text: "Approval Involved",
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            const Text(
-              "Feb 28 2023",
-              style: TextStyle(
-                color: AppColors.unselectedIconColor,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 16, bottom: 4),
-              child: TextColorWrap(
-                text: "Awaiting Approval",
-                textColor: AppColors.yellowColor3,
-                color: Color(0xffECE4CD),
-                textfontSize: 12,
-              ),
-            ),
-            SizedBox(
-              child: TabBar(
-                controller: _tabController,
-                labelColor: Colors.black,
-                indicatorColor: AppColors.yellowColor3,
-                unselectedLabelColor: AppColors.unselectedIconColor,
-                unselectedLabelStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
                 ),
-                labelStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-                tabs: const [
-                  Tab(
-                    text: "Transaction Details",
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      TransactionDetaailsTab(),
+                      Container(
+                        child: const Text("Two"),
+                      ),
+                    ],
                   ),
-                  Tab(
-                    text: "Approval Involved",
-                  ),
-                ],
-              ),
+                )
+              ],
             ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  TransactionDetaailsTab(),
-                  Container(
-                    child: const Text("Two"),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
+          ),
+          Positioned(
+            bottom: 20,
+            child: Material(
+              child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 70,
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: AppButton(
+                          onTap: () {},
+                          text: "Approve",
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      Flexible(
+                        child: AppButton(
+                          onTap: () {},
+                          text: "Decline",
+                          textColor: AppColors.failedColor,
+                          borderColor: AppColors.failedColor,
+                          bgColor: Colors.transparent,
+                        ),
+                      ),
+                    ],
+                  )),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -313,6 +347,7 @@ class TransactionDetaailsTab extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 100),
           ],
         ),
       ),
