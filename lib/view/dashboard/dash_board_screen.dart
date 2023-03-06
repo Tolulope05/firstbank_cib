@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
 import '../../view_model/dashboard_view_model.dart';
+import '../../widgets/select_account_dialogue.dart';
 
 class DashBoardScreen extends GetView<DashBoardviewModel> {
   const DashBoardScreen({Key? key}) : super(key: key);
@@ -82,31 +83,38 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                     color: AppColors.whiteColor,
                     borderRadius: BorderRadius.circular(60),
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/images/naira_dollar.png",
-                        width: 24,
-                        height: 16,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 9, right: 11),
-                        child: Text(
-                          "All account (8)",
-                          style: TextStyle(
-                            color: Color(0xff1E1E1E),
+                  child: GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => const SelectAccountDialogue());
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/naira_dollar.png",
+                          width: 24,
+                          height: 16,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 9, right: 11),
+                          child: Text(
+                            "All account (8)",
+                            style: TextStyle(
+                              color: Color(0xff1E1E1E),
+                            ),
                           ),
                         ),
-                      ),
-                      const RotatedBox(
-                        quarterTurns: 45,
-                        child: Icon(
-                          Icons.chevron_right,
+                        const RotatedBox(
+                          quarterTurns: 45,
+                          child: Icon(
+                            Icons.chevron_right,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 const Text(
