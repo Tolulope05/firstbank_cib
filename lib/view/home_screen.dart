@@ -138,17 +138,16 @@ class _HomeScreenState extends State<HomeScreen> {
             Positioned(
               left: 0,
               right: 0,
-              bottom: 20,
+              bottom: 12,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  vertical: 10.0,
                   horizontal: 16.0,
                 ),
                 child: Container(
                   height: 74,
                   width: MediaQuery.of(context).size.width,
                   child: Card(
-                    elevation: 15.0,
+                    elevation: 4.0,
                     color: color,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),

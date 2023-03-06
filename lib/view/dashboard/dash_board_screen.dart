@@ -110,7 +110,7 @@ class DashBoardScreen extends StatelessWidget {
                   ),
                   const Text(
                     "Float account",
-                    style: TextStyle(color: Color(0xFF898A8D)),
+                    style: TextStyle(color: AppColors.unselectedIconColor),
                   ),
                   Center(
                     child: Row(
@@ -136,7 +136,9 @@ class DashBoardScreen extends StatelessWidget {
                   ),
                   const Text(
                     "NGN 7,000,481 available",
-                    style: TextStyle(color: Color(0xFF898A8D)),
+                    style: TextStyle(
+                      color: AppColors.unselectedIconColor,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
@@ -376,6 +378,8 @@ class DashBoardScreen extends StatelessWidget {
                             Expanded(child: SizedBox()),
                           ],
                         ),
+                        TransactionCard(),
+                        TransactionCard(),
                         TransactionCard(),
                       ],
                     ),
