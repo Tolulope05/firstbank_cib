@@ -241,39 +241,37 @@ class ApprovalTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Flexible(
-        child: Column(
-          children: const [
-            ApprovalchildPosition(
-              statusColor: AppColors.primaryColor,
-              userStatus: "Initiated",
-              time: "Feb 30, 2023 05:18",
-              usename: "Dada Sparco",
-              userPosition: "Accountant",
-            ),
-            ApprovalchildPosition(
-              statusColor: AppColors.successColor,
-              userStatus: "●  Approved",
-              time: "Feb 29, 2023 19:28",
-              usename: "Muharrem Kavak",
-              userPosition: "Admin",
-            ),
-            ApprovalchildPosition(
-              statusColor: AppColors.failedColor,
-              userStatus: "●  Declined",
-              time: "Feb 27, 2023 23:26",
-              usename: "DFadime Yalcinkaya",
-              userPosition: "Accountant",
-            ),
-            ApprovalchildPosition(
-              statusColor: AppColors.primaryColor,
-              userStatus: "●  Awaiting Response",
-              // time: "Feb 30, 2023 05:18",
-              usename: "Dada Sparco",
-              userPosition: "Accountant",
-            ),
-          ],
-        ),
+      child: Column(
+        children: const [
+          ApprovalchildPosition(
+            statusColor: AppColors.primaryColor,
+            userStatus: "Initiated",
+            time: "Feb 30, 2023 05:18",
+            usename: "Dada Sparco",
+            userPosition: "Accountant",
+          ),
+          ApprovalchildPosition(
+            statusColor: AppColors.successColor,
+            userStatus: "●  Approved",
+            time: "Feb 29, 2023 19:28",
+            usename: "Muharrem Kavak",
+            userPosition: "Admin",
+          ),
+          ApprovalchildPosition(
+            statusColor: AppColors.failedColor,
+            userStatus: "●  Declined",
+            time: "Feb 27, 2023 23:26",
+            usename: "DFadime Yalcinkaya",
+            userPosition: "Accountant",
+          ),
+          ApprovalchildPosition(
+            statusColor: AppColors.primaryColor,
+            userStatus: "●  Awaiting Response",
+            // time: "Feb 30, 2023 05:18",
+            usename: "Dada Sparco",
+            userPosition: "Accountant",
+          ),
+        ],
       ),
     );
   }
@@ -287,149 +285,147 @@ class TransactionDetailsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Flexible(
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 16),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor2,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
-                          "Source Account",
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            decoration: BoxDecoration(
+              color: AppColors.whiteColor2,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        "Source Account",
+                        style: TextStyle(
+                          color: AppColors.unselectedIconColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Text.rich(
+                        TextSpan(
+                          text: 'Float Account ',
                           style: TextStyle(
-                            color: AppColors.unselectedIconColor,
+                            color: AppColors.primaryColor,
                             fontSize: 14,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w500,
+                            overflow: TextOverflow.ellipsis,
                           ),
+                          children: <InlineSpan>[
+                            TextSpan(
+                              text: '- 0245728039',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xff4B4B4B),
+                              ),
+                            )
+                          ],
                         ),
-                        Text.rich(
-                          TextSpan(
-                            text: 'Float Account ',
-                            style: TextStyle(
-                              color: AppColors.primaryColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            children: <InlineSpan>[
-                              TextSpan(
-                                text: '- 0245728039',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xff4B4B4B),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  const CustomCardChildPosition(
-                    prefixText: "Available Balance",
-                    suffixText: "₦17,870,902",
-                  ),
-                ],
-              ),
+                ),
+                const CustomCardChildPosition(
+                  prefixText: "Available Balance",
+                  suffixText: "₦17,870,902",
+                ),
+              ],
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 16),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor2,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                children: const [
-                  CustomCardChildPosition(
-                    prefixText: "Payment to",
-                    suffixText: "Layor Pan Enterprises",
-                  ),
-                  CustomCardChildPosition(
-                    prefixText: "Account Number",
-                    suffixText: "0245728039",
-                  ),
-                  CustomCardChildPosition(
-                    prefixText: "Bank Name",
-                    suffixText: "X Bank",
-                  ),
-                ],
-              ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            decoration: BoxDecoration(
+              color: AppColors.whiteColor2,
+              borderRadius: BorderRadius.circular(8),
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 16),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor2,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                children: const [
-                  CustomCardChildPosition(
-                    prefixText: "Ampunt",
-                    suffixText: "₦5,129,000",
-                  ),
-                  CustomCardChildPosition(
-                    prefixText: "Fee",
-                    suffixText: "₦718",
-                  ),
-                ],
-              ),
+            child: Column(
+              children: const [
+                CustomCardChildPosition(
+                  prefixText: "Payment to",
+                  suffixText: "Layor Pan Enterprises",
+                ),
+                CustomCardChildPosition(
+                  prefixText: "Account Number",
+                  suffixText: "0245728039",
+                ),
+                CustomCardChildPosition(
+                  prefixText: "Bank Name",
+                  suffixText: "X Bank",
+                ),
+              ],
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 16),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor2,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                children: const [
-                  CustomCardChildPosition(
-                    prefixText: "Narration",
-                    suffixText: "Payment for Cox Communications",
-                  ),
-                ],
-              ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            decoration: BoxDecoration(
+              color: AppColors.whiteColor2,
+              borderRadius: BorderRadius.circular(8),
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 16),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor2,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                children: const [
-                  CustomCardChildPosition(
-                    prefixText: "Method",
-                    suffixText: "Instant Payment",
-                  ),
-                  CustomCardChildPosition(
-                    prefixText: "Type",
-                    suffixText: "Other Payment",
-                  ),
-                  CustomCardChildPosition(
-                    prefixText: "Value Date",
-                    suffixText: "24/02/2023",
-                  ),
-                ],
-              ),
+            child: Column(
+              children: const [
+                CustomCardChildPosition(
+                  prefixText: "Ampunt",
+                  suffixText: "₦5,129,000",
+                ),
+                CustomCardChildPosition(
+                  prefixText: "Fee",
+                  suffixText: "₦718",
+                ),
+              ],
             ),
-            const SizedBox(height: 100),
-          ],
-        ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            decoration: BoxDecoration(
+              color: AppColors.whiteColor2,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              children: const [
+                CustomCardChildPosition(
+                  prefixText: "Narration",
+                  suffixText: "Payment for Cox Communications",
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            decoration: BoxDecoration(
+              color: AppColors.whiteColor2,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              children: const [
+                CustomCardChildPosition(
+                  prefixText: "Method",
+                  suffixText: "Instant Payment",
+                ),
+                CustomCardChildPosition(
+                  prefixText: "Type",
+                  suffixText: "Other Payment",
+                ),
+                CustomCardChildPosition(
+                  prefixText: "Value Date",
+                  suffixText: "24/02/2023",
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 100),
+        ],
       ),
     );
   }

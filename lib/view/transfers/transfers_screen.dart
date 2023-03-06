@@ -1,3 +1,4 @@
+import 'package:firstbank_cib/utils/utils.dart';
 import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:firstbank_cib/widgets/initiate_payment_dialogue.dart';
 import 'package:flutter/material.dart';
@@ -86,9 +87,7 @@ class _TransfersScreenState extends State<TransfersScreen>
               controller: _tabController,
               children: [
                 const OwnAccountTabView(),
-                Container(
-                  child: const Text("Test 1"),
-                ),
+                const FirstBankTabview(),
                 Container(
                   child: const Text("Test 1"),
                 ),
@@ -113,82 +112,188 @@ class OwnAccountTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<TransferScreenViewModel>();
     return SingleChildScrollView(
-      child: Flexible(
-        child: Column(
-          children: [
-            Padding(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: AppTextFieldInput(
+              controller: controller.sourceAccountController,
+              headerText: 'Source Account',
+              hintText: 'Select Account',
+              suffixIcon: const RotatedBox(
+                quarterTurns: 45,
+                child: Icon(Icons.chevron_right),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: AppTextFieldInput(
+              controller: controller.beneficialAccountController,
+              headerText: 'Account to credit',
+              hintText: 'Select Account',
+              suffixIcon: const RotatedBox(
+                quarterTurns: 45,
+                child: Icon(Icons.chevron_right),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: AppTextFieldInput(
+              controller: controller.beneficialAccountController,
+              headerText: 'Amount',
+              hintText: 'NGN',
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: AppTextFieldInput(
+              controller: controller.beneficialAccountController,
+              headerText: 'Payment memo',
+              hintText: '',
+            ),
+          ),
+          Padding(
               padding: const EdgeInsets.only(
                 top: 24,
                 right: 16.0,
                 left: 16.0,
               ),
-              child: AppTextFieldInput(
-                controller: controller.sourceAccountController,
-                headerText: 'Source Account',
-                hintText: 'Select Account',
-                suffixIcon: const RotatedBox(
-                  quarterTurns: 45,
-                  child: Icon(Icons.chevron_right),
+              child: AppButton(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const InitiatePaymentDialogue(),
+                  );
+                },
+                text: 'Initiate Payment',
+              )),
+        ],
+      ),
+    );
+  }
+}
+
+class FirstBankTabview extends StatelessWidget {
+  const FirstBankTabview({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.find<TransferScreenViewModel>();
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: AppTextFieldInput(
+              controller: controller.firstBankAccountController,
+              headerText: 'Source Account',
+              hintText: 'Select Account',
+              suffixIcon: const RotatedBox(
+                quarterTurns: 45,
+                child: Icon(Icons.chevron_right),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Flexible(
+                  child: AppTextFieldInput(
+                    controller: controller.beneficialAccountController,
+                    headerText: 'Account Number',
+                    hintText: '0123456789',
+                  ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 24,
-                right: 16.0,
-                left: 16.0,
-              ),
-              child: AppTextFieldInput(
-                controller: controller.beneficialAccountController,
-                headerText: 'Account to credit',
-                hintText: 'Select Account',
-                suffixIcon: const RotatedBox(
-                  quarterTurns: 45,
-                  child: Icon(Icons.chevron_right),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 8),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryColorDeep,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    height: 50,
+                    width: 50,
+                    child: Utils.renderSVGImage(
+                        assetName: "assets/images/three_head.svg",
+                        height: 20.0,
+                        width: 20.0,
+                        color: Color(0xffffffff)),
+                  ),
                 ),
-              ),
+              ],
             ),
-            Padding(
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: AppTextFieldInput(
+              controller: controller.beneficialAccountController,
+              headerText: 'Amount',
+              hintText: 'NGN',
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: AppTextFieldInput(
+              controller: controller.beneficialAccountController,
+              headerText: 'Payment memo',
+              hintText: '',
+            ),
+          ),
+          Padding(
               padding: const EdgeInsets.only(
                 top: 24,
                 right: 16.0,
                 left: 16.0,
               ),
-              child: AppTextFieldInput(
-                controller: controller.beneficialAccountController,
-                headerText: 'Amount',
-                hintText: 'NGN',
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 24,
-                right: 16.0,
-                left: 16.0,
-              ),
-              child: AppTextFieldInput(
-                controller: controller.beneficialAccountController,
-                headerText: 'Payment memo',
-                hintText: '',
-              ),
-            ),
-            Padding(
-                padding: const EdgeInsets.only(
-                  top: 24,
-                  right: 16.0,
-                  left: 16.0,
-                ),
-                child: AppButton(
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => const InitiatePaymentDialogue(),
-                    );
-                  },
-                  text: 'Initiate Payment',
-                )),
-          ],
-        ),
+              child: AppButton(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const InitiatePaymentDialogue(),
+                  );
+                },
+                text: 'Initiate Payment',
+              )),
+        ],
       ),
     );
   }
