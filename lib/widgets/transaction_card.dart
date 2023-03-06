@@ -11,18 +11,25 @@ class TransactionCard extends StatelessWidget {
           //column 1
           Column(
             children: [
-              Center(
-                child: Image.asset("assets/images/incoming.png"),
+              Image.asset(
+                "assets/images/incoming.png",
+                width: 32,
+                height: 32,
               )
             ],
           ),
           //column 2
           Column(
-            children: [],
+            children: const [
+              Text("Layor Salami"),
+              Text("Jan 10 2023"),
+            ],
           ),
           //column 3
           Column(
-            children: [],
+            children: [
+              Text("NGN 10,000"),
+            ],
           ),
         ],
       ),
