@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   Color selectedIconColor = AppColors.primaryColor;
   Color unselectedIconColor = const Color(0XFF898A8D);
-  Color color = const Color(0xffFDFCFC);
+  Color color = AppColors.whiteColor2;
 
   @override
   Widget build(BuildContext context) {
