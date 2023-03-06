@@ -96,12 +96,21 @@ class ActionCenterScreen extends GetView<ActionCenterModel> {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(
+          Padding(
+            padding: const EdgeInsets.symmetric(
               vertical: 24,
               horizontal: 24,
             ),
-            child: ActionCenterCard(),
+            child: ActionCenterCard(
+              recieverName: 'Layor Pan Enterprises',
+              recieverNumber: '0245728039',
+              narration: 'Website Payment Installment 2',
+              amount: '100,000.00',
+              paymentMethod: 'Intant Payment',
+              onApprove: () {
+                print("Give me money");
+              },
+            ),
           ),
         ],
       ),
