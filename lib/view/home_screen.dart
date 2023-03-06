@@ -20,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final PageController _pageController = PageController();
-  int index = 0;
+  int selectedIndex = 0;
   Color selectedIconColor = AppColors.primaryColor;
   Color unselectedIconColor = const Color(0XFF898A8D);
   Color color = const Color(0xffFDFCFC);
@@ -52,9 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     changePage(index) {
-      _pageController.jumpToPage(index);
+      _pageController.jumpToPage(selectedIndex);
       setState(() {
-        index = index;
+        selectedIndex = index;
         print("index: $index");
       });
     }
@@ -73,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
               if (hapticFeedback == true) {
                 HapticFeedback.mediumImpact();
               }
+              setState(() {});
 
               changePage(index);
             },
@@ -83,8 +84,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   assetName: item.iconSvgName,
                   height: 24.0,
                   width: 24.0,
-                  color:
-                      index == index ? selectedIconColor : unselectedIconColor,
+                  color: index == selectedIndex
+                      ? selectedIconColor
+                      : unselectedIconColor,
                 )
                 // child: Icon(
                 //   item.iconData,
@@ -93,19 +95,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
           ),
           AnimatedContainer(
-            duration: const Duration(milliseconds: 1000),
-            child: index == index
-                ? Text(
-                    item.title,
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: index == index
-                          ? selectedIconColor
-                          : unselectedIconColor,
-                    ),
-                  )
-                : const SizedBox.shrink(),
-          )
+              duration: const Duration(milliseconds: 100),
+              child: Text(
+                item.title,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: index == selectedIndex
+                      ? selectedIconColor
+                      : unselectedIconColor,
+                ),
+              ))
         ],
       );
     }
