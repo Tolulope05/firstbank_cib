@@ -85,33 +85,85 @@ class ActionCenterScreen extends GetView<ActionCenterModel> {
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 24),
-            child: Text(
-              "Feb 28 2023",
-              style: TextStyle(
-                color: AppColors.unselectedIconColor,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 24),
+                    child: Text(
+                      "Feb 28 2023",
+                      style: TextStyle(
+                        color: AppColors.unselectedIconColor,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 24,
+                      horizontal: 24,
+                    ),
+                    child: ActionCenterCard(
+                      recieverName: 'Layor Pan Enterprises',
+                      recieverNumber: '0245728039',
+                      narration: 'Website Payment Installment 2',
+                      amount: '100,000.00',
+                      paymentMethod: 'Intant Payment',
+                      onApprove: () {
+                        print("Hello World");
+                      },
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 24),
+                    child: Text(
+                      "Feb 27 2023",
+                      style: TextStyle(
+                        color: AppColors.unselectedIconColor,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 24,
+                      horizontal: 24,
+                    ),
+                    child: ActionCenterCard(
+                      recieverName: 'Layor Pan Enterprises',
+                      recieverNumber: '0245728039',
+                      narration: 'Website Payment Installment 2',
+                      amount: '100,000.00',
+                      paymentMethod: 'Intant Payment',
+                      onApprove: () {
+                        print("Hello World");
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 24,
+                      horizontal: 24,
+                    ),
+                    child: ActionCenterCard(
+                      recieverName: 'Layor Pan Enterprises',
+                      recieverNumber: '0245728039',
+                      narration: 'Website Payment Installment 2',
+                      amount: '100,000.00',
+                      paymentMethod: 'Intant Payment',
+                      onApprove: () {
+                        print("Hello World");
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 24,
-              horizontal: 24,
-            ),
-            child: ActionCenterCard(
-              recieverName: 'Layor Pan Enterprises',
-              recieverNumber: '0245728039',
-              narration: 'Website Payment Installment 2',
-              amount: '100,000.00',
-              paymentMethod: 'Intant Payment',
-              onApprove: () {
-                print("Hello World");
-              },
-            ),
-          ),
+          )
         ],
       ),
     );
