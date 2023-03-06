@@ -18,4 +18,5 @@ class AppColors {
   static const Color greyColor2 = Color(0XFF333333);
   static const Color unselectedIconColor = Color(0XFF898A8D);
   static const Color successColor = Color(0XFF33CC99);
+  static const Color failedColor = Color(0XFFFF4B55);
 }

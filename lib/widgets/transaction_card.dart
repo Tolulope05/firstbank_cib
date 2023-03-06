@@ -2,7 +2,19 @@ import 'package:firstbank_cib/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class TransactionCard extends StatelessWidget {
-  const TransactionCard({Key? key}) : super(key: key);
+  TransactionCard({
+    Key? key,
+    required this.userName,
+    required this.date,
+    required this.isIncome,
+    required this.amount,
+    this.status,
+  }) : super(key: key);
+  final String userName;
+  final String date;
+  final String amount;
+  final String? status;
+  final bool isIncome;
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +24,15 @@ class TransactionCard extends StatelessWidget {
       ),
       child: Row(
         mainAxisSize: MainAxisSize.max,
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           //column 1
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
-                "assets/images/incoming.png",
+                isIncome
+                    ? "assets/images/incoming.png"
+                    : "assets/images/outgoing.png",
                 width: 32,
                 height: 32,
               )
@@ -31,17 +44,17 @@ class TransactionCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
-                    "Layor Salami",
-                    style: TextStyle(
+                    userName,
+                    style: const TextStyle(
                       color: AppColors.blackColor,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   Text(
-                    "Jan 10 2023",
-                    style: TextStyle(
+                    date,
+                    style: const TextStyle(
                       fontSize: 12,
                       color: AppColors.unselectedIconColor,
                       fontWeight: FontWeight.w400,
@@ -56,18 +69,18 @@ class TransactionCard extends StatelessWidget {
           Flexible(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: const [
+              children: [
                 Text(
-                  "+ NGN 10,000",
-                  style: TextStyle(
+                  "${isIncome ? "+" : "-"} NGN $amount",
+                  style: const TextStyle(
                     fontSize: 14,
                     color: AppColors.successColor,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 Text(
-                  "Processed",
-                  style: TextStyle(
+                  status ?? "",
+                  style: const TextStyle(
                     fontSize: 12,
                     color: AppColors.blackColor,
                     fontWeight: FontWeight.w500,
