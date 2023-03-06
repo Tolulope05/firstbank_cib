@@ -1,3 +1,4 @@
+import 'package:firstbank_cib/widgets/profile_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/colors.dart';
@@ -21,7 +22,10 @@ class MoreScreen extends StatelessWidget {
         ),
       ),
       body: Column(
-        children: const [],
+        children: [
+          Container(color: AppColors.whiteColor2, height: 10),
+          ProfileCard(),
+        ],
       ),
     );
   }
