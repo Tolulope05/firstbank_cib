@@ -23,7 +23,7 @@ class TransactionCard extends StatelessWidget {
         vertical: 12,
       ),
       child: Row(
-        mainAxisSize: MainAxisSize.max,
+        // mainAxisSize: MainAxisSize.max,
         children: [
           //column 1
           Column(
@@ -64,7 +64,6 @@ class TransactionCard extends StatelessWidget {
               ),
             ),
           ),
-          const Spacer(),
           //column 3
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,

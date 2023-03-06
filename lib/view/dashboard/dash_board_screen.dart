@@ -402,7 +402,7 @@ class DashBoardScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 100), // to be removed soon
+                  const SizedBox(height: 100), // to be remo
                 ],
               ),
             )
