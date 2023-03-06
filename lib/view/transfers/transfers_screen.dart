@@ -85,15 +85,11 @@ class _TransfersScreenState extends State<TransfersScreen>
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: [
-                const OwnAccountTabView(),
-                const FirstBankTabview(),
-                Container(
-                  child: const Text("Test 1"),
-                ),
-                Container(
-                  child: const Text("Test 1"),
-                ),
+              children: const [
+                OwnAccountTabView(),
+                FirstBankTabview(),
+                FirstBankTabview(),
+                FirstBankTabview(),
               ],
             ),
           ),
@@ -308,6 +304,65 @@ class FirstBankTabview extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(
               top: 24,
+              right: 18.0,
+              left: 18.0,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: Text(
+                    "Payment method",
+                    style: TextStyle(
+                      color: AppColors.textColor2,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Radio(
+                      value: 1,
+                      groupValue: 2,
+                      fillColor: MaterialStateColor.resolveWith(
+                          (states) => AppColors.unselectedIconColor),
+                      onChanged: (value) {},
+                    ),
+                    const Text(
+                      'Instant Payment',
+                      style: TextStyle(
+                        color: AppColors.textColor2,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Radio(
+                      value: 2,
+                      groupValue: 2,
+                      fillColor: MaterialStateColor.resolveWith(
+                        (states) => AppColors.yellowColor3,
+                      ),
+                      onChanged: (value) {},
+                    ),
+                    const Text(
+                      'RTGS',
+                      style: TextStyle(
+                        color: AppColors.textColor2,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 12,
               right: 16.0,
               left: 16.0,
             ),
