@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Text(
                 item.title,
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 14,
                   color: index == selectedIndex
                       ? selectedIconColor
                       : unselectedIconColor,
