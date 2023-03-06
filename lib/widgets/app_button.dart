@@ -37,6 +37,7 @@ class AppButton extends StatelessWidget {
               text ?? 'Enter',
               style: TextStyle(
                 color: textColor ?? Colors.white,
+                fontWeight: FontWeight.w500,
                 fontSize: 16,
               ),
             )),

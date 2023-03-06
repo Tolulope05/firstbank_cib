@@ -52,8 +52,14 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     changePage(index) {
-      _pageController.jumpToPage(selectedIndex);
+      // to do later
       setState(() {
+        _pageController.jumpToPage(selectedIndex);
+        selectedIndex = index;
+        print("index: $index");
+      });
+      setState(() {
+        _pageController.jumpToPage(selectedIndex);
         selectedIndex = index;
         print("index: $index");
       });
@@ -127,6 +133,9 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Stack(
           children: [
             PageView(
+              physics:
+                  const NeverScrollableScrollPhysics(), //prvent screen swipping only button for home screen
+
               controller: _pageController,
               children: items.map((item) => item.page).toList(),
               onPageChanged: (index) => changePage(index),
