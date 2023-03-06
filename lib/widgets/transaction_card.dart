@@ -1,3 +1,4 @@
+import 'package:firstbank_cib/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class TransactionCard extends StatelessWidget {
@@ -7,29 +8,46 @@ class TransactionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           //column 1
-          Column(
-            children: [
-              Image.asset(
-                "assets/images/incoming.png",
-                width: 32,
-                height: 32,
-              )
-            ],
+          Flexible(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  "assets/images/incoming.png",
+                  width: 32,
+                  height: 32,
+                )
+              ],
+            ),
           ),
           //column 2
-          Column(
-            children: const [
-              Text("Layor Salami"),
-              Text("Jan 10 2023"),
-            ],
+          Expanded(
+            child: Column(
+              children: const [
+                Text(
+                  "Layor Salami",
+                  style: TextStyle(
+                    // fontSize: 14,
+                    color: AppColors.blackColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text("Jan 10 2023"),
+              ],
+            ),
           ),
           //column 3
-          Column(
-            children: [
-              Text("NGN 10,000"),
-            ],
+          Flexible(
+            child: Column(
+              children: [
+                Text("NGN 10,000"),
+                Text("Processed"),
+              ],
+            ),
           ),
         ],
       ),
