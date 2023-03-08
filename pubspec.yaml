@@ -15,6 +15,8 @@ dependencies:
     sdk: flutter
   flutter_svg: ^2.0.2
   get: ^4.6.5
+  get_storage: ^2.1.1
+  http: ^0.13.5
   pinput: ^2.2.31
   smooth_page_indicator: ^1.0.1
 

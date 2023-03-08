@@ -8,6 +8,7 @@ class AppTextFieldInput extends StatefulWidget {
     required this.headerText,
     required this.hintText,
     required this.controller,
+    this.validator,
     this.obscureText = false,
   }) : super(key: key);
   final String headerText;
@@ -15,6 +16,7 @@ class AppTextFieldInput extends StatefulWidget {
   final TextEditingController controller;
   bool obscureText;
   final Widget? suffixIcon;
+  String? Function(String?)? validator;
 
   @override
   State<AppTextFieldInput> createState() => _AppTextFieldInputState();
@@ -39,6 +41,7 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
         TextFormField(
           obscureText: widget.obscureText,
           controller: widget.controller,
+          validator: widget.validator,
           decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(4),
