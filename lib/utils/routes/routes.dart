@@ -1,81 +1,62 @@
+import 'package:get/get.dart';
 import 'package:firstbank_cib/utils/routes/routes_name.dart';
-import 'package:firstbank_cib/view/dashboard/dash_board_screen.dart';
-import 'package:firstbank_cib/view/dashboard/transaction_details_screen.dart';
+
 import 'package:firstbank_cib/view/home_screen.dart';
 import 'package:firstbank_cib/view/login/login_screen.dart';
 import 'package:firstbank_cib/view/splash_screen.dart';
 import 'package:firstbank_cib/view/transfers/transfers_screen.dart';
-import 'package:firstbank_cib/view_model/actioncenter_view_model.dart';
-import 'package:firstbank_cib/view_model/dashboard_view_model.dart';
-import 'package:firstbank_cib/view_model/home_view_model.dart';
-import 'package:get/get.dart';
 
-import '../../view/dashboard/action_center_screen.dart';
+import '../../bindings/bindings.dart';
+import '../../view/dashboard/dashboard.dart';
 import '../../view/login/pin_confirmation_screen.dart';
 import '../../view/login/sign_in_screen.dart';
-import '../../view_model/pin_confirmation_model.dart';
-import '../../view_model/sign_in_view_model.dart';
-import '../../view_model/transfer_screen_view_model.dart';
 
 class Routes {
   static List<GetPage<dynamic>>? getPages = [
     GetPage<dynamic>(
       name: RoutesName.splash,
       page: () => const SplashScreen(),
+      binding: SplashBindings(),
     ),
     GetPage<dynamic>(
       name: RoutesName.login,
       page: () => const Logincreen(),
+      binding: AuthBindings(),
     ),
     GetPage<dynamic>(
       name: RoutesName.signIn,
       page: () => const SignInScreen(),
-      binding: BindingsBuilder(
-        () {
-          Get.lazyPut(() => SignInViewModel());
-        },
-      ),
+      binding: AuthBindings(),
     ),
     GetPage<dynamic>(
       name: RoutesName.pinConfirmation,
       page: () => const PinConfirmationScreen(),
-      binding: BindingsBuilder(
-        () {
-          Get.lazyPut(() => PinConfirmationModel());
-        },
-      ),
+      binding: AuthBindings(),
     ),
     GetPage<dynamic>(
       name: RoutesName.homeScreen,
       page: () => const HomeScreen(),
-      binding: BindingsBuilder(
-        () {
-          Get.lazyPut(() => HomeViewModel());
-          Get.put(DashBoardviewModel());
-          Get.put(TransferScreenViewModel());
-        },
-      ),
+      binding: HomeBindings(),
     ),
     GetPage<dynamic>(
       name: RoutesName.dashBoard,
       page: () => const DashBoardScreen(),
+      binding: HomeBindings(),
     ),
     GetPage<dynamic>(
       name: RoutesName.actionCenter,
       page: () => const ActionCenterScreen(),
-      binding: BindingsBuilder(
-        () {
-          Get.put(ActionCenterModel());
-        },
-      ),
+      binding: HomeBindings(),
     ),
     GetPage<dynamic>(
       name: RoutesName.transactionDetails,
       page: () => const TransactionDetailsScreen(),
+      binding: HomeBindings(),
     ),
     GetPage<dynamic>(
       name: RoutesName.transferScreen,
       page: () => const TransfersScreen(),
+      binding: HomeBindings(),
     ),
   ];
 }

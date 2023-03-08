@@ -33,7 +33,7 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<ActionCenterModel>();
+    final controller = Get.find<ActionCenterViewModel>();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

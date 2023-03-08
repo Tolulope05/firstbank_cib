@@ -6,7 +6,7 @@ import '../../constants/colors.dart';
 import '../../view_model/actioncenter_view_model.dart';
 import '../../widgets/action_center_card.dart';
 
-class ActionCenterScreen extends GetView<ActionCenterModel> {
+class ActionCenterScreen extends GetView<ActionCenterViewModel> {
   const ActionCenterScreen({Key? key}) : super(key: key);
 
   @override
