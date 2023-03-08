@@ -1,7 +1,12 @@
 import 'package:firstbank_cib/utils/routes/routes_name.dart';
+import 'package:firstbank_cib/view_model/auth_view_model.dart';
 import 'package:get/get.dart';
 
-class SplashViewmodel extends GetxController {
+import '../services/cache/cache_manager.dart';
+
+class SplashViewmodel extends GetxController with CacheManager {
+  AuthViewModel authViewModel = Get.put(AuthViewModel());
+
   @override
   void onInit() {
     handleStartUpLogic();
@@ -9,10 +14,11 @@ class SplashViewmodel extends GetxController {
   }
 
   Future handleStartUpLogic() async {
-    var hasLoggedInUser = false;
+    await authViewModel.checkLoginStatus();
+    bool hasLoggedInUser = authViewModel.isLoggedValue;
     await Future.delayed(const Duration(seconds: 1));
     if (hasLoggedInUser == true) {
-      Get.toNamed(RoutesName.dashBoard);
+      Get.toNamed(RoutesName.homeScreen);
     } else {
       Get.toNamed(RoutesName.login);
     }

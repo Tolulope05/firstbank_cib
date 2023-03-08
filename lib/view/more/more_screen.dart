@@ -114,31 +114,34 @@ class MoreScreen extends GetView<AuthViewModel> {
                 title: "Approval Rules",
                 svgColor: AppColors.yellowColor3,
               ),
-              Container(
-                padding: const EdgeInsets.all(16),
-                margin: const EdgeInsets.only(top: 24, bottom: 100),
-                decoration: BoxDecoration(
-                  color: AppColors.failedColor,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  children: [
-                    const Text(
-                      "Logout",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+              GestureDetector(
+                onTap: () => controller.logUserOut(),
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  margin: const EdgeInsets.only(top: 24, bottom: 100),
+                  decoration: BoxDecoration(
+                    color: AppColors.failedColor,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: [
+                      const Text(
+                        "Logout",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.whiteColor2,
+                        ),
+                      ),
+                      const Spacer(),
+                      Utils.renderSVGImage(
+                        assetName: "assets/svg/logout.svg",
+                        height: 20.00,
+                        width: 20.0,
                         color: AppColors.whiteColor2,
                       ),
-                    ),
-                    const Spacer(),
-                    Utils.renderSVGImage(
-                      assetName: "assets/svg/logout.svg",
-                      height: 20.00,
-                      width: 20.0,
-                      color: AppColors.whiteColor2,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

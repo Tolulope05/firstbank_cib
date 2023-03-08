@@ -1,13 +1,15 @@
+import 'package:firstbank_cib/constants/colors.dart';
 import 'package:firstbank_cib/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
-import '../model/login_model.dart';
+import '../model/login_response.dart';
+import '../model/logout_response.dart';
 import '../services/auth_services.dart';
+import '../services/cache/cache_manager.dart';
 import '../utils/routes/routes_name.dart';
 
-class AuthViewModel extends GetxController {
+class AuthViewModel extends GetxController with CacheManager {
   TextEditingController organizationCodeController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -15,10 +17,8 @@ class AuthViewModel extends GetxController {
   LoginResponse? userResponse;
   // Rx<bool> isLoading = false.obs;
 
-  final Rx<bool> isLogged = false.obs;
-
-  // local storage
-  final box = GetStorage();
+  final Rx<bool> _isLogged = false.obs;
+  bool get isLoggedValue => _isLogged.value;
 
   @override
   void onClose() {
@@ -28,9 +28,11 @@ class AuthViewModel extends GetxController {
     super.onClose();
   }
 
-  void checkLoginStatus() {
-    if (box.read('userToken') != null) {
-      Get.offAllNamed(RoutesName.homeScreen);
+  Future<void> checkLoginStatus() async {
+    final token = getToken();
+    final session = getSession();
+    if (token != null && session != null) {
+      _isLogged.value = true;
     }
   }
 
@@ -47,28 +49,94 @@ class AuthViewModel extends GetxController {
         password: passwordController.text,
         corporateCode: organizationCodeController.text,
       );
-      // save user data
-      if (userResponse != null) {
-        box.write('userToken', userResponse!.token);
-        box.write('userSession', userResponse!.session);
-      }
 
-      if (userResponse!.success == false) {
+      if (userResponse!.success == true) {
+        _isLogged.value = true;
+        //Token and session is cached
+        await saveToken(userResponse!.token);
+        await saveSession(userResponse!.session);
+        await saveFullname(userResponse!.fullname);
+        // navigate to home screen
+        usernameController.clear();
+        passwordController.clear();
+        organizationCodeController.clear();
+
+        Get.offAllNamed(RoutesName.homeScreen);
         Utils.getsnackbar(
-          title: "Not Succesful",
+          title: "Welcome ${getFullname()} ",
+          // title: "Welcome ${userResponse!.fullname} ",
           message: userResponse!.responseMessage,
         );
       } else {
         Utils.getsnackbar(
-          title: "Welcome ${userResponse!.fullname} ",
+          title: "Not Succesful",
           message: userResponse!.responseMessage,
         );
-        Get.offAllNamed(RoutesName.homeScreen);
       }
     } catch (error) {
       String errorMessage = error.toString();
       Utils.getsnackbar(title: "Failed to login..", message: errorMessage);
       throw Exception(errorMessage);
+    }
+  }
+
+  void logUserOut() {
+    Get.dialog(
+      AlertDialog(
+        title: const Text(
+          "Logout",
+          style: TextStyle(color: AppColors.failedColor),
+        ),
+        content: const Text("Are you sure you want to logout?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text(
+              "No",
+              style: TextStyle(
+                color: AppColors.blackColor,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              _logOut();
+            },
+            child: const Text(
+              "Yes",
+              style: TextStyle(
+                color: AppColors.failedColor,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // logout
+  void _logOut() async {
+    _isLogged.value = false;
+    LogoutResponse logoutResp = await authServices.logoutUser(
+      username: getFullname()!,
+      session: getSession()!,
+    );
+    if (logoutResp.success == true) {
+      removeToken();
+      removeSession();
+      removeFullname();
+      Get.offAllNamed(RoutesName.login);
+      Utils.getsnackbar(
+        title: "Logout Successfull",
+        message: logoutResp.responseMessage,
+      );
+    } else {
+      Utils.getsnackbar(
+        title: "Not Succesful",
+        message: logoutResp.responseMessage,
+      );
     }
   }
 }
