@@ -10,13 +10,15 @@ class AppTextFieldInput extends StatefulWidget {
     required this.controller,
     this.validator,
     this.obscureText = false,
+    this.isPassword,
   }) : super(key: key);
   final String headerText;
   final String hintText;
   final TextEditingController controller;
   bool obscureText;
   final Widget? suffixIcon;
-  String? Function(String?)? validator;
+  final String? Function(String?)? validator;
+  bool? isPassword;
 
   @override
   State<AppTextFieldInput> createState() => _AppTextFieldInputState();
@@ -59,7 +61,8 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
             ),
             suffixIcon: GestureDetector(
               onTap: () {
-                if (widget.suffixIcon != null && widget.obscureText == true) {
+                //password function when suffix only
+                if (widget.suffixIcon != null && widget.isPassword == true) {
                   setState(() {
                     widget.obscureText = !widget.obscureText;
                   });
@@ -67,7 +70,11 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
                   // we can pass every other function here
                 }
               },
-              child: widget.suffixIcon ?? const SizedBox.shrink(),
+              child: widget.obscureText != true
+                  ? widget.suffixIcon ?? const SizedBox.shrink()
+                  : const Icon(
+                      Icons.visibility,
+                    ),
             ),
             focusColor: AppColors.primaryColor,
           ),

@@ -10,13 +10,13 @@ import '../../widgets/app_app_bar.dart';
 
 class SignInScreen extends GetView<SignInViewModel> {
   const SignInScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
-          key: controller.formKey,
+          key: formKey,
           child: Column(
             children: [
               const AppAppBar(),
@@ -151,7 +151,8 @@ class SignInScreen extends GetView<SignInViewModel> {
                   controller: controller.passwordController,
                   headerText: 'Password',
                   hintText: 'Password',
-                  obscureText: false,
+                  obscureText: true,
+                  isPassword: true,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please enter password';
@@ -201,7 +202,11 @@ class SignInScreen extends GetView<SignInViewModel> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: AppButton(
                   onTap: () {
-                    controller.navigateToPinConfirmationScreen();
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
+                      controller.loginUser();
+                      // controller.navigateToPinConfirmationScreen();
+                    }
                   },
                   text: "Sign In to your account ",
                 ),
