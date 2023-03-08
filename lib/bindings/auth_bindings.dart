@@ -7,7 +7,7 @@ class AuthBindings implements Bindings {
   void dependencies() {
     Get.lazyPut(() => LoginViewModel());
     Get.lazyPut(() => PinConfirmationModel());
-    Get.lazyPut(() => SignInViewModel());
+    Get.lazyPut(() => AuthViewModel());
     Get.lazyPut(() => PinConfirmationModel());
   }
 }

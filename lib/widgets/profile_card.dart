@@ -32,7 +32,9 @@ class ProfileCard extends StatelessWidget {
                     child: Text(
                       "LS",
                       style: TextStyle(
-                          fontSize: 12, color: AppColors.primaryColor),
+                        fontSize: 12,
+                        color: AppColors.primaryColor,
+                      ),
                     ),
                   ),
                 ),

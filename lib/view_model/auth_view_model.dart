@@ -7,12 +7,16 @@ import '../model/login_model.dart';
 import '../services/auth_services.dart';
 import '../utils/routes/routes_name.dart';
 
-class SignInViewModel extends GetxController {
+class AuthViewModel extends GetxController {
   TextEditingController organizationCodeController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   AuthServices authServices = AuthServices();
   LoginResponse? userResponse;
+  // Rx<bool> isLoading = false.obs;
+
+  final Rx<bool> isLogged = false.obs;
+
   // local storage
   final box = GetStorage();
 
@@ -24,10 +28,16 @@ class SignInViewModel extends GetxController {
     super.onClose();
   }
 
+  void checkLoginStatus() {
+    if (box.read('userToken') != null) {
+      Get.offAllNamed(RoutesName.homeScreen);
+    }
+  }
+
 // navigate to pin confirmation screen
   void navigateToPinConfirmationScreen() {
     Get.toNamed(RoutesName.pinConfirmation);
-  }
+  } // not used yet in the api
 
   // login with username and password
   Future<void> loginUser() async {
@@ -37,10 +47,10 @@ class SignInViewModel extends GetxController {
         password: passwordController.text,
         corporateCode: organizationCodeController.text,
       );
-
       // save user data
       if (userResponse != null) {
-        box.write('userToken', userResponse);
+        box.write('userToken', userResponse!.token);
+        box.write('userSession', userResponse!.session);
       }
 
       if (userResponse!.success == false) {
@@ -67,11 +77,9 @@ class SignInViewModel extends GetxController {
 
 
 /**
- * {
   "username": "lukushaker",
   "password": "Password10!",
   "ipAddress": "string",
   "macAddress": "string",
-  "corporateCode": "testing"
-}'
+  "corporateCode": "testing" //Organization Code
  */

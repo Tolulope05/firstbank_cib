@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../utils/utils.dart';
-import '../../view_model/sign_in_view_model.dart';
+import '../../view_model/auth_view_model.dart';
 import '../../widgets/app_app_bar.dart';
 
-class SignInScreen extends GetView<SignInViewModel> {
+class SignInScreen extends GetView<AuthViewModel> {
   const SignInScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {

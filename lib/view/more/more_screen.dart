@@ -1,11 +1,13 @@
 import 'package:firstbank_cib/widgets/profile_card.dart';
 import 'package:firstbank_cib/widgets/profile_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
 import '../../utils/utils.dart';
+import '../../view_model/view_model.dart';
 
-class MoreScreen extends StatelessWidget {
+class MoreScreen extends GetView<AuthViewModel> {
   const MoreScreen({Key? key}) : super(key: key);
 
   @override
