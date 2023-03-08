@@ -1,4 +1,4 @@
-import 'package:firstbank_cib/constants/colors.dart';
+import 'package:firstbank_cib/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -12,7 +12,7 @@ class SignInViewModel extends GetxController {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   AuthServices authServices = AuthServices();
-  Rxn<LoginModel>? _user;
+  LoginResponse? userResponse;
   // local storage
   final box = GetStorage();
 
@@ -32,24 +32,32 @@ class SignInViewModel extends GetxController {
   // login with username and password
   Future<void> loginUser() async {
     try {
-      _user!.value = await authServices.loginWithUsernameAndPassword(
+      userResponse = await authServices.loginWithUsernameAndPassword(
         username: usernameController.text,
         password: passwordController.text,
         corporateCode: organizationCodeController.text,
       );
 
       // save user data
-      box.write('userToken', _user!.value!.token);
-      Get.offAllNamed(RoutesName.homeScreen);
+      if (userResponse != null) {
+        box.write('userToken', userResponse);
+      }
+
+      if (userResponse!.success == false) {
+        Utils.getsnackbar(
+          title: "Not Succesful",
+          message: userResponse!.responseMessage,
+        );
+      } else {
+        Utils.getsnackbar(
+          title: "Welcome ${userResponse!.fullname} ",
+          message: userResponse!.responseMessage,
+        );
+        Get.offAllNamed(RoutesName.homeScreen);
+      }
     } catch (error) {
       String errorMessage = error.toString();
-      Get.snackbar(
-        'Failed to login..',
-        errorMessage,
-        backgroundColor: AppColors.primaryColor.withOpacity(0.9),
-        colorText: AppColors.whiteColor,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      Utils.getsnackbar(title: "Failed to login..", message: errorMessage);
       throw Exception(errorMessage);
     }
   }

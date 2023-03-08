@@ -1,52 +1,47 @@
-// To parse this JSON data, do
-//
-//     final loginModel = loginModelFromJson(jsonString);
-
 import 'dart:convert';
 
-LoginModel loginModelFromJson(String str) =>
-    LoginModel.fromJson(json.decode(str));
+LoginResponse loginResponseFromJson(String str) =>
+    LoginResponse.fromJson(json.decode(str));
 
-String loginModelToJson(LoginModel data) => json.encode(data.toJson());
+String loginResponseToJson(LoginResponse data) => json.encode(data.toJson());
 
-class LoginModel {
-  LoginModel({
+class LoginResponse {
+  LoginResponse({
     required this.success,
     required this.changePassword,
     required this.response,
     required this.responseMessage,
-    required this.fullname,
-    required this.session,
-    required this.getSubsidiaries,
+    this.fullname,
+    this.session,
+    this.getSubsidiaries,
     required this.advert,
     required this.tokenRequired,
-    required this.lastLogin,
+    this.lastLogin,
     required this.firstTime,
-    required this.token,
+    this.token,
   });
 
   bool success;
   bool changePassword;
   int response;
   String responseMessage;
-  String fullname;
-  String session;
-  List<GetSubsidiary> getSubsidiaries;
+  dynamic fullname;
+  dynamic session;
+  dynamic getSubsidiaries;
   bool advert;
   bool tokenRequired;
-  String lastLogin;
+  dynamic lastLogin;
   bool firstTime;
-  String token;
+  dynamic token;
 
-  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
+  factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
         success: json["success"],
         changePassword: json["changePassword"],
         response: json["response"],
         responseMessage: json["responseMessage"],
         fullname: json["fullname"],
         session: json["session"],
-        getSubsidiaries: List<GetSubsidiary>.from(
-            json["getSubsidiaries"].map((x) => GetSubsidiary.fromJson(x))),
+        getSubsidiaries: json["getSubsidiaries"],
         advert: json["advert"],
         tokenRequired: json["tokenRequired"],
         lastLogin: json["lastLogin"],
@@ -61,8 +56,7 @@ class LoginModel {
         "responseMessage": responseMessage,
         "fullname": fullname,
         "session": session,
-        "getSubsidiaries":
-            List<dynamic>.from(getSubsidiaries.map((x) => x.toJson())),
+        "getSubsidiaries": getSubsidiaries,
         "advert": advert,
         "tokenRequired": tokenRequired,
         "lastLogin": lastLogin,

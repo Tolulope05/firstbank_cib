@@ -1,19 +1,21 @@
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:flutter/material.dart';
+import 'package:firstbank_cib/services/exceptions/app_exceptions.dart';
 
 import '../constants/api_constants.dart';
 import '../model/login_model.dart';
 import 'package:http/http.dart' as http;
 
 class AuthServices {
-  Future<LoginModel> loginWithUsernameAndPassword({
+  Future<LoginResponse> loginWithUsernameAndPassword({
     required String username,
     required String password,
     required String corporateCode,
   }) async {
     Uri url = Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.loginUrl);
-    Map body = {
+
+    Map<String, dynamic> body = {
       'username': username,
       'password': password,
       'ipAddress': 'string',
@@ -34,14 +36,21 @@ class AuthServices {
           final responseBody = jsonDecode(response.body);
           print(responseBody);
           //  Deserialize into loginUserModel
-          final LoginModel usersModel = LoginModel.fromJson(responseBody);
+          final LoginResponse usersModel = LoginResponse.fromJson(responseBody);
           return usersModel;
+        case 400:
+          throw BadRequestException(response.body.toString());
+        case 403:
+          throw UnauthorisedException(response.body.toString());
 
         default:
-          return Future.error(Exception(response.reasonPhrase));
+          throw FetchDataException(
+              'Error occured while Communication with Server with StatusCode : ${response.statusCode}');
       }
+    } on SocketException {
+      throw FetchDataException("No Internet connection");
     } catch (e) {
-      return Future.error(Exception(e.toString()));
+      throw FetchDataException(e.toString());
     }
   }
 }
