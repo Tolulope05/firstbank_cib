@@ -32,7 +32,7 @@ class MoreScreen extends GetView<AuthViewModel> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ProfileCard(),
+              ProfileCard(fullname: controller.getFullname()),
               const Padding(
                 padding: EdgeInsets.only(top: 24),
                 child: Text(

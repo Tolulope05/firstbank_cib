@@ -4,7 +4,11 @@ import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 
 class ProfileCard extends StatelessWidget {
-  const ProfileCard({Key? key}) : super(key: key);
+  const ProfileCard({
+    Key? key,
+    this.fullname,
+  }) : super(key: key);
+  final String? fullname;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +46,8 @@ class ProfileCard extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "The Sharply Africa",
                         style: TextStyle(
                           color: AppColors.blackColor,
@@ -51,10 +55,10 @@ class ProfileCard extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
-                        "Layor Pan",
-                        style: TextStyle(
+                        fullname ?? "No Name",
+                        style: const TextStyle(
                           color: AppColors.unselectedIconColor,
                           fontSize: 14,
                         ),
