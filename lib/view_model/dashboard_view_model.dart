@@ -1,5 +1,6 @@
 import 'package:firstbank_cib/utils/routes/routes_name.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../model/model.dart';
 import '../services/services.dart';
@@ -11,6 +12,15 @@ class DashBoardviewModel extends GetxController with CacheManager {
   RxBool obScureBalance = true.obs;
   RxBool isLoading = true.obs;
 
+// Transaction History Date parsing
+  DateTime now = DateTime.now();
+  final DateFormat formatter = DateFormat('yyyy-MM-dd');
+  String get presentDate => DateFormat('yyyy-MM-dd').format(now);
+// Get first date of the month
+  DateTime get firstDateOfMonth => DateTime(now.year, now.month, 1);
+// Parse date to string
+  String get firstDateOfMonthString => formatter.format(firstDateOfMonth);
+
   togglePasswordVisibility() {
     obScureBalance.value = !obScureBalance.value;
   }
@@ -21,9 +31,8 @@ class DashBoardviewModel extends GetxController with CacheManager {
   String giveCommaseparated(String str) => str.replaceAllMapped(reg, mathFunc);
   // obscure home balance
   String obscureBalance(String balance) {
-// replace all digit and string with *
+    // replace all digit and string with *
     String finalBalance = balance.replaceAll(RegExp(r'[0-9,.]'), '*');
-
     return finalBalance;
   }
 
@@ -39,6 +48,13 @@ class DashBoardviewModel extends GetxController with CacheManager {
   }
 
   String get greetings => getTimeOfDay().value;
+
+  @override
+  void onInit() async {
+    await getAccountCenter();
+    await getTransactionHistory();
+    super.onInit();
+  }
 
   // get account center
   Future<void> getAccountCenter() async {
@@ -64,10 +80,23 @@ class DashBoardviewModel extends GetxController with CacheManager {
     }
   }
 
-  @override
-  void onInit() {
-    getAccountCenter();
-    super.onInit();
+  // get transaction history
+  Future<void> getTransactionHistory() async {
+    print(accountcenter!.accounts![0].accountId!);
+    TransactionHistoryResponse transactionHistoryResponse =
+        await _accountCenterServices.getTransctionHistory(
+      accountId: accountcenter!.accounts![0].accountId!,
+      dashboard: true,
+      startDate: firstDateOfMonthString,
+      enddate: presentDate,
+      session: getSession()!,
+      username: "${getFullname()}@${getCorporateCode()}",
+    );
+    if (transactionHistoryResponse.success == true) {
+      isLoading.value = false;
+    } else {
+      isLoading.value = false;
+    }
   }
 
 //navigation logics
