@@ -8,6 +8,9 @@ class ProfileViewModel extends GetxController with CacheManager {
   final SubidiairiesServices _subsidiariesServices = SubidiairiesServices();
   GetSubsidiary? subsidiaries;
 
+  final RxInt _subsidiaryId = 2.obs;
+  int get subsidiaryId => _subsidiaryId.value;
+
   @override
   void onInit() {
     getSubsidiaryInfo();
@@ -18,7 +21,7 @@ class ProfileViewModel extends GetxController with CacheManager {
     subsidiaries = await _subsidiariesServices.getSubsidiaries(
       session: getSession()!,
       username: "${getFullname()!}@${getCorporateCode()!}",
-      subsidiaryId: 1,
+      subsidiaryId: subsidiaryId,
     );
   }
 }
