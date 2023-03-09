@@ -6,8 +6,17 @@ import '../model/model.dart';
 import '../services/services.dart';
 
 class DashBoardviewModel extends GetxController with CacheManager {
+// Account Center
   final AccountCenterServices _accountCenterServices = AccountCenterServices();
   AccountCenter? accountcenter;
+
+  // Transaction History
+  final Rx<TransactionHistoryResponse> _transactionHistoryResponse =
+      TransactionHistoryResponse().obs;
+  TransactionHistoryResponse get transactionHistoryResponse =>
+      _transactionHistoryResponse.value;
+
+  // User Details
   String get username => getFullname() ?? "User";
   RxBool obScureBalance = true.obs;
   RxBool isLoading = true.obs;
@@ -83,7 +92,7 @@ class DashBoardviewModel extends GetxController with CacheManager {
   // get transaction history
   Future<void> getTransactionHistory() async {
     print(accountcenter!.accounts![0].accountId!);
-    TransactionHistoryResponse transactionHistoryResponse =
+    TransactionHistoryResponse transactionResponse =
         await _accountCenterServices.getTransctionHistory(
       accountId: accountcenter!.accounts![0].accountId!,
       dashboard: true,
@@ -92,10 +101,14 @@ class DashBoardviewModel extends GetxController with CacheManager {
       session: getSession()!,
       username: "${getFullname()}@${getCorporateCode()}",
     );
-    if (transactionHistoryResponse.success == true) {
-      isLoading.value = false;
+    if (transactionResponse.success == true) {
+      _transactionHistoryResponse.value = transactionResponse;
     } else {
-      isLoading.value = false;
+      Get.snackbar(
+        "Unable to fetch history",
+        transactionResponse.responseMessage.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      ); // didnt work
     }
   }
 

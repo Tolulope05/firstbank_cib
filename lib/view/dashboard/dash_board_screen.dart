@@ -3,8 +3,10 @@ import 'package:firstbank_cib/widgets/transaction_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../constants/colors.dart';
+import '../../model/model.dart';
 import '../../view_model/dashboard_view_model.dart';
 import '../../widgets/select_account_dialogue.dart';
 
@@ -285,7 +287,7 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                       ],
                     ),
                   ),
-                  Expanded(
+                  Flexible(
                     child: SingleChildScrollView(
                       child: Container(
                         margin:
@@ -459,27 +461,60 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                                       Expanded(child: SizedBox()),
                                     ],
                                   ),
-                                  const TransactionCard(
-                                    userName: "Layor Salami",
-                                    date: "Jan 10 2023",
-                                    amount: "10,000",
-                                    // status: "Processed",
-                                    isIncome: true,
-                                  ),
-                                  const TransactionCard(
-                                    userName: "Layor Pan Enterprises",
-                                    date: "Jan 10 2023",
-                                    amount: "5,129,000",
-                                    status: "Processed",
-                                    isIncome: false,
-                                  ),
-                                  const TransactionCard(
-                                    userName: "Transfer Commission",
-                                    date: "Jan 10 2023",
-                                    amount: "50",
-                                    status: "Processed",
-                                    isIncome: false,
-                                  ),
+                                  Obx(
+                                    () => ListView.builder(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount: controller
+                                              .transactionHistoryResponse
+                                              .result
+                                              ?.length ??
+                                          0,
+                                      itemBuilder: (context, index) {
+                                        Result result = controller
+                                            .transactionHistoryResponse
+                                            .result![index];
+                                        bool isIncome;
+                                        if (result.drcr == "D") {
+                                          isIncome = false;
+                                        } else {
+                                          isIncome = true;
+                                        }
+
+                                        return TransactionCard(
+                                          userName: result.narration ??
+                                              "Transaction Narration",
+                                          date: result.transDate!,
+                                          amount: result.transAmountString!,
+                                          // status: "Processed",
+                                          isIncome: isIncome,
+                                        );
+                                      },
+                                    ),
+                                  )
+
+                                  // const TransactionCard(
+                                  //   userName: "Layor Salami",
+                                  //   date: "Jan 10 2023",
+                                  //   amount: "10,000",
+                                  //   // status: "Processed",
+                                  //   isIncome: true,
+                                  // ),
+                                  // const TransactionCard(
+                                  //   userName: "Layor Pan Enterprises",
+                                  //   date: "Jan 10 2023",
+                                  //   amount: "5,129,000",
+                                  //   status: "Processed",
+                                  //   isIncome: false,
+                                  // ),
+                                  // const TransactionCard(
+                                  //   userName: "Transfer Commission",
+                                  //   date: "Jan 10 2023",
+                                  //   amount: "50",
+                                  //   status: "Processed",
+                                  //   isIncome: false,
+                                  // ),
                                 ],
                               ),
                             ),
