@@ -9,7 +9,7 @@ class DashBoardviewModel extends GetxController with CacheManager {
   AccountCenter? accountcenter;
   String get username => getFullname() ?? "User";
   RxBool obScureBalance = true.obs;
-  RxBool isLoading = false.obs;
+  RxBool isLoading = true.obs;
 
   togglePasswordVisibility() {
     obScureBalance.value = !obScureBalance.value;
