@@ -70,7 +70,7 @@ class GetSubsidiary {
     required this.subsidiaryId,
     required this.subsidiaryName,
     required this.userRole,
-    required this.userRoles,
+    this.userRoles,
     this.suspense,
     required this.seeBalance,
     required this.payOnlyApprovedBeneficiaries,
@@ -80,8 +80,8 @@ class GetSubsidiary {
   int subsidiaryId;
   String subsidiaryName;
   List<UserRole> userRole;
-  String userRoles;
-  String? suspense;
+  dynamic userRoles;
+  dynamic suspense;
   bool seeBalance;
   bool payOnlyApprovedBeneficiaries;
   List<GetModule> getModules;

@@ -51,14 +51,13 @@ class AuthViewModel extends GetxController with CacheManager {
         password: passwordController.text,
         corporateCode: organizationCodeController.text,
       );
-      print(getSession());
 
       if (userResponse!.success == true) {
         _isLogged.value = true;
         //Token and session is cached
         await saveToken(userResponse!.token);
         await saveSession(userResponse!.session);
-        await saveFullname(userResponse!.fullname);
+        await saveFullname(usernameController.text);
         await saveCorporateCode(organizationCodeController.text);
         userResponse!.getSubsidiaries!.map((element) {
           subsidiariesList.add(element);
@@ -126,8 +125,9 @@ class AuthViewModel extends GetxController with CacheManager {
   // logout
   void _logOut() async {
     _isLogged.value = false;
+    print(getFullname());
     LogoutResponse logoutResp = await authServices.logoutUser(
-      username: "${getFullname()!}@${getCorporateCode()!}",
+      username: "${getFullname()}@${getCorporateCode()}",
       session: getSession()!,
     );
     if (logoutResp.success == true) {

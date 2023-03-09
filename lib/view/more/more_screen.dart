@@ -35,6 +35,7 @@ class MoreScreen extends GetView<AuthViewModel> {
             children: [
               ProfileCard(
                 fullname: controller.getFullname(),
+                subsidiaries: profileController.subsidiaries,
               ),
               const Padding(
                 padding: EdgeInsets.only(top: 24),

@@ -21,6 +21,10 @@ class SubidiairiesServices {
       'subsidiaryId': subsidiaryId,
     };
 
+    print(session);
+    print(username);
+    print(subsidiaryId);
+
     try {
       http.Response response = await http.post(
         url,
@@ -32,7 +36,6 @@ class SubidiairiesServices {
         case 200:
           // Convert the response into a map & get relevant data from the response
           final responseBody = jsonDecode(response.body);
-          print(responseBody);
           //  Deserialize into loginUserModel
           final GetSubsidiary usersModel = GetSubsidiary.fromJson(responseBody);
           return usersModel;

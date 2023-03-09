@@ -21,7 +21,7 @@ mixin CacheManager {
 
   Future<bool> saveCorporateCode(String? corporateCode) async {
     final box = GetStorage();
-    await box.write(CacheManagerKey.USERNAME.toString(), corporateCode);
+    await box.write(CacheManagerKey.CORPORATECODE.toString(), corporateCode);
     return true;
   }
 
@@ -42,7 +42,7 @@ mixin CacheManager {
 
   String? getCorporateCode() {
     final box = GetStorage();
-    return box.read(CacheManagerKey.USERNAME.toString());
+    return box.read(CacheManagerKey.CORPORATECODE.toString());
   }
 
   Future<void> removeToken() async {
@@ -62,8 +62,8 @@ mixin CacheManager {
 
   Future<void> removeCorporateCode() async {
     final box = GetStorage();
-    await box.remove(CacheManagerKey.USERNAME.toString());
+    await box.remove(CacheManagerKey.CORPORATECODE.toString());
   }
 }
 
-enum CacheManagerKey { TOKEN, SESSION, USERNAME }
+enum CacheManagerKey { TOKEN, SESSION, USERNAME, CORPORATECODE }

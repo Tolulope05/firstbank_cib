@@ -3,14 +3,14 @@ import 'package:firstbank_cib/utils/utils.dart';
 import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 
+import '../model/login_response.dart';
 import 'add_transaction_dialogue.dart';
 
 class ProfileCard extends StatelessWidget {
-  const ProfileCard({
-    Key? key,
-    this.fullname,
-  }) : super(key: key);
+  const ProfileCard({Key? key, this.fullname, required this.subsidiaries})
+      : super(key: key);
   final String? fullname;
+  final GetSubsidiary? subsidiaries;
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +49,9 @@ class ProfileCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "The Sharply Africa",
-                        style: TextStyle(
+                      Text(
+                        "${subsidiaries?.subsidiaryName ?? "Subsidiary Name"} ",
+                        style: const TextStyle(
                           color: AppColors.blackColor,
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -71,11 +71,11 @@ class ProfileCard extends StatelessWidget {
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 16.0),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
             child: Text(
-              "Organization ID:933787438",
-              style: TextStyle(
+              "Organization ID: ${subsidiaries?.subsidiaryId ?? "No ID"}",
+              style: const TextStyle(
                 color: AppColors.unselectedIconColor,
                 fontSize: 14,
               ),
