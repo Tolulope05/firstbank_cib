@@ -8,13 +8,24 @@ class DashBoardviewModel extends GetxController with CacheManager {
   final AccountCenterServices _accountCenterServices = AccountCenterServices();
   AccountCenter? accountcenter;
   String get username => getFullname() ?? "User";
+  RxBool obScureBalance = true.obs;
+
+  togglePasswordVisibility() {
+    obScureBalance.value = !obScureBalance.value;
+  }
 
   // currency comma regex
   RegExp reg = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
   String Function(Match) mathFunc = (Match match) => '${match[1]},';
   String giveCommaseparated(String str) => str.replaceAllMapped(reg, mathFunc);
+  // obscure home balance
+  String obscureBalance(String balance) {
+// replace all digit and string with *
+    String finalBalance = balance.replaceAll(RegExp(r'[0-9,.]'), '*');
 
-  // write a logic that greet user based on time
+    return finalBalance;
+  }
+
   Rx<String> getTimeOfDay() {
     var hour = DateTime.now().hour;
     if (hour < 12) {

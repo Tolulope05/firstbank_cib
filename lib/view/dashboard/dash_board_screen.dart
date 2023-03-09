@@ -129,33 +129,62 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                   "Float account",
                   style: TextStyle(color: AppColors.unselectedIconColor),
                 ),
-                Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "${controller.accountcenter?.accountGroup.first.currency ?? "NGN"} ${controller.giveCommaseparated(controller.accountcenter?.accountGroup.first.totalLedgerBalance.toString() ?? "0")}",
-                        style: const TextStyle(
-                          fontSize: 24,
-                          color: AppColors.whiteColor2,
-                          fontWeight: FontWeight.w500,
+                Obx(
+                  () => Center(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        controller.obScureBalance.value
+                            ? Text(
+                                "${controller.accountcenter?.accountGroup.first.currency ?? "NGN"} ${controller.giveCommaseparated(controller.accountcenter?.accountGroup.first.totalLedgerBalance.toString() ?? "0")}",
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  color: AppColors.whiteColor2,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
+                            : Text(
+                                "${controller.accountcenter?.accountGroup.first.currency ?? "NGN"} ${controller.obscureBalance(controller.accountcenter?.accountGroup.first.totalLedgerBalance.toString() ?? "0")}",
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  color: AppColors.whiteColor2,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                        Obx(
+                          () => IconButton(
+                            onPressed: () {
+                              controller.togglePasswordVisibility();
+                            },
+                            icon: controller.obScureBalance.value
+                                ? const Icon(
+                                    Icons.visibility_off,
+                                    color: AppColors.whiteColor2,
+                                  )
+                                : const Icon(
+                                    Icons.visibility,
+                                    color: AppColors.whiteColor2,
+                                  ),
+                          ),
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.visibility_off,
-                          color: AppColors.whiteColor2,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-                Text(
-                  "${controller.accountcenter?.accountGroup.first.currency ?? "NGN"} ${controller.giveCommaseparated(controller.accountcenter?.accountGroup.first.totalAvailableBalance.toString() ?? "0")} available",
-                  style: const TextStyle(
-                    color: AppColors.unselectedIconColor,
-                  ),
+                Obx(
+                  () => controller.obScureBalance.value
+                      ? Text(
+                          "${controller.accountcenter?.accountGroup.first.currency ?? "NGN"} ${controller.giveCommaseparated(controller.accountcenter?.accountGroup.first.totalAvailableBalance.toString() ?? "0")} available",
+                          style: const TextStyle(
+                            color: AppColors.unselectedIconColor,
+                          ),
+                        )
+                      : Text(
+                          "${controller.accountcenter?.accountGroup.first.currency ?? "NGN"} ${controller.obscureBalance(controller.accountcenter?.accountGroup.first.totalAvailableBalance.toString() ?? "0")} available",
+                          style: const TextStyle(
+                            color: AppColors.unselectedIconColor,
+                          ),
+                        ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
