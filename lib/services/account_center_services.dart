@@ -56,15 +56,3 @@ class AccountCenterServices {
     }
   }
 }
-
-
-
-/**
- * {
-  "session": "rGz4Rf46ghUAPAd5BcOzHquu3zWj4OcG0d1n73YZN9t37WZn4IXuhQ9wopZ4QImedtRPp4x6RhbDhulPIiVaw",
-  "username": "lukushaker@testing",
-  "subsidiaryId": 2,
-  "page": 1,
-  "recordPerPage": 1
-}
- */
