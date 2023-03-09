@@ -21,10 +21,6 @@ class SubidiairiesServices {
       'subsidiaryId': subsidiaryId,
     };
 
-    print(session);
-    print(username);
-    print(subsidiaryId);
-
     try {
       http.Response response = await http.post(
         url,

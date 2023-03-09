@@ -125,7 +125,6 @@ class AuthViewModel extends GetxController with CacheManager {
   // logout
   void _logOut() async {
     _isLogged.value = false;
-    print(getFullname());
     LogoutResponse logoutResp = await authServices.logoutUser(
       username: "${getFullname()}@${getCorporateCode()}",
       session: getSession()!,

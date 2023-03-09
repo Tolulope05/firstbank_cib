@@ -73,7 +73,6 @@ class AuthServices {
         case 200:
           // Convert the response into a map & get relevant data from the response
           final responseBody = jsonDecode(response.body);
-          print(responseBody);
           //  Deserialize into loginUserModel
           final LogoutResponse usersModel =
               LogoutResponse.fromJson(responseBody);

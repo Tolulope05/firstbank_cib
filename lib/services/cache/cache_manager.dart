@@ -66,4 +66,13 @@ mixin CacheManager {
   }
 }
 
-enum CacheManagerKey { TOKEN, SESSION, USERNAME, CORPORATECODE }
+enum CacheManagerKey {
+  // ignore: constant_identifier_names
+  TOKEN,
+  // ignore: constant_identifier_names
+  SESSION,
+  // ignore: constant_identifier_names
+  USERNAME,
+  // ignore: constant_identifier_names
+  CORPORATECODE,
+}
