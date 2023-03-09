@@ -103,7 +103,8 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                               showDialog(
                                 context: context,
                                 builder: (context) => SelectAccountDialogue(
-                                  accounts: controller.accountcenter!.accounts,
+                                  accounts:
+                                      controller.accountcenter!.accounts ?? [],
                                 ),
                               );
                             },
@@ -120,7 +121,7 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                                   padding:
                                       const EdgeInsets.only(left: 9, right: 11),
                                   child: Text(
-                                    "All account (${controller.accountcenter?.accounts.length ?? 0})",
+                                    "All account (${controller.accountcenter?.accounts!.length ?? 0})",
                                     style: const TextStyle(
                                       color: Color(0xff1E1E1E),
                                     ),
@@ -148,7 +149,7 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                               children: [
                                 controller.obScureBalance.value
                                     ? Text(
-                                        "${controller.accountcenter?.accountGroup.first.currency ?? "NGN"} ${controller.giveCommaseparated(controller.accountcenter?.accountGroup.first.totalLedgerBalance.toString() ?? "0")}",
+                                        "${controller.accountcenter?.accounts!.first.currency ?? "NGN"} ${controller.giveCommaseparated(controller.accountcenter?.accounts!.first.ledgerBalance.toString() ?? "0")}",
                                         style: const TextStyle(
                                           fontSize: 24,
                                           color: AppColors.whiteColor2,
@@ -156,7 +157,7 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                                         ),
                                       )
                                     : Text(
-                                        "${controller.accountcenter?.accountGroup.first.currency ?? "NGN"} ${controller.obscureBalance(controller.accountcenter?.accountGroup.first.totalLedgerBalance.toString() ?? "0")}",
+                                        "${controller.accountcenter?.accounts!.first.currency ?? "NGN"} ${controller.obscureBalance(controller.accountcenter?.accounts!.first.ledgerBalance.toString() ?? "0")}",
                                         style: const TextStyle(
                                           fontSize: 24,
                                           color: AppColors.whiteColor2,
@@ -186,13 +187,13 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                         Obx(
                           () => controller.obScureBalance.value
                               ? Text(
-                                  "${controller.accountcenter?.accountGroup.first.currency ?? "NGN"} ${controller.giveCommaseparated(controller.accountcenter?.accountGroup.first.totalAvailableBalance.toString() ?? "0")} available",
+                                  "${controller.accountcenter?.accounts!.first.currency ?? "NGN"} ${controller.giveCommaseparated(controller.accountcenter?.accounts!.first.availableBalance.toString() ?? "0")} available",
                                   style: const TextStyle(
                                     color: AppColors.unselectedIconColor,
                                   ),
                                 )
                               : Text(
-                                  "${controller.accountcenter?.accountGroup.first.currency ?? "NGN"} ${controller.obscureBalance(controller.accountcenter?.accountGroup.first.totalAvailableBalance.toString() ?? "0")} available",
+                                  "${controller.accountcenter?.accounts!.first.currency ?? "NGN"} ${controller.obscureBalance(controller.accountcenter?.accounts!.first.availableBalance.toString() ?? "0")} available",
                                   style: const TextStyle(
                                     color: AppColors.unselectedIconColor,
                                   ),

@@ -44,8 +44,8 @@ class DashBoardviewModel extends GetxController with CacheManager {
   Future<void> getAccountCenter() async {
     isLoading.value = true;
     AccountCenter accountResp = await _accountCenterServices.getAccountsPaged(
-      page: 1,
-      recordPerPage: 1,
+      page: 0,
+      recordPerPage: 10,
       session: getSession()!,
       subsidiaryId: 2,
       username: "${getFullname()}@${getCorporateCode()}",

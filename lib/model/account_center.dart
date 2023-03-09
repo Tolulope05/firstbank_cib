@@ -11,33 +11,37 @@ String accountCenterToJson(AccountCenter data) => json.encode(data.toJson());
 
 class AccountCenter {
   AccountCenter({
-    required this.totalAccounts,
-    required this.accountGroup,
-    required this.accounts,
-    required this.maskAccountBalance,
-    required this.success,
-    required this.response,
-    required this.responseMessage,
+    this.totalAccounts,
+    this.accountGroup,
+    this.accounts,
+    this.maskAccountBalance,
+    this.success,
+    this.response,
+    this.responseMessage,
     this.session,
     this.message,
   });
 
-  int totalAccounts;
-  List<AccountGroup> accountGroup;
-  List<Account> accounts;
-  bool maskAccountBalance;
-  bool success;
-  int response;
-  String responseMessage;
-  String? session;
-  String? message;
+  int? totalAccounts;
+  List<AccountGroup>? accountGroup;
+  List<Account>? accounts;
+  bool? maskAccountBalance;
+  bool? success;
+  int? response;
+  String? responseMessage;
+  dynamic session;
+  dynamic message;
 
   factory AccountCenter.fromJson(Map<String, dynamic> json) => AccountCenter(
         totalAccounts: json["totalAccounts"],
-        accountGroup: List<AccountGroup>.from(
-            json["accountGroup"].map((x) => AccountGroup.fromJson(x))),
-        accounts: List<Account>.from(
-            json["accounts"].map((x) => Account.fromJson(x))),
+        accountGroup: json["accountGroup"] == null
+            ? []
+            : List<AccountGroup>.from(
+                json["accountGroup"]!.map((x) => AccountGroup.fromJson(x))),
+        accounts: json["accounts"] == null
+            ? []
+            : List<Account>.from(
+                json["accounts"]!.map((x) => Account.fromJson(x))),
         maskAccountBalance: json["maskAccountBalance"],
         success: json["success"],
         response: json["response"],
@@ -48,27 +52,31 @@ class AccountCenter {
 
   Map<String, dynamic> toJson() => {
         "totalAccounts": totalAccounts,
-        "accountGroup": List<dynamic>.from(accountGroup.map((x) => x.toJson())),
-        "accounts": List<dynamic>.from(accounts.map((x) => x.toJson())),
+        "accountGroup": accountGroup == null
+            ? []
+            : List<dynamic>.from(accountGroup!.map((x) => x.toJson())),
+        "accounts": accounts == null
+            ? []
+            : List<dynamic>.from(accounts!.map((x) => x.toJson())),
         "maskAccountBalance": maskAccountBalance,
         "success": success,
         "response": response,
         "responseMessage": responseMessage,
-        "session": session ?? "",
-        "message": message ?? "",
+        "session": session,
+        "message": message,
       };
 }
 
 class AccountGroup {
   AccountGroup({
-    required this.currency,
-    required this.totalAvailableBalance,
-    required this.totalLedgerBalance,
+    this.currency,
+    this.totalAvailableBalance,
+    this.totalLedgerBalance,
   });
 
-  String currency;
-  double totalAvailableBalance;
-  double totalLedgerBalance;
+  String? currency;
+  double? totalAvailableBalance;
+  double? totalLedgerBalance;
 
   factory AccountGroup.fromJson(Map<String, dynamic> json) => AccountGroup(
         currency: json["currency"],
@@ -85,38 +93,38 @@ class AccountGroup {
 
 class Account {
   Account({
-    required this.accountId,
-    required this.accountType,
-    required this.accountName,
-    required this.preferredName,
-    required this.bankName,
-    required this.accountNumber,
-    required this.status,
-    required this.currency,
-    required this.availableBalance,
-    required this.overDraftBalance,
-    required this.ledgerBalance,
-    required this.primaryAccount,
-    required this.telegraphicBalance,
-    required this.telegraphicCashBalance,
-    required this.bankCode,
+    this.accountId,
+    this.accountType,
+    this.accountName,
+    this.preferredName,
+    this.bankName,
+    this.accountNumber,
+    this.status,
+    this.currency,
+    this.availableBalance,
+    this.overDraftBalance,
+    this.ledgerBalance,
+    this.primaryAccount,
+    this.telegraphicBalance,
+    this.telegraphicCashBalance,
+    this.bankCode,
   });
 
-  int accountId;
-  String accountType;
-  String accountName;
-  String preferredName;
-  String bankName;
-  String accountNumber;
-  String status;
-  String currency;
-  double availableBalance;
-  int overDraftBalance;
-  double ledgerBalance;
-  bool primaryAccount;
-  double telegraphicBalance;
-  double telegraphicCashBalance;
-  String bankCode;
+  int? accountId;
+  String? accountType;
+  String? accountName;
+  String? preferredName;
+  String? bankName;
+  String? accountNumber;
+  String? status;
+  String? currency;
+  double? availableBalance;
+  int? overDraftBalance;
+  double? ledgerBalance;
+  bool? primaryAccount;
+  double? telegraphicBalance;
+  double? telegraphicCashBalance;
+  String? bankCode;
 
   factory Account.fromJson(Map<String, dynamic> json) => Account(
         accountId: json["accountId"],
@@ -131,8 +139,8 @@ class Account {
         overDraftBalance: json["overDraftBalance"],
         ledgerBalance: json["ledgerBalance"]?.toDouble(),
         primaryAccount: json["primaryAccount"],
-        telegraphicBalance: json["telegraphicBalance"],
-        telegraphicCashBalance: json["telegraphicCashBalance"],
+        telegraphicBalance: json["telegraphicBalance"]?.toDouble(),
+        telegraphicCashBalance: json["telegraphicCashBalance"]?.toDouble(),
         bankCode: json["bankCode"],
       );
 

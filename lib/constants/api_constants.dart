@@ -13,4 +13,7 @@ class ApiEndPoints {
 
   static const String getaccountsSummary =
       "/api/AccountCenter/GetAccountsPaged";
+
+  static const String getAccountHistory =
+      "/api/AccountCenter/GetTransactionHistory";
 }

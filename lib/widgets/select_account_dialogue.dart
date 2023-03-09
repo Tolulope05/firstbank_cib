@@ -44,17 +44,21 @@ class SelectAccountDialogue extends StatelessWidget {
                 ],
               ),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: accounts.length,
-              itemBuilder: (context, index) {
-                return accountTypeWidget(
-                  accountNumber: accounts[index].accountNumber,
-                  accounType: accounts[index].accountType,
-                  balance: accounts[index].availableBalance.toString(),
-                  isNaira: accounts[index].currency == "NGN" ? true : false,
-                );
-              },
+            Container(
+              constraints: BoxConstraints.tight(const Size.fromHeight(400)),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: accounts.length,
+                itemBuilder: (context, index) {
+                  return accountTypeWidget(
+                    accountNumber: accounts[index].accountNumber ?? "",
+                    accounType: accounts[index].accountType ?? "",
+                    balance: accounts[index].availableBalance.toString(),
+                    isNaira: accounts[index].currency == "NGN" ? true : false,
+                    onTap: () => Get.back(),
+                  );
+                },
+              ),
             ),
             // accountTypeWidget(
             //   accountNumber: "0827483028",
@@ -104,66 +108,70 @@ Widget accountTypeWidget({
   required String accounType,
   required String balance,
   bool isNaira = true,
+  VoidCallback? onTap,
 }) {
-  return Container(
-    padding: const EdgeInsets.symmetric(
-      vertical: 14,
-      horizontal: 16,
-    ),
-    margin: const EdgeInsets.only(bottom: 8),
-    decoration: BoxDecoration(
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.1),
-          spreadRadius: 0.5,
-          blurRadius: 1,
-          offset: const Offset(1, 1),
-        ),
-      ],
-      color: AppColors.whiteColor2,
-    ),
-    child: Row(
-      children: [
-        Center(
-          child: Image.asset(
-            isNaira ? "assets/images/naira.png" : "assets/images/dollar.png",
-            width: 32,
-            height: 32,
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 14,
+        horizontal: 16,
+      ),
+      margin: const EdgeInsets.only(bottom: 8),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 0.5,
+            blurRadius: 1,
+            offset: const Offset(1, 1),
           ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  accountNumber,
-                  style: const TextStyle(
-                    color: AppColors.primaryColor,
-                  ),
-                ),
-                Text(
-                  accounType,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: AppColors.unselectedIconColor,
-                  ),
-                ),
-              ],
+        ],
+        color: AppColors.whiteColor2,
+      ),
+      child: Row(
+        children: [
+          Center(
+            child: Image.asset(
+              isNaira ? "assets/images/naira.png" : "assets/images/dollar.png",
+              width: 32,
+              height: 32,
             ),
           ),
-        ),
-        Center(
-          child: Text(
-            "${isNaira ? "NGN" : "USD"}$balance",
-            style: const TextStyle(
-              color: AppColors.primaryColor,
-              fontWeight: FontWeight.w500,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    accountNumber,
+                    style: const TextStyle(
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                  Text(
+                    accounType,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: AppColors.unselectedIconColor,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+          Center(
+            child: Text(
+              "${isNaira ? "NGN" : "USD"} $balance",
+              style: const TextStyle(
+                color: AppColors.primaryColor,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
+      ),
     ),
   );
 }
