@@ -56,6 +56,7 @@ class AuthViewModel extends GetxController with CacheManager {
         await saveToken(userResponse!.token);
         await saveSession(userResponse!.session);
         await saveFullname(userResponse!.fullname);
+        await saveCorporateCode(organizationCodeController.text);
         // navigate to home screen
         usernameController.clear();
         passwordController.clear();
@@ -111,25 +112,6 @@ class AuthViewModel extends GetxController with CacheManager {
               ),
             ),
           ),
-          TextButton(
-            onPressed: () {
-              removeToken();
-              removeSession();
-              removeFullname();
-              Get.offAllNamed(RoutesName.login);
-              Utils.getsnackbar(
-                title: "Logout Successfull",
-                message:
-                    "This is just test, backend return false for all logout calls, it will be removed when logout endpoint returns success true",
-              );
-            },
-            child: const Text(
-              "Force logout",
-              style: TextStyle(
-                color: AppColors.failedColor,
-              ),
-            ),
-          ),
         ],
       ),
     );
@@ -139,13 +121,14 @@ class AuthViewModel extends GetxController with CacheManager {
   void _logOut() async {
     _isLogged.value = false;
     LogoutResponse logoutResp = await authServices.logoutUser(
-      username: getFullname()!,
+      username: "${getFullname()!}@${getCorporateCode()!}",
       session: getSession()!,
     );
     if (logoutResp.success == true) {
       removeToken();
       removeSession();
       removeFullname();
+      removeCorporateCode();
       Get.offAllNamed(RoutesName.login);
       Utils.getsnackbar(
         title: "Logout Successfull",

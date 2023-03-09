@@ -19,6 +19,12 @@ mixin CacheManager {
     return true;
   }
 
+  Future<bool> saveCorporateCode(String? corporateCode) async {
+    final box = GetStorage();
+    await box.write(CacheManagerKey.USERNAME.toString(), corporateCode);
+    return true;
+  }
+
   String? getToken() {
     final box = GetStorage();
     return box.read(CacheManagerKey.TOKEN.toString());
@@ -34,6 +40,11 @@ mixin CacheManager {
     return box.read(CacheManagerKey.USERNAME.toString());
   }
 
+  String? getCorporateCode() {
+    final box = GetStorage();
+    return box.read(CacheManagerKey.USERNAME.toString());
+  }
+
   Future<void> removeToken() async {
     final box = GetStorage();
     await box.remove(CacheManagerKey.TOKEN.toString());
@@ -45,6 +56,11 @@ mixin CacheManager {
   }
 
   Future<void> removeFullname() async {
+    final box = GetStorage();
+    await box.remove(CacheManagerKey.USERNAME.toString());
+  }
+
+  Future<void> removeCorporateCode() async {
     final box = GetStorage();
     await box.remove(CacheManagerKey.USERNAME.toString());
   }
