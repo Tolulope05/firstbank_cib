@@ -29,8 +29,8 @@ class AccountCenter {
   bool success;
   int response;
   String responseMessage;
-  dynamic session;
-  dynamic message;
+  String? session;
+  String? message;
 
   factory AccountCenter.fromJson(Map<String, dynamic> json) => AccountCenter(
         totalAccounts: json["totalAccounts"],
@@ -54,8 +54,8 @@ class AccountCenter {
         "success": success,
         "response": response,
         "responseMessage": responseMessage,
-        "session": session,
-        "message": message,
+        "session": session ?? "",
+        "message": message ?? "",
       };
 }
 
@@ -114,8 +114,8 @@ class Account {
   int overDraftBalance;
   double ledgerBalance;
   bool primaryAccount;
-  int telegraphicBalance;
-  int telegraphicCashBalance;
+  double telegraphicBalance;
+  double telegraphicCashBalance;
   String bankCode;
 
   factory Account.fromJson(Map<String, dynamic> json) => Account(

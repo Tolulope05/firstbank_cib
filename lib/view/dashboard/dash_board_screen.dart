@@ -22,17 +22,24 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
               children: [
                 Row(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(
+                    Container(
+                      padding: const EdgeInsets.only(
                         left: 13,
                         top: kToolbarHeight,
                       ),
-                      child: Text(
-                        'Good Morning, Layor',
-                        style: TextStyle(
-                          color: AppColors.whiteColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.7,
+                      ),
+                      child: Obx(
+                        () => Text(
+                          '${controller.greetings}, ${controller.username}',
+                          maxLines: 25,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: AppColors.whiteColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
@@ -99,11 +106,11 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                           width: 24,
                           height: 16,
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 9, right: 11),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 9, right: 11),
                           child: Text(
-                            "All account (8)",
-                            style: TextStyle(
+                            "All account (${controller.accountcenter?.accounts.length ?? 0})",
+                            style: const TextStyle(
                               color: Color(0xff1E1E1E),
                             ),
                           ),
@@ -126,9 +133,9 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
-                        "NGN 17,000,481",
-                        style: TextStyle(
+                      Text(
+                        "${controller.accountcenter?.accountGroup.first.currency ?? "NGN"} ${controller.giveCommaseparated(controller.accountcenter?.accountGroup.first.totalLedgerBalance.toString() ?? "0")}",
+                        style: const TextStyle(
                           fontSize: 24,
                           color: AppColors.whiteColor2,
                           fontWeight: FontWeight.w500,
@@ -144,9 +151,9 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                     ],
                   ),
                 ),
-                const Text(
-                  "NGN 7,000,481 available",
-                  style: TextStyle(
+                Text(
+                  "${controller.accountcenter?.accountGroup.first.currency ?? "NGN"} ${controller.giveCommaseparated(controller.accountcenter?.accountGroup.first.totalAvailableBalance.toString() ?? "0")} available",
+                  style: const TextStyle(
                     color: AppColors.unselectedIconColor,
                   ),
                 ),

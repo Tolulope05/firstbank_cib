@@ -25,7 +25,6 @@ class AccountCenterServices {
       "page": page,
       "recordPerPage": recordPerPage
     };
-
     try {
       http.Response response = await http.post(
         url,
