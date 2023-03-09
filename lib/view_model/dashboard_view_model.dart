@@ -8,7 +8,9 @@ import '../services/services.dart';
 class DashBoardviewModel extends GetxController with CacheManager {
 // Account Center
   final AccountCenterServices _accountCenterServices = AccountCenterServices();
-  AccountCenter? accountcenter;
+
+  final Rx<AccountCenter> _accountCenter = AccountCenter().obs;
+  AccountCenter get accountcenter => _accountCenter.value;
 
   // Transaction History
   final Rx<TransactionHistoryResponse> _transactionHistoryResponse =
@@ -77,7 +79,7 @@ class DashBoardviewModel extends GetxController with CacheManager {
     );
 
     if (accountResp.success == true) {
-      accountcenter = accountResp;
+      _accountCenter.value = accountResp;
       isLoading.value = false;
     } else {
       Get.snackbar(
@@ -91,10 +93,10 @@ class DashBoardviewModel extends GetxController with CacheManager {
 
   // get transaction history
   Future<void> getTransactionHistory() async {
-    print(accountcenter!.accounts![0].accountId!);
+    print(accountcenter.accounts![0].accountId!);
     TransactionHistoryResponse transactionResponse =
         await _accountCenterServices.getTransctionHistory(
-      accountId: accountcenter!.accounts![0].accountId!,
+      accountId: accountcenter.accounts![0].accountId!,
       dashboard: true,
       startDate: firstDateOfMonthString,
       enddate: presentDate,

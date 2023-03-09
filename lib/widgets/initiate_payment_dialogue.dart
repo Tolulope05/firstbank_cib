@@ -68,7 +68,7 @@ class InitiatePaymentDialogue extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (context) => SelectAccountDialogue(
-                      accounts: _dashBoardController.accountcenter!.accounts!,
+                      accounts: _dashBoardController.accountcenter.accounts!,
                     ),
                   );
                 },
