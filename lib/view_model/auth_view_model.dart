@@ -5,8 +5,7 @@ import 'package:get/get.dart';
 
 import '../model/login_response.dart';
 import '../model/logout_response.dart';
-import '../services/auth_services.dart';
-import '../services/cache/cache_manager.dart';
+import '../services/services.dart';
 import '../utils/routes/routes_name.dart';
 
 class AuthViewModel extends GetxController with CacheManager {

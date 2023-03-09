@@ -1,24 +1,29 @@
 import 'dart:convert';
 import 'dart:io';
 
-import '../constants/api_constants.dart';
-import '../model/model.dart';
+import 'package:firstbank_cib/model/account_center.dart';
 import 'package:http/http.dart' as http;
 
-import 'exceptions/app_exceptions.dart';
+import '../constants/api_constants.dart';
+import 'services.dart';
+// import 'exceptions/app_exceptions.dart';
 
-class SubidiairiesServices {
-  Future<GetSubsidiary> getSubsidiaries({
+class AccountCenterServices {
+  Future<AccountCenter> getAccountsPaged({
     required String session,
     required String username,
     required int subsidiaryId,
+    required int page,
+    required int recordPerPage,
   }) async {
-    Uri url = Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.getSubsidiaryInfo);
+    Uri url = Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.getaccountsSummary);
 
     Map<String, dynamic> body = {
-      'session': session,
-      'username': username,
-      'subsidiaryId': subsidiaryId,
+      "session": session,
+      "username": username,
+      "subsidiaryId": subsidiaryId,
+      "page": page,
+      "recordPerPage": recordPerPage
     };
 
     try {
@@ -32,8 +37,8 @@ class SubidiairiesServices {
         case 200:
           // Convert the response into a map & get relevant data from the response
           final responseBody = jsonDecode(response.body);
-          //  Deserialize into getSubsidiary
-          final GetSubsidiary usersModel = GetSubsidiary.fromJson(responseBody);
+          //  Deserialize into accountcenter
+          final AccountCenter usersModel = AccountCenter.fromJson(responseBody);
           return usersModel;
         case 400:
           throw BadRequestException(response.body.toString());
@@ -52,10 +57,14 @@ class SubidiairiesServices {
   }
 }
 
+
+
 /**
  * {
-  "session": "string",
-  "username": "string",
-  "subsidiaryId": 0
+  "session": "rGz4Rf46ghUAPAd5BcOzHquu3zWj4OcG0d1n73YZN9t37WZn4IXuhQ9wopZ4QImedtRPp4x6RhbDhulPIiVaw",
+  "username": "lukushaker@testing",
+  "subsidiaryId": 2,
+  "page": 1,
+  "recordPerPage": 1
 }
  */

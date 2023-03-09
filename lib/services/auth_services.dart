@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:firstbank_cib/model/model.dart';
-import 'package:firstbank_cib/services/exceptions/app_exceptions.dart';
 
 import '../constants/api_constants.dart';
 import 'package:http/http.dart' as http;
+
+import 'services.dart';
 
 class AuthServices {
   Future<LoginResponse> loginWithUsernameAndPassword({
