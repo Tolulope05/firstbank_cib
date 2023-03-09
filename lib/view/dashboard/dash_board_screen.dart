@@ -94,7 +94,9 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                     onTap: () {
                       showDialog(
                         context: context,
-                        builder: (context) => const SelectAccountDialogue(),
+                        builder: (context) => SelectAccountDialogue(
+                          accounts: controller.accountcenter!.accounts,
+                        ),
                       );
                     },
                     child: Row(
@@ -207,41 +209,45 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                               color: AppColors.yellowColor3,
                             ),
                             padding: const EdgeInsets.all(12),
-                            child: Row(children: [
-                              const Text(
-                                "Action Center",
-                                style: TextStyle(
-                                  color: AppColors.greyColor2,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  right: 0, //8 => Already taaken by IconButton
-                                ),
-                                child: Container(
-                                  height: 24,
-                                  width: 24,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xffE4E4E4),
-                                    borderRadius: BorderRadius.circular(16),
+                            child: Row(
+                              children: [
+                                const Text(
+                                  "Action Center",
+                                  style: TextStyle(
+                                    color: AppColors.greyColor2,
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  child: const Center(
-                                      child: Text(
-                                    "8",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                    ),
-                                  )),
                                 ),
-                              ),
-                              GestureDetector(
+                                const Spacer(),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    right:
+                                        0, //8 => Already taaken by IconButton
+                                  ),
+                                  child: Container(
+                                    height: 24,
+                                    width: 24,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xffE4E4E4),
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: const Center(
+                                        child: Text(
+                                      "8",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                    )),
+                                  ),
+                                ),
+                                GestureDetector(
                                   onTap: () {},
                                   child: const Icon(
                                     Icons.chevron_right,
-                                  ))
-                            ]),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

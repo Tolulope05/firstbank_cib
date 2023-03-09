@@ -9,6 +9,7 @@ class DashBoardviewModel extends GetxController with CacheManager {
   AccountCenter? accountcenter;
   String get username => getFullname() ?? "User";
   RxBool obScureBalance = true.obs;
+  RxBool isLoading = false.obs;
 
   togglePasswordVisibility() {
     obScureBalance.value = !obScureBalance.value;
@@ -41,6 +42,7 @@ class DashBoardviewModel extends GetxController with CacheManager {
 
   // get account center
   Future<void> getAccountCenter() async {
+    isLoading.value = true;
     AccountCenter accountResp = await _accountCenterServices.getAccountsPaged(
       page: 1,
       recordPerPage: 1,
@@ -51,12 +53,14 @@ class DashBoardviewModel extends GetxController with CacheManager {
 
     if (accountResp.success == true) {
       accountcenter = accountResp;
+      isLoading.value = false;
     } else {
       Get.snackbar(
         "Unable to fetch data",
         accountResp.message.toString(),
         snackPosition: SnackPosition.BOTTOM,
       ); // didnt work
+      isLoading.value = false;
     }
   }
 

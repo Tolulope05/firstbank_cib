@@ -1,4 +1,5 @@
 import 'package:firstbank_cib/constants/colors.dart';
+import 'package:firstbank_cib/view_model/view_model.dart';
 import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:firstbank_cib/widgets/select_account_dialogue.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ class InitiatePaymentDialogue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DashBoardviewModel _dashBoardController = Get.find<DashBoardviewModel>();
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       child: Container(
@@ -65,7 +67,9 @@ class InitiatePaymentDialogue extends StatelessWidget {
                   Get.back(); // close the current dialogue and open the next one.
                   showDialog(
                     context: context,
-                    builder: (context) => const SelectAccountDialogue(),
+                    builder: (context) => SelectAccountDialogue(
+                      accounts: _dashBoardController.accountcenter!.accounts,
+                    ),
                   );
                 },
                 text: "Verify transaction",

@@ -2,8 +2,11 @@ import 'package:firstbank_cib/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../model/account_center.dart';
+
 class SelectAccountDialogue extends StatelessWidget {
-  const SelectAccountDialogue({Key? key}) : super(key: key);
+  SelectAccountDialogue({Key? key, required this.accounts}) : super(key: key);
+  List<Account> accounts;
 
   @override
   Widget build(BuildContext context) {
@@ -41,56 +44,54 @@ class SelectAccountDialogue extends StatelessWidget {
                 ],
               ),
             ),
-            // Expanded(
-            //   child: ListView.builder(
-            //     shrinkWrap: true,
-            //     itemCount: 8,
-            //     itemBuilder: (context, index) {
-            //       return accountTypeWidget(
-            //         accountNumber: "0827483028",
-            //         accounType: "Current account",
-            //         balance: "12,000,481",
-            //         isNaira: true,
-            //       );
-            //     },
-            //   ),
-            // ),.
-            accountTypeWidget(
-              accountNumber: "0827483028",
-              accounType: "Current account",
-              balance: "12,000,481",
-              isNaira: true,
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: accounts.length,
+              itemBuilder: (context, index) {
+                return accountTypeWidget(
+                  accountNumber: accounts[index].accountNumber,
+                  accounType: accounts[index].accountType,
+                  balance: accounts[index].availableBalance.toString(),
+                  isNaira: accounts[index].currency == "NGN" ? true : false,
+                );
+              },
             ),
-            accountTypeWidget(
-              accountNumber: "0245728123",
-              accounType: "Float account",
-              balance: "2,000,481",
-              isNaira: true,
-            ),
-            accountTypeWidget(
-              accountNumber: "0948029281",
-              accounType: "Utility account",
-              balance: "2,000,481",
-              isNaira: true,
-            ),
-            accountTypeWidget(
-              accountNumber: "0827483028",
-              accounType: "Payroll account",
-              balance: "3,000,481",
-              isNaira: true,
-            ),
-            accountTypeWidget(
-              accountNumber: "0245728123",
-              accounType: "Dollar account",
-              balance: "23,021",
-              isNaira: false,
-            ),
-            accountTypeWidget(
-              accountNumber: "0827483028",
-              accounType: "Dollar Card ccount",
-              balance: "5,481",
-              isNaira: false,
-            )
+            // accountTypeWidget(
+            //   accountNumber: "0827483028",
+            //   accounType: "Current account",
+            //   balance: "12,000,481",
+            //   isNaira: true,
+            // ),
+            // accountTypeWidget(
+            //   accountNumber: "0245728123",
+            //   accounType: "Float account",
+            //   balance: "2,000,481",
+            //   isNaira: true,
+            // ),
+            // accountTypeWidget(
+            //   accountNumber: "0948029281",
+            //   accounType: "Utility account",
+            //   balance: "2,000,481",
+            //   isNaira: true,
+            // ),
+            // accountTypeWidget(
+            //   accountNumber: "0827483028",
+            //   accounType: "Payroll account",
+            //   balance: "3,000,481",
+            //   isNaira: true,
+            // ),
+            // accountTypeWidget(
+            //   accountNumber: "0245728123",
+            //   accounType: "Dollar account",
+            //   balance: "23,021",
+            //   isNaira: false,
+            // ),
+            // accountTypeWidget(
+            //   accountNumber: "0827483028",
+            //   accounType: "Dollar Card ccount",
+            //   balance: "5,481",
+            //   isNaira: false,
+            // )
           ],
         ),
       ),
