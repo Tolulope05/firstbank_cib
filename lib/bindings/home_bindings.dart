@@ -9,5 +9,6 @@ class HomeBindings extends Bindings {
     Get.put(DashBoardviewModel());
     Get.put(TransferScreenViewModel());
     Get.put(ActionCenterViewModel());
+    Get.put(ProfileViewModel());
   }
 }

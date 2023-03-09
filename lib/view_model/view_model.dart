@@ -6,3 +6,4 @@ export 'login_view_model.dart';
 export 'pin_confirmation_model.dart';
 export 'auth_view_model.dart';
 export 'splash_view_model.dart';
+export 'profile_view_model.dart';

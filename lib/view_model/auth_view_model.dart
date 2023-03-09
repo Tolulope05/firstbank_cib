@@ -15,6 +15,8 @@ class AuthViewModel extends GetxController with CacheManager {
   TextEditingController passwordController = TextEditingController();
   AuthServices authServices = AuthServices();
   LoginResponse? userResponse;
+  List<GetSubsidiary?> subsidiariesList = <GetSubsidiary?>[];
+
   // Rx<bool> isLoading = false.obs;
 
   final Rx<bool> _isLogged = false.obs;
@@ -49,6 +51,7 @@ class AuthViewModel extends GetxController with CacheManager {
         password: passwordController.text,
         corporateCode: organizationCodeController.text,
       );
+      print(getSession());
 
       if (userResponse!.success == true) {
         _isLogged.value = true;
@@ -57,6 +60,9 @@ class AuthViewModel extends GetxController with CacheManager {
         await saveSession(userResponse!.session);
         await saveFullname(userResponse!.fullname);
         await saveCorporateCode(organizationCodeController.text);
+        userResponse!.getSubsidiaries!.map((element) {
+          subsidiariesList.add(element);
+        });
         // navigate to home screen
         usernameController.clear();
         passwordController.clear();
@@ -147,7 +153,7 @@ class AuthViewModel extends GetxController with CacheManager {
 
 
 /**
-  "username": "lukushaker",
+  "username": "lukushaker", or "codyrhodes"
   "password": "Password10!",
   "ipAddress": "string",
   "macAddress": "string",

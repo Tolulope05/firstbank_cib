@@ -8,4 +8,6 @@ class ApiEndPoints {
   };
 
   static const String logoutUrl = "/api/Authentication/Logout";
+  static const String getSubsidiaryInfo =
+      "/api/Authentication/GetSubsidiaryInfo";
 }

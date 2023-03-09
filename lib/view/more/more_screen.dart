@@ -12,6 +12,7 @@ class MoreScreen extends GetView<AuthViewModel> {
 
   @override
   Widget build(BuildContext context) {
+    ProfileViewModel profileController = Get.find<ProfileViewModel>();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -32,7 +33,9 @@ class MoreScreen extends GetView<AuthViewModel> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ProfileCard(fullname: controller.getFullname()),
+              ProfileCard(
+                fullname: controller.getFullname(),
+              ),
               const Padding(
                 padding: EdgeInsets.only(top: 24),
                 child: Text(
