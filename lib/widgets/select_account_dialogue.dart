@@ -24,7 +24,7 @@ class SelectAccountDialogue extends StatelessWidget {
               child: Row(
                 children: [
                   const Text(
-                    "Select Acount",
+                    "Select Account",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
@@ -46,7 +46,7 @@ class SelectAccountDialogue extends StatelessWidget {
             //     shrinkWrap: true,
             //     itemCount: 8,
             //     itemBuilder: (context, index) {
-            //       return accountTypeWwidget(
+            //       return accountTypeWidget(
             //         accountNumber: "0827483028",
             //         accounType: "Current account",
             //         balance: "12,000,481",
@@ -55,37 +55,37 @@ class SelectAccountDialogue extends StatelessWidget {
             //     },
             //   ),
             // ),.
-            accountTypeWwidget(
+            accountTypeWidget(
               accountNumber: "0827483028",
               accounType: "Current account",
               balance: "12,000,481",
               isNaira: true,
             ),
-            accountTypeWwidget(
+            accountTypeWidget(
               accountNumber: "0245728123",
               accounType: "Float account",
               balance: "2,000,481",
               isNaira: true,
             ),
-            accountTypeWwidget(
+            accountTypeWidget(
               accountNumber: "0948029281",
               accounType: "Utility account",
               balance: "2,000,481",
               isNaira: true,
             ),
-            accountTypeWwidget(
+            accountTypeWidget(
               accountNumber: "0827483028",
               accounType: "Payroll account",
               balance: "3,000,481",
               isNaira: true,
             ),
-            accountTypeWwidget(
+            accountTypeWidget(
               accountNumber: "0245728123",
               accounType: "Dollar account",
               balance: "23,021",
               isNaira: false,
             ),
-            accountTypeWwidget(
+            accountTypeWidget(
               accountNumber: "0827483028",
               accounType: "Dollar Card ccount",
               balance: "5,481",
@@ -98,7 +98,7 @@ class SelectAccountDialogue extends StatelessWidget {
   }
 }
 
-Widget accountTypeWwidget({
+Widget accountTypeWidget({
   required String accountNumber,
   required String accounType,
   required String balance,

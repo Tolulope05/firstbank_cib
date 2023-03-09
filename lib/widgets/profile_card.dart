@@ -3,6 +3,8 @@ import 'package:firstbank_cib/utils/utils.dart';
 import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 
+import 'add_transaction_dialogue.dart';
+
 class ProfileCard extends StatelessWidget {
   const ProfileCard({
     Key? key,
@@ -80,7 +82,11 @@ class ProfileCard extends StatelessWidget {
             ),
           ),
           AppButton(
-            onTap: () {},
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) => const AddTransactionDialogue());
+            },
             bgColor: Colors.transparent,
             borderColor: AppColors.primaryColor,
             textColor: AppColors.primaryColor,
