@@ -1,15 +1,15 @@
 import 'package:firstbank_cib/constants/colors.dart';
-import 'package:firstbank_cib/view_model/view_model.dart';
 import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class InitiatePaymentDialogue extends StatelessWidget {
-  const InitiatePaymentDialogue({Key? key}) : super(key: key);
+  const InitiatePaymentDialogue({Key? key, required this.onTap})
+      : super(key: key);
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    DashBoardviewModel dashBoardController = Get.find<DashBoardviewModel>();
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       child: Container(
@@ -62,11 +62,7 @@ class InitiatePaymentDialogue extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 24),
               child: AppButton(
-                onTap: () {
-                  Get.back(); // close the current dialogue and open the next one.
-                  // dashBoardController.showVerifyPaymentDialogue();
-                  dashBoardController.navigateToActionCenter();
-                },
+                onTap: () => onTap(),
                 text: "Verify transaction",
               ),
             )

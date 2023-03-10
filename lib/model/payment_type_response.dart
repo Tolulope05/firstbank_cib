@@ -307,3 +307,51 @@ class Payment {
         "remark": remark,
       };
 }
+
+// response from initiated transfer
+// To parse this JSON data, do
+//
+//     final paymentResponse = paymentResponseFromJson(jsonString);
+
+InitiatePaymentResponse paymentResponseFromJson(String str) =>
+    InitiatePaymentResponse.fromJson(json.decode(str));
+
+String paymentResponseToJson(InitiatePaymentResponse data) =>
+    json.encode(data.toJson());
+
+class InitiatePaymentResponse {
+  InitiatePaymentResponse({
+    this.paymentResponse,
+    this.success,
+    this.response,
+    this.responseMessage,
+    this.session,
+    this.message,
+  });
+
+  dynamic paymentResponse;
+  bool? success;
+  int? response;
+  String? responseMessage;
+  dynamic session;
+  String? message;
+
+  factory InitiatePaymentResponse.fromJson(Map<String, dynamic> json) =>
+      InitiatePaymentResponse(
+        paymentResponse: json["paymentResponse"],
+        success: json["success"],
+        response: json["response"],
+        responseMessage: json["responseMessage"],
+        session: json["session"],
+        message: json["message"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "paymentResponse": paymentResponse,
+        "success": success,
+        "response": response,
+        "responseMessage": responseMessage,
+        "session": session,
+        "message": message,
+      };
+}

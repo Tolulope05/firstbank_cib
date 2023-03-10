@@ -23,4 +23,7 @@ class ApiEndPoints {
   static const String getWorkSpacesummary = "/api/Payment/GetPaymentDashboard";
 
   static const String getLocalPayment = "/api/Payment/GetlocalPayment";
+
+  static const String initiatePayment =
+      "/api/Payment/MakeOnScreenBulkLocalPayment";
 }

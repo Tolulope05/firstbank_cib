@@ -1,4 +1,5 @@
 import 'package:firstbank_cib/services/services.dart';
+import 'package:firstbank_cib/view/dashboard/action_center_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -133,4 +134,45 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       authViewModel.logOut();
     }
   }
+
+  // call initiate payment
+  Future<void> initiateOwnAccountPayment() async {
+    InitiatePaymentResponse initiatePaymentResponse =
+        await paymentservices.initiatePayment(
+      session: "${getSession()}",
+      username: "${getFullname()}@${getCorporateCode()}",
+      sourceAccountId: selectedSourceAccount.accountId!,
+      bankCode: selectedBeneficiaryAccount.bankCode ?? "011",
+      amount: int.parse(beneficialAmountController.text),
+      charges: 0,
+      bankName: selectedBeneficiaryAccount.bankName!,
+      dateTime: "2023-03-10",
+      memo: ownAccountPaymentMemoController.text,
+      recieverAccountNumber: selectedBeneficiaryAccount.accountNumber!,
+      recieverName: selectedBeneficiaryAccount.preferredName!,
+      saveBeneficiary: saveBeneficiary,
+    );
+    if (initiatePaymentResponse.success == true) {
+      Get.snackbar(
+        "Success",
+        initiatePaymentResponse.responseMessage.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+      Get.to(() => const ActionCenterScreen());
+    } else {
+      Get.snackbar(
+        "Something went wrong",
+        initiatePaymentResponse.responseMessage.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
+  /**  DateTime now = DateTime.now();
+  String formattedDate = DateFormat('yyyy-MM-dd').format(now.add(Duration(days: 1148)));
+  print(formattedDate); // Output: "2023-03-10" */
 }

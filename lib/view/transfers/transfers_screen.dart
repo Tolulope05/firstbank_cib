@@ -234,7 +234,8 @@ class OwnAccountTabView extends GetView<TransferScreenViewModel> {
               onTap: () {
                 showDialog(
                   context: context,
-                  builder: (context) => const InitiatePaymentDialogue(),
+                  builder: (context) => InitiatePaymentDialogue(
+                      onTap: () => controller.initiateOwnAccountPayment()),
                 );
               },
               text: 'Initiate Payment',
@@ -499,10 +500,10 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
             ),
             child: AppButton(
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => const InitiatePaymentDialogue(),
-                );
+                // showDialog(
+                //   context: context,
+                // builder: (context) => const InitiatePaymentDialogue(),
+                // );
               },
               text: 'Initiate Payment',
             ),
@@ -737,10 +738,10 @@ class OtherBankTabview extends GetView<TransferScreenViewModel> {
             ),
             child: AppButton(
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => const InitiatePaymentDialogue(),
-                );
+                // showDialog(
+                //   context: context,
+                //   builder: (context) => const InitiatePaymentDialogue(),
+                // );
               },
               text: 'Initiate Payment',
             ),
@@ -977,10 +978,10 @@ class InternationalBankTabview extends GetView<TransferScreenViewModel> {
             ),
             child: AppButton(
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => const InitiatePaymentDialogue(),
-                );
+                // showDialog(
+                //   context: context,
+                //   builder: (context) => const InitiatePaymentDialogue(),
+                // );
               },
               text: 'Initiate Payment',
             ),
