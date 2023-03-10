@@ -198,18 +198,38 @@ class SignInScreen extends GetView<AuthViewModel> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: AppButton(
-                  onTap: () {
-                    if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
-                      controller.loginUser();
-                      // controller.navigateToPinConfirmationScreen();
-                    }
-                  },
-                  text: "Sign In to your account ",
-                ),
+              Obx(
+                () => controller.isLoading.value
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: AppButton(
+                          onTap: () {
+                            if (formKey.currentState!.validate()) {
+                              formKey.currentState!.save();
+                              controller.loginUser();
+                              // controller.navigateToPinConfirmationScreen();
+                            }
+                          },
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              color: AppColors.whiteColor,
+                            ),
+                          ),
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: AppButton(
+                          onTap: () {
+                            if (formKey.currentState!.validate()) {
+                              formKey.currentState!.save();
+                              controller.loginUser();
+                              // controller.navigateToPinConfirmationScreen();
+                            }
+                          },
+                          text: "Sign In to your account ",
+                        ),
+                      ),
               ),
               Padding(
                 padding: const EdgeInsets.only(

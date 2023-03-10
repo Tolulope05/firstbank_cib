@@ -19,7 +19,7 @@ class AuthViewModel extends GetxController with CacheManager {
   final RxList<GetSubsidiary?> _subsidiariesList = <GetSubsidiary>[].obs;
   List<GetSubsidiary?> get subsidiariesList => _subsidiariesList;
 
-  // Rx<bool> isLoading = false.obs;
+  Rx<bool> isLoading = false.obs;
 
   final Rx<bool> _isLogged = false.obs;
   bool get isLoggedValue => _isLogged.value;
@@ -47,6 +47,7 @@ class AuthViewModel extends GetxController with CacheManager {
 
   // login with username and password
   Future<void> loginUser() async {
+    isLoading.value = true;
     try {
       LoginResponse resFromServer =
           await authServices.loginWithUsernameAndPassword(
@@ -71,7 +72,7 @@ class AuthViewModel extends GetxController with CacheManager {
         usernameController.clear();
         passwordController.clear();
         organizationCodeController.clear();
-
+        isLoading.value = false;
         Get.offAllNamed(RoutesName.homeScreen);
         Utils.getsnackbar(
           title: "Welcome ${getFullname()} ",
@@ -79,8 +80,10 @@ class AuthViewModel extends GetxController with CacheManager {
           message: resFromServer.responseMessage ?? "Successfully logged in",
         );
       } else {
+        _isLogged.value = false;
         await saveToken(_userResponse.value.token);
         await saveSession(_userResponse.value.session);
+
         Utils.getsnackbar(
           title: "Not Succesful",
           message: resFromServer.responseMessage ?? "Failed to login",
@@ -91,6 +94,7 @@ class AuthViewModel extends GetxController with CacheManager {
       Utils.getsnackbar(title: "Failed to login..", message: errorMessage);
       throw Exception(errorMessage);
     }
+    isLoading.value = false;
   }
 
   void logUserOut() {
