@@ -16,8 +16,8 @@ class AuthViewModel extends GetxController with CacheManager {
   final Rx<LoginResponse> _userResponse = LoginResponse().obs;
   LoginResponse? get userResponse => _userResponse.value;
 
-  final RxList<GetSubsidiary?> _subsidiariesList = <GetSubsidiary>[].obs;
-  List<GetSubsidiary?> get subsidiariesList => _subsidiariesList;
+  final RxList<GetSubsidiary> _subsidiariesList = <GetSubsidiary>[].obs;
+  List<GetSubsidiary> get subsidiariesList => _subsidiariesList;
 
   Rx<bool> isLoading = false.obs;
 
@@ -64,8 +64,7 @@ class AuthViewModel extends GetxController with CacheManager {
         await saveSession(_userResponse.value.session);
         await saveFullname(usernameController.text.trim());
         await saveCorporateCode(organizationCodeController.text.trim());
-
-        _subsidiariesList.addAll(_userResponse.value.getSubsidiaries!);
+        subsidiariesList.assignAll(_userResponse.value.getSubsidiaries!);
         // navigate to home screen
         usernameController.clear();
         passwordController.clear();
