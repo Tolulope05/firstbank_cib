@@ -6,9 +6,13 @@ import '../model/model.dart';
 import '../services/services.dart';
 
 class DashBoardviewModel extends GetxController with CacheManager {
+  // User Details
+  String get username => getFullname() ?? "User";
+  RxBool obScureBalance = true.obs;
+  RxBool isLoading = true.obs;
+
 // Account Center
   final AccountCenterServices _accountCenterServices = AccountCenterServices();
-
   final Rx<AccountCenter> _accountCenter = AccountCenter().obs;
   AccountCenter get accountcenter => _accountCenter.value;
 
@@ -18,10 +22,11 @@ class DashBoardviewModel extends GetxController with CacheManager {
   TransactionHistoryResponse get transactionHistoryResponse =>
       _transactionHistoryResponse.value;
 
-  // User Details
-  String get username => getFullname() ?? "User";
-  RxBool obScureBalance = true.obs;
-  RxBool isLoading = true.obs;
+  // Workspace Summary
+  final Rx<WorkSpaceSummaryResponse> _workspaceSummaryResponse =
+      WorkSpaceSummaryResponse().obs;
+  WorkSpaceSummaryResponse get workspaceSummaryResponse =>
+      _workspaceSummaryResponse.value;
 
 // Transaction History Date parsing
   DateTime now = DateTime.now();
@@ -64,6 +69,7 @@ class DashBoardviewModel extends GetxController with CacheManager {
   void onInit() async {
     await getAccountCenter();
     await getTransactionHistory();
+    await getWorkspaceSummary();
     super.onInit();
   }
 
@@ -107,8 +113,27 @@ class DashBoardviewModel extends GetxController with CacheManager {
       _transactionHistoryResponse.value = transactionResponse;
     } else {
       Get.snackbar(
-        "Unable to fetch history",
+        "Unable to fetch transaction history",
         transactionResponse.responseMessage.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      ); // didnt work
+    }
+  }
+
+  // get workspace summary
+  Future<void> getWorkspaceSummary() async {
+    WorkSpaceSummaryResponse workspaceSummaryResponse =
+        await _accountCenterServices.getWorkspaceSummary(
+      session: getSession()!,
+      username: "${getFullname()}@${getCorporateCode()}",
+      subsidiaryId: 2,
+    );
+    if (workspaceSummaryResponse.success == true) {
+      _workspaceSummaryResponse.value = workspaceSummaryResponse;
+    } else {
+      Get.snackbar(
+        "Unable to fetch history",
+        workspaceSummaryResponse.responseMessage.toString(),
         snackPosition: SnackPosition.BOTTOM,
       ); // didnt work
     }

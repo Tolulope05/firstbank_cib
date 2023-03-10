@@ -10,7 +10,7 @@ class InitiatePaymentDialogue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DashBoardviewModel _dashBoardController = Get.find<DashBoardviewModel>();
+    DashBoardviewModel dashBoardController = Get.find<DashBoardviewModel>();
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       child: Container(
@@ -68,7 +68,7 @@ class InitiatePaymentDialogue extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (context) => SelectAccountDialogue(
-                      accounts: _dashBoardController.accountcenter.accounts!,
+                      accounts: dashBoardController.accountcenter.accounts!,
                     ),
                   );
                 },

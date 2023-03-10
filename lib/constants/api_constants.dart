@@ -1,6 +1,9 @@
 class ApiEndPoints {
   static const String baseUrl =
       "https://firstdirectsandbox.firstbanknigeria.com:8443/Tesla_Auth_1b";
+
+  static const String baseUrl2 =
+      "https://firstdirectsandbox.firstbanknigeria.com:8443/Tesla_Payment_1b";
   static const String loginUrl = "/api/Authentication/Login_Old";
   static const Map<String, String> apiHeader = {
     "Content-Type": "application/json",
@@ -16,4 +19,6 @@ class ApiEndPoints {
 
   static const String getAccountHistory =
       "/api/AccountCenter/GetTransactionHistory";
+
+  static const String getWorkSpacesummary = "/api/Payment/GetPaymentDashboard";
 }

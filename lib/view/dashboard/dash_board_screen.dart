@@ -245,13 +245,22 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                                               borderRadius:
                                                   BorderRadius.circular(16),
                                             ),
-                                            child: const Center(
-                                                child: Text(
-                                              "8",
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                              ),
-                                            )),
+                                            child: FutureBuilder(
+                                                future: controller
+                                                    .getWorkspaceSummary(),
+                                                builder: (context, snapshot) {
+                                                  return Center(
+                                                      child: Text(
+                                                    controller.workspaceSummaryResponse
+                                                                .totalTransaction ==
+                                                            null
+                                                        ? "0"
+                                                        : "${controller.workspaceSummaryResponse.totalTransaction}",
+                                                    style: const TextStyle(
+                                                      fontSize: 12,
+                                                    ),
+                                                  ));
+                                                }),
                                           ),
                                         ),
                                         GestureDetector(
