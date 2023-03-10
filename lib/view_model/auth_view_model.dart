@@ -64,9 +64,7 @@ class AuthViewModel extends GetxController with CacheManager {
         await saveSession(_userResponse.value.session);
         await saveFullname(usernameController.text.trim());
         await saveCorporateCode(organizationCodeController.text.trim());
-        // _userResponse.value.getSubsidiaries!.map((element) {
-        //   subsidiariesList.add(element);
-        // });
+
         _subsidiariesList.addAll(_userResponse.value.getSubsidiaries!);
         // navigate to home screen
         usernameController.clear();
@@ -85,7 +83,7 @@ class AuthViewModel extends GetxController with CacheManager {
         await saveSession(_userResponse.value.session);
 
         Utils.getsnackbar(
-          title: "Not Succesful",
+          title: "Login Failed",
           message: resFromServer.responseMessage ?? "Failed to login",
         );
       }
@@ -152,7 +150,7 @@ class AuthViewModel extends GetxController with CacheManager {
       );
     } else {
       Utils.getsnackbar(
-        title: "Not Succesful",
+        title: "Logout Failed",
         message: logoutResp.responseMessage,
       );
     }
