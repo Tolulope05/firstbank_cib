@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../../constants/colors.dart';
 import '../../model/model.dart';
 import '../../view_model/dashboard_view_model.dart';
@@ -491,10 +490,18 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                                           isIncome = true;
                                         }
 
+                                        DateTime dateTime = DateTime.parse(
+                                          result.recordTime!.toIso8601String(),
+                                        );
+                                        String formattedDateTime =
+                                            DateFormat.yMMMMd("en_US")
+                                                .add_jm()
+                                                .format(dateTime);
+
                                         return TransactionCard(
                                           userName: result.narration ??
                                               "Transaction Narration",
-                                          date: result.transDate!,
+                                          date: formattedDateTime,
                                           amount: result.transAmountString!,
                                           // status: "Processed",
                                           isIncome: isIncome,
