@@ -174,12 +174,12 @@ class OwnAccountTabView extends GetView<TransferScreenViewModel> {
                     ),
                   ),
                 ),
-                DropdownSearch<Beneficiary>(
+                DropdownSearch<BankAccount>(
                   asyncItems: (String filter) =>
                       controller.getBeneficiaryBankList(),
-                  itemAsString: (Beneficiary u) =>
+                  itemAsString: (BankAccount u) =>
                       "${u.accountName!} - ${u.accountNumber!}",
-                  onChanged: (Beneficiary? data) =>
+                  onChanged: (BankAccount? data) =>
                       controller.setBeneficiaryAccount(data!),
                   dropdownDecoratorProps: const DropDownDecoratorProps(
                     baseStyle: TextStyle(

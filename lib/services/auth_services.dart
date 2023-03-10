@@ -68,7 +68,7 @@ class AuthServices {
         url,
         headers: ApiEndPoints.apiHeader,
       );
-      print(response.body);
+      // print(response.body);
 
       switch (response.statusCode) {
         case 200:

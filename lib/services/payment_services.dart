@@ -20,16 +20,16 @@ class Paymentservices {
       "subsidiaryId": subsidiaryId,
     };
 
-    print(session);
-    print(username);
-    print(subsidiaryId);
+    // print(session);
+    // print(username);
+    // print(subsidiaryId);
     try {
       http.Response response = await http.post(
         url,
         body: jsonEncode(body),
         headers: ApiEndPoints.apiHeader,
       );
-      print(response.body);
+      // print(response.body);
       switch (response.statusCode) {
         case 200:
           // Convert the response into a map & get relevant data from the response

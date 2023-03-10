@@ -62,14 +62,14 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       LocalPaymentResponse().obs;
   LocalPaymentResponse get localPaymentResponse => _localPaymentResponse.value;
   List<BankAccount> accountList = [];
-  List<Beneficiary> beneficiaryList = [];
+  List<BankAccount> beneficiaryList = [];
 
   /// OWN ACCOUNT LOGICS
   // select source by account number
   final Rx<BankAccount> _selectedSourceAccount = BankAccount().obs;
   BankAccount get selectedSourceAccount => _selectedSourceAccount.value;
-  final Rx<Beneficiary> _selectedBeneficiaryAccount = Beneficiary().obs;
-  Beneficiary get selectedBeneficiaryAccount =>
+  final Rx<BankAccount> _selectedBeneficiaryAccount = BankAccount().obs;
+  BankAccount get selectedBeneficiaryAccount =>
       _selectedBeneficiaryAccount.value;
   // select source by Bank account
   setSourceAccount(BankAccount bankAccount) {
@@ -77,7 +77,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
     print("${_selectedSourceAccount.value.accountName} selected");
   }
 
-  setBeneficiaryAccount(Beneficiary bankAccount) {
+  setBeneficiaryAccount(BankAccount bankAccount) {
     _selectedBeneficiaryAccount.value = bankAccount;
     print("${_selectedBeneficiaryAccount.value.accountNumber} selected");
   }
@@ -102,8 +102,8 @@ class TransferScreenViewModel extends GetxController with CacheManager {
   }
 
   // get beneficiary bank list
-  Future<List<Beneficiary>> getBeneficiaryBankList() async {
-    List<Beneficiary> beneficiaryBankList = [];
+  Future<List<BankAccount>> getBeneficiaryBankList() async {
+    List<BankAccount> beneficiaryBankList = [];
     for (var i = 0; i < beneficiaryList.length; i++) {
       beneficiaryBankList.add(beneficiaryList[i]);
     }
@@ -120,7 +120,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
     if (localPayResp.success == true) {
       _localPaymentResponse.value = localPayResp;
       accountList = localPayResp.accounts!;
-      beneficiaryList = localPayResp.beneficiaries!;
+      beneficiaryList = localPayResp.accounts!;
     } else {
       Get.snackbar(
         "Error",
