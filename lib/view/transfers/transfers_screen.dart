@@ -3,8 +3,10 @@ import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:firstbank_cib/widgets/initiate_payment_dialogue.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 
 import '../../constants/colors.dart';
+import '../../model/model.dart';
 import '../../view_model/transfer_screen_view_model.dart';
 import '../../widgets/text_field_input.dart';
 
@@ -116,15 +118,101 @@ class OwnAccountTabView extends GetView<TransferScreenViewModel> {
               right: 16.0,
               left: 16.0,
             ),
-            child: AppTextFieldInput(
-              controller: controller.sourceAccountController,
-              headerText: 'Source Account',
-              hintText: 'Select Account',
-              readOnly: true,
-              suffixIcon: const RotatedBox(
-                quarterTurns: 45,
-                child: Icon(Icons.chevron_right),
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: Text(
+                    "Source account",
+                    style: TextStyle(
+                      color: AppColors.textColor2,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                DropdownSearch<BankAccount>(
+                  asyncItems: (String filter) => controller.getSourceBankList(),
+                  itemAsString: (BankAccount u) =>
+                      "${u.accountName!} - ${u.accountNumber!}",
+                  onChanged: (BankAccount? data) =>
+                      controller.setSourceAccount(data!),
+                  dropdownDecoratorProps: const DropDownDecoratorProps(
+                    baseStyle: TextStyle(
+                      color: AppColors.textColor2,
+                      fontSize: 14,
+                    ),
+                    dropdownSearchDecoration: InputDecoration(
+                      hintText: "Select Account",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(4),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     top: 24,
+          //     right: 16.0,
+          //     left: 16.0,
+          //   ),
+          //   child: AppTextFieldInput(
+          //     controller: controller.beneficialAccountController,
+          //     headerText: 'Account to credit',
+          //     hintText: 'Select Account',
+          //     suffixIcon: const RotatedBox(
+          //       quarterTurns: 45,
+          //       child: Icon(Icons.chevron_right),
+          //     ),
+          //   ),
+          // ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: Text(
+                    "Account to credit",
+                    style: TextStyle(
+                      color: AppColors.textColor2,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                DropdownSearch<Beneficiary>(
+                  asyncItems: (String filter) =>
+                      controller.getBeneficiaryBankList(),
+                  itemAsString: (Beneficiary u) =>
+                      "${u.accountName!} - ${u.accountNumber!}",
+                  onChanged: (Beneficiary? data) =>
+                      controller.setBeneficiaryAccount(data!),
+                  dropdownDecoratorProps: const DropDownDecoratorProps(
+                    baseStyle: TextStyle(
+                      color: AppColors.textColor2,
+                      fontSize: 14,
+                    ),
+                    dropdownSearchDecoration: InputDecoration(
+                      hintText: "012345678",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(4),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Padding(
@@ -134,25 +222,10 @@ class OwnAccountTabView extends GetView<TransferScreenViewModel> {
               left: 16.0,
             ),
             child: AppTextFieldInput(
-              controller: controller.beneficialAccountController,
-              headerText: 'Account to credit',
-              hintText: 'Select Account',
-              suffixIcon: const RotatedBox(
-                quarterTurns: 45,
-                child: Icon(Icons.chevron_right),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 24,
-              right: 16.0,
-              left: 16.0,
-            ),
-            child: AppTextFieldInput(
-              controller: controller.beneficialAccountController,
+              controller: controller.beneficialAmountController,
               headerText: 'Amount',
               hintText: 'NGN',
+              isNumberonly: true,
             ),
           ),
           Padding(
@@ -162,26 +235,27 @@ class OwnAccountTabView extends GetView<TransferScreenViewModel> {
               left: 16.0,
             ),
             child: AppTextFieldInput(
-              controller: controller.beneficialAccountController,
+              controller: controller.ownAccountPaymentMemoController,
               headerText: 'Payment memo',
               hintText: '',
             ),
           ),
           Padding(
-              padding: const EdgeInsets.only(
-                top: 24,
-                right: 16.0,
-                left: 16.0,
-              ),
-              child: AppButton(
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => const InitiatePaymentDialogue(),
-                  );
-                },
-                text: 'Initiate Payment',
-              )),
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: AppButton(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const InitiatePaymentDialogue(),
+                );
+              },
+              text: 'Initiate Payment',
+            ),
+          ),
         ],
       ),
     );
@@ -224,13 +298,13 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Flexible(
-                  child: AppTextFieldInput(
-                    controller: controller.beneficialAccountController,
-                    headerText: 'Account Number',
-                    hintText: '0123456789',
-                  ),
-                ),
+                // Flexible(
+                //   child: AppTextFieldInput(
+                //     controller: controller.beneficialAccountController,
+                //     headerText: 'Account Number',
+                //     hintText: '0123456789',
+                //   ),
+                // ),
                 InkWell(
                   onTap: () {},
                   child: Container(
@@ -262,18 +336,18 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
               hintText: '',
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 24,
-              right: 16.0,
-              left: 16.0,
-            ),
-            child: AppTextFieldInput(
-              controller: controller.beneficialAccountController,
-              headerText: 'Amount',
-              hintText: 'NGN',
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     top: 24,
+          //     right: 16.0,
+          //     left: 16.0,
+          //   ),
+          //   child: AppTextFieldInput(
+          //     controller: controller.beneficialAccountController,
+          //     headerText: 'Amount',
+          //     hintText: 'NGN',
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.only(
               top: 24,

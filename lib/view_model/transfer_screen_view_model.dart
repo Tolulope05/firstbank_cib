@@ -9,10 +9,7 @@ import 'view_model.dart';
 class TransferScreenViewModel extends GetxController with CacheManager {
 //Auth services callback
   AuthViewModel authViewModel = Get.find<AuthViewModel>();
-// own account number
-  TextEditingController sourceAccountController = TextEditingController();
-  TextEditingController beneficialAccountController = TextEditingController();
-  TextEditingController amountAccountController = TextEditingController();
+
 // firstbank account number
   TextEditingController firstBankAccountController = TextEditingController();
   TextEditingController firstBankBeneficialAccountController =
@@ -30,35 +27,52 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       LocalPaymentResponse().obs;
   LocalPaymentResponse get localPaymentResponse => _localPaymentResponse.value;
   List<BankAccount> accountList = [];
+  List<Beneficiary> beneficiaryList = [];
 
-  // select account list search by account number
-  final Rx<BankAccount> _selectedAccount = BankAccount().obs;
-  BankAccount get selectedAccount => _selectedAccount.value;
-  // select account list search by account name
-  // Future<BankAccount> getAccountByAccountName(String accountName) async {
-  //   BankAccount account = BankAccount();
-  //   for (var item in accountList) {
-  //     if (item.accountName == accountName) {
-  //       account = item;
-  //     }
-  //   }
-  //   return account;
-  // }
-  // select account from a list of account where account number is the same
-  Future<BankAccount> getAccountByAccountNumber(String accountNumber) async {
-    BankAccount account = BankAccount();
-    for (var item in accountList) {
-      if (item.accountNumber == accountNumber) {
-        account = item;
-      }
-    }
-    return account;
+  /// OWN ACCOUNT LOGICS
+  // select source by account number
+  final Rx<BankAccount> _selectedSourceAccount = BankAccount().obs;
+  BankAccount get selectedSourceAccount => _selectedSourceAccount.value;
+  final Rx<Beneficiary> _selectedBeneficiaryAccount = Beneficiary().obs;
+  Beneficiary get selectedBeneficiaryAccount =>
+      _selectedBeneficiaryAccount.value;
+  // select source by Bank account
+  setSourceAccount(BankAccount bankAccount) {
+    _selectedSourceAccount.value = bankAccount;
+    print("${_selectedSourceAccount.value.accountName} selected");
   }
+
+  setBeneficiaryAccount(Beneficiary bankAccount) {
+    _selectedBeneficiaryAccount.value = bankAccount;
+    print("${_selectedBeneficiaryAccount.value.accountNumber} selected");
+  }
+
+  TextEditingController beneficialAmountController = TextEditingController();
+  TextEditingController ownAccountPaymentMemoController =
+      TextEditingController();
 
   @override
   void onInit() async {
     super.onInit();
     await getLocalPayment();
+  }
+
+  // get source bank list
+  Future<List<BankAccount>> getSourceBankList() async {
+    List<BankAccount> sourceBankList = [];
+    for (var i = 0; i < accountList.length; i++) {
+      sourceBankList.add(accountList[i]);
+    }
+    return sourceBankList;
+  }
+
+  // get beneficiary bank list
+  Future<List<Beneficiary>> getBeneficiaryBankList() async {
+    List<Beneficiary> beneficiaryBankList = [];
+    for (var i = 0; i < beneficiaryList.length; i++) {
+      beneficiaryBankList.add(beneficiaryList[i]);
+    }
+    return beneficiaryBankList;
   }
 
   //call get local payment
@@ -71,6 +85,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
     if (localPayResp.success == true) {
       _localPaymentResponse.value = localPayResp;
       accountList = localPayResp.accounts!;
+      beneficiaryList = localPayResp.beneficiaries!;
     } else {
       Get.snackbar(
         "Error",
