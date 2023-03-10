@@ -50,9 +50,9 @@ class AuthViewModel extends GetxController with CacheManager {
     try {
       LoginResponse resFromServer =
           await authServices.loginWithUsernameAndPassword(
-        username: usernameController.text,
-        password: passwordController.text,
-        corporateCode: organizationCodeController.text,
+        username: usernameController.text.trim(),
+        password: passwordController.text.trim(),
+        corporateCode: organizationCodeController.text.trim(),
       );
 
       if (resFromServer.success == true) {
@@ -61,8 +61,8 @@ class AuthViewModel extends GetxController with CacheManager {
         //Token and session is cached
         await saveToken(_userResponse.value.token);
         await saveSession(_userResponse.value.session);
-        await saveFullname(usernameController.text);
-        await saveCorporateCode(organizationCodeController.text);
+        await saveFullname(usernameController.text.trim());
+        await saveCorporateCode(organizationCodeController.text.trim());
         // _userResponse.value.getSubsidiaries!.map((element) {
         //   subsidiariesList.add(element);
         // });
