@@ -438,6 +438,35 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
               right: 16.0,
               left: 16.0,
             ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Save details as beneficiary ",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400),
+                ),
+                Obx(
+                  () => Switch(
+                    value: controller.saveBeneficiary,
+                    onChanged: (value) {
+                      controller.saveBeneficiaryToggle();
+                      print(controller.saveBeneficiary);
+                    },
+                    activeColor: AppColors.primaryColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
             child: AppButton(
               onTap: () {},
               bgColor: Colors.transparent,

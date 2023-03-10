@@ -23,6 +23,12 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       TextEditingController();
   TextEditingController firstBankPaymentMemoController =
       TextEditingController();
+  final RxBool _saveBeneficiary = false.obs;
+  bool get saveBeneficiary => _saveBeneficiary.value;
+  void saveBeneficiaryToggle() {
+    _saveBeneficiary.value = !_saveBeneficiary.value;
+  }
+
   // other account number
   TextEditingController otherBankSourceAccountController =
       TextEditingController();

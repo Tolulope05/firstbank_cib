@@ -1,7 +1,6 @@
 import 'package:firstbank_cib/constants/colors.dart';
 import 'package:firstbank_cib/view_model/view_model.dart';
 import 'package:firstbank_cib/widgets/app_button.dart';
-import 'package:firstbank_cib/widgets/select_account_dialogue.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -65,12 +64,8 @@ class InitiatePaymentDialogue extends StatelessWidget {
               child: AppButton(
                 onTap: () {
                   Get.back(); // close the current dialogue and open the next one.
-                  showDialog(
-                    context: context,
-                    builder: (context) => SelectAccountDialogue(
-                      accounts: dashBoardController.accountcenter.accounts!,
-                    ),
-                  );
+                  // dashBoardController.showVerifyPaymentDialogue();
+                  dashBoardController.navigateToActionCenter();
                 },
                 text: "Verify transaction",
               ),
