@@ -33,10 +33,6 @@ class TransferScreenViewModel extends GetxController with CacheManager {
 
   @override
   void onInit() async {
-    print(getFullname());
-    print(getCorporateCode());
-    print(getToken());
-    print(getSession());
     super.onInit();
     await getLocalPayment();
   }
