@@ -267,7 +267,7 @@ class Limit {
   int? dailyLimit;
   int? outstandingLimit;
   bool? allowedForTransactions;
-  int? singleLimit;
+  num? singleLimit; //single transaction limit is a double and int ??
 
   factory Limit.fromJson(Map<String, dynamic> json) => Limit(
         dailyLimit: json["dailyLimit"],
