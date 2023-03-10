@@ -11,14 +11,17 @@ class TransferScreenViewModel extends GetxController with CacheManager {
   AuthViewModel authViewModel = Get.find<AuthViewModel>();
 
 // firstbank account number
-  TextEditingController firstBankAccountController = TextEditingController();
+  TextEditingController firstBankSourceAccountController =
+      TextEditingController();
   TextEditingController firstBankBeneficialAccountController =
       TextEditingController();
   TextEditingController firstBankBeneficialAccountnameController =
       TextEditingController();
   TextEditingController firstBankPaymentTypeController =
       TextEditingController();
-  TextEditingController firstBankAmountAccountControllerMemo =
+  TextEditingController firstBankAmountAccountController =
+      TextEditingController();
+  TextEditingController firstBankPaymentMemoController =
       TextEditingController();
 
   Paymentservices paymentservices = Paymentservices();

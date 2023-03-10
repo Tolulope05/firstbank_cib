@@ -280,7 +280,7 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
               left: 16.0,
             ),
             child: AppTextFieldInput(
-              controller: controller.firstBankAccountController,
+              controller: controller.firstBankSourceAccountController,
               headerText: 'Source Account',
               hintText: 'Select Account',
               suffixIcon: const RotatedBox(
@@ -298,13 +298,13 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                // Flexible(
-                //   child: AppTextFieldInput(
-                //     controller: controller.beneficialAccountController,
-                //     headerText: 'Account Number',
-                //     hintText: '0123456789',
-                //   ),
-                // ),
+                Flexible(
+                  child: AppTextFieldInput(
+                    controller: controller.firstBankBeneficialAccountController,
+                    headerText: 'Account Number',
+                    hintText: '0123456789',
+                  ),
+                ),
                 InkWell(
                   onTap: () {},
                   child: Container(
@@ -336,18 +336,6 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
               hintText: '',
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.only(
-          //     top: 24,
-          //     right: 16.0,
-          //     left: 16.0,
-          //   ),
-          //   child: AppTextFieldInput(
-          //     controller: controller.beneficialAccountController,
-          //     headerText: 'Amount',
-          //     hintText: 'NGN',
-          //   ),
-          // ),
           Padding(
             padding: const EdgeInsets.only(
               top: 24,
@@ -355,7 +343,19 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
               left: 16.0,
             ),
             child: AppTextFieldInput(
-              controller: controller.firstBankAmountAccountControllerMemo,
+              controller: controller.firstBankAmountAccountController,
+              headerText: 'Amount',
+              hintText: 'NGN',
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 24,
+              right: 16.0,
+              left: 16.0,
+            ),
+            child: AppTextFieldInput(
+              controller: controller.firstBankPaymentMemoController,
               headerText: 'Payment memo',
               hintText: '',
             ),
