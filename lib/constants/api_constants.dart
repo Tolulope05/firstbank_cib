@@ -21,4 +21,6 @@ class ApiEndPoints {
       "/api/AccountCenter/GetTransactionHistory";
 
   static const String getWorkSpacesummary = "/api/Payment/GetPaymentDashboard";
+
+  static const String getLocalPayment = "/api/Payment/GetlocalPayment";
 }
