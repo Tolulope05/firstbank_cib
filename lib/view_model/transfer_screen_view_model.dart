@@ -23,6 +23,32 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       TextEditingController();
   TextEditingController firstBankPaymentMemoController =
       TextEditingController();
+  // other account number
+  TextEditingController otherBankSourceAccountController =
+      TextEditingController();
+  TextEditingController otherBankBeneficialAccountController =
+      TextEditingController();
+  TextEditingController otherBankBeneficialAccountnameController =
+      TextEditingController();
+  TextEditingController otherBankPaymentTypeController =
+      TextEditingController();
+  TextEditingController otherBankAmountAccountController =
+      TextEditingController();
+  TextEditingController otherBankPaymentMemoController =
+      TextEditingController();
+  // firstbank account number
+  TextEditingController internationalBankSourceAccountController =
+      TextEditingController();
+  TextEditingController internationalBankBeneficialAccountController =
+      TextEditingController();
+  TextEditingController internationalBankBeneficialAccountnameController =
+      TextEditingController();
+  TextEditingController internationalBankPaymentTypeController =
+      TextEditingController();
+  TextEditingController internationalBankAmountAccountController =
+      TextEditingController();
+  TextEditingController internationalBankPaymentMemoController =
+      TextEditingController();
 
   Paymentservices paymentservices = Paymentservices();
   // local payment servie call
