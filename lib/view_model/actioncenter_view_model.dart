@@ -37,6 +37,11 @@ class ActionCenterViewModel extends GetxController with CacheManager {
       _localPaymentResponse.value = paymentRes;
     } else {
       print("error");
+      Get.snackbar(
+        "Error",
+        paymentRes.responseMessage.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 

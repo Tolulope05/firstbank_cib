@@ -11,6 +11,15 @@ class SplashScreen extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         color: AppColors.primaryColor,
+        child: const Center(
+            child: Text(
+          "FIRST BANK",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 28,
+            fontWeight: FontWeight.w600,
+          ),
+        )),
       ),
     );
   }

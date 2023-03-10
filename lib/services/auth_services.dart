@@ -29,7 +29,7 @@ class AuthServices {
         body: jsonEncode(body),
         headers: ApiEndPoints.apiHeader,
       );
-      print(response.body);
+      print('LOGIN RESPONSE ${response.body}');
 
       switch (response.statusCode) {
         case 200:
@@ -68,7 +68,7 @@ class AuthServices {
         url,
         headers: ApiEndPoints.apiHeader,
       );
-      // print(response.body);
+      print('LOGOUT RESPONSE ${response.body}');
 
       switch (response.statusCode) {
         case 200:

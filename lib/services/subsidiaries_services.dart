@@ -27,7 +27,7 @@ class SubidiairiesServices {
         body: jsonEncode(body),
         headers: ApiEndPoints.apiHeader,
       );
-      // print(response.body);
+      print('SUBSIDIARY RESPONSE ${response.body}');
       switch (response.statusCode) {
         case 200:
           // Convert the response into a map & get relevant data from the response

@@ -20,16 +20,16 @@ class Paymentservices {
       "subsidiaryId": subsidiaryId,
     };
 
-    // print(session);
-    // print(username);
-    // print(subsidiaryId);
+    print(session);
+    print(username);
+    print(subsidiaryId);
     try {
       http.Response response = await http.post(
         url,
         body: jsonEncode(body),
         headers: ApiEndPoints.apiHeader,
       );
-      // print(response.body);
+      print('LOCAL PAYMENT ${response.body}');
       switch (response.statusCode) {
         case 200:
           // Convert the response into a map & get relevant data from the response
@@ -101,22 +101,15 @@ class Paymentservices {
       ]
     };
 
-    print(jsonEncode(body));
+    // print(jsonEncode(body));
 
-    // print(session);
-    // print(username);
-    // print(subsidiaryId);
-    // print(sourceAccount);
-    // print(beneficiaryAccount);
-    // print(amount);
-    // print(memo);
     try {
       http.Response response = await http.post(
         url,
         body: jsonEncode(body),
         headers: ApiEndPoints.apiHeader,
       );
-      print(response.body);
+      print('INITIATE PAYMENT RES ${response.body}');
       switch (response.statusCode) {
         case 200:
           // Convert the response into a map & get relevant data from the response
@@ -170,20 +163,13 @@ class Paymentservices {
       "keyword": keyword,
     };
 
-    // print(session);
-    // print(username);
-    // print(subsidiaryId);
-    // print(sourceAccount);
-    // print(beneficiaryAccount);
-    // print(amount);
-    // print(memo);
     try {
       http.Response response = await http.post(
         url,
         body: jsonEncode(body),
         headers: ApiEndPoints.apiHeader,
       );
-      print(response.body);
+      print('SINGLE PAYMENT SUMMARY ${response.body}');
       switch (response.statusCode) {
         case 200:
           // Convert the response into a map & get relevant data from the response
