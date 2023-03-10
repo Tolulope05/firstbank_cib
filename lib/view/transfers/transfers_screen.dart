@@ -99,7 +99,7 @@ class _TransfersScreenState extends State<TransfersScreen>
   }
 }
 
-class OwnAccountTabView extends StatelessWidget {
+class OwnAccountTabView extends GetView<TransferScreenViewModel> {
   const OwnAccountTabView({
     super.key,
   });
@@ -120,6 +120,7 @@ class OwnAccountTabView extends StatelessWidget {
               controller: controller.sourceAccountController,
               headerText: 'Source Account',
               hintText: 'Select Account',
+              readOnly: true,
               suffixIcon: const RotatedBox(
                 quarterTurns: 45,
                 child: Icon(Icons.chevron_right),
@@ -187,7 +188,7 @@ class OwnAccountTabView extends StatelessWidget {
   }
 }
 
-class FirstBankTabview extends StatelessWidget {
+class FirstBankTabview extends GetView<TransferScreenViewModel> {
   const FirstBankTabview({
     super.key,
   });

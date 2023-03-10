@@ -24,12 +24,36 @@ class TransferScreenViewModel extends GetxController with CacheManager {
   TextEditingController firstBankAmountAccountControllerMemo =
       TextEditingController();
 
+  Paymentservices paymentservices = Paymentservices();
   // local payment servie call
   final Rx<LocalPaymentResponse> _localPaymentResponse =
       LocalPaymentResponse().obs;
   LocalPaymentResponse get localPaymentResponse => _localPaymentResponse.value;
+  List<BankAccount> accountList = [];
 
-  Paymentservices paymentservices = Paymentservices();
+  // select account list search by account number
+  final Rx<BankAccount> _selectedAccount = BankAccount().obs;
+  BankAccount get selectedAccount => _selectedAccount.value;
+  // select account list search by account name
+  // Future<BankAccount> getAccountByAccountName(String accountName) async {
+  //   BankAccount account = BankAccount();
+  //   for (var item in accountList) {
+  //     if (item.accountName == accountName) {
+  //       account = item;
+  //     }
+  //   }
+  //   return account;
+  // }
+  // select account from a list of account where account number is the same
+  Future<BankAccount> getAccountByAccountNumber(String accountNumber) async {
+    BankAccount account = BankAccount();
+    for (var item in accountList) {
+      if (item.accountNumber == accountNumber) {
+        account = item;
+      }
+    }
+    return account;
+  }
 
   @override
   void onInit() async {
@@ -46,6 +70,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
     );
     if (localPayResp.success == true) {
       _localPaymentResponse.value = localPayResp;
+      accountList = localPayResp.accounts!;
     } else {
       Get.snackbar(
         "Error",

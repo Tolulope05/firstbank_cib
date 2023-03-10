@@ -10,6 +10,7 @@ class AppTextFieldInput extends StatefulWidget {
     required this.controller,
     this.validator,
     this.obscureText = false,
+    this.readOnly = false,
     this.isPassword,
   }) : super(key: key);
   final String headerText;
@@ -19,6 +20,7 @@ class AppTextFieldInput extends StatefulWidget {
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
   bool? isPassword;
+  bool readOnly;
 
   @override
   State<AppTextFieldInput> createState() => _AppTextFieldInputState();
@@ -41,6 +43,7 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
           ),
         ),
         TextFormField(
+          readOnly: widget.readOnly,
           obscureText: widget.obscureText,
           controller: widget.controller,
           validator: widget.validator,
