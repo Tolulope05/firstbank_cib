@@ -7,32 +7,32 @@ String loginResponseToJson(LoginResponse data) => json.encode(data.toJson());
 
 class LoginResponse {
   LoginResponse({
-    required this.success,
-    required this.changePassword,
-    required this.response,
-    required this.responseMessage,
+    this.success,
+    this.changePassword,
+    this.response,
+    this.responseMessage,
     this.fullname,
     this.session,
     this.getSubsidiaries,
-    required this.advert,
-    required this.tokenRequired,
+    this.advert,
+    this.tokenRequired,
     this.lastLogin,
-    required this.firstTime,
+    this.firstTime,
     this.token,
   });
 
-  bool success;
-  bool changePassword;
-  int response;
-  String responseMessage;
-  dynamic fullname;
-  dynamic session;
-  dynamic getSubsidiaries;
-  bool advert;
-  bool tokenRequired;
-  dynamic lastLogin;
-  bool firstTime;
-  dynamic token;
+  bool? success;
+  bool? changePassword;
+  int? response;
+  String? responseMessage;
+  String? fullname;
+  String? session;
+  List<GetSubsidiary>? getSubsidiaries;
+  bool? advert;
+  bool? tokenRequired;
+  String? lastLogin;
+  bool? firstTime;
+  String? token;
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
         success: json["success"],
@@ -41,7 +41,10 @@ class LoginResponse {
         responseMessage: json["responseMessage"],
         fullname: json["fullname"],
         session: json["session"],
-        getSubsidiaries: json["getSubsidiaries"],
+        getSubsidiaries: json["getSubsidiaries"] == null
+            ? []
+            : List<GetSubsidiary>.from(
+                json["getSubsidiaries"]!.map((x) => GetSubsidiary.fromJson(x))),
         advert: json["advert"],
         tokenRequired: json["tokenRequired"],
         lastLogin: json["lastLogin"],
@@ -56,7 +59,9 @@ class LoginResponse {
         "responseMessage": responseMessage,
         "fullname": fullname,
         "session": session,
-        "getSubsidiaries": getSubsidiaries,
+        "getSubsidiaries": getSubsidiaries == null
+            ? []
+            : List<dynamic>.from(getSubsidiaries!.map((x) => x.toJson())),
         "advert": advert,
         "tokenRequired": tokenRequired,
         "lastLogin": lastLogin,
@@ -67,66 +72,74 @@ class LoginResponse {
 
 class GetSubsidiary {
   GetSubsidiary({
-    required this.subsidiaryId,
-    required this.subsidiaryName,
-    required this.userRole,
+    this.subsidiaryId,
+    this.subsidiaryName,
+    this.userRole,
     this.userRoles,
     this.suspense,
-    required this.seeBalance,
-    required this.payOnlyApprovedBeneficiaries,
-    required this.getModules,
+    this.seeBalance,
+    this.payOnlyApprovedBeneficiaries,
+    this.getModules,
   });
 
-  int subsidiaryId;
-  String subsidiaryName;
-  List<UserRole> userRole;
-  dynamic userRoles;
-  dynamic suspense;
-  bool seeBalance;
-  bool payOnlyApprovedBeneficiaries;
-  List<GetModule> getModules;
+  int? subsidiaryId;
+  String? subsidiaryName;
+  List<UserRole>? userRole;
+  String? userRoles;
+  String? suspense;
+  bool? seeBalance;
+  bool? payOnlyApprovedBeneficiaries;
+  List<GetModule>? getModules;
 
   factory GetSubsidiary.fromJson(Map<String, dynamic> json) => GetSubsidiary(
         subsidiaryId: json["subsidiaryId"],
         subsidiaryName: json["subsidiaryName"],
-        userRole: List<UserRole>.from(
-            json["userRole"].map((x) => UserRole.fromJson(x))),
+        userRole: json["userRole"] == null
+            ? []
+            : List<UserRole>.from(
+                json["userRole"]!.map((x) => UserRole.fromJson(x))),
         userRoles: json["userRoles"],
         suspense: json["suspense"],
         seeBalance: json["seeBalance"],
         payOnlyApprovedBeneficiaries: json["payOnlyApprovedBeneficiaries"],
-        getModules: List<GetModule>.from(
-            json["getModules"].map((x) => GetModule.fromJson(x))),
+        getModules: json["getModules"] == null
+            ? []
+            : List<GetModule>.from(
+                json["getModules"]!.map((x) => GetModule.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "subsidiaryId": subsidiaryId,
         "subsidiaryName": subsidiaryName,
-        "userRole": List<dynamic>.from(userRole.map((x) => x.toJson())),
+        "userRole": userRole == null
+            ? []
+            : List<dynamic>.from(userRole!.map((x) => x.toJson())),
         "userRoles": userRoles,
         "suspense": suspense,
         "seeBalance": seeBalance,
         "payOnlyApprovedBeneficiaries": payOnlyApprovedBeneficiaries,
-        "getModules": List<dynamic>.from(getModules.map((x) => x.toJson())),
+        "getModules": getModules == null
+            ? []
+            : List<dynamic>.from(getModules!.map((x) => x.toJson())),
       };
 }
 
 class GetModule {
   GetModule({
-    required this.id,
-    required this.modulename,
+    this.id,
+    this.modulename,
     this.moduleUrl,
-    required this.arrangement,
-    required this.allowed,
-    required this.getSubModules,
+    this.arrangement,
+    this.allowed,
+    this.getSubModules,
   });
 
-  int id;
-  String modulename;
+  int? id;
+  String? modulename;
   dynamic moduleUrl;
-  int arrangement;
-  bool allowed;
-  List<GetSubModule> getSubModules;
+  int? arrangement;
+  bool? allowed;
+  List<GetSubModule>? getSubModules;
 
   factory GetModule.fromJson(Map<String, dynamic> json) => GetModule(
         id: json["id"],
@@ -134,8 +147,10 @@ class GetModule {
         moduleUrl: json["moduleUrl"],
         arrangement: json["arrangement"],
         allowed: json["allowed"],
-        getSubModules: List<GetSubModule>.from(
-            json["getSubModules"].map((x) => GetSubModule.fromJson(x))),
+        getSubModules: json["getSubModules"] == null
+            ? []
+            : List<GetSubModule>.from(
+                json["getSubModules"]!.map((x) => GetSubModule.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -144,25 +159,26 @@ class GetModule {
         "moduleUrl": moduleUrl,
         "arrangement": arrangement,
         "allowed": allowed,
-        "getSubModules":
-            List<dynamic>.from(getSubModules.map((x) => x.toJson())),
+        "getSubModules": getSubModules == null
+            ? []
+            : List<dynamic>.from(getSubModules!.map((x) => x.toJson())),
       };
 }
 
 class GetSubModule {
   GetSubModule({
-    required this.id,
-    required this.subModuleName,
+    this.id,
+    this.subModuleName,
     this.subModuleUrl,
-    required this.arrangement,
-    required this.allowed,
+    this.arrangement,
+    this.allowed,
   });
 
-  int id;
-  String subModuleName;
+  int? id;
+  String? subModuleName;
   dynamic subModuleUrl;
-  int arrangement;
-  bool allowed;
+  int? arrangement;
+  bool? allowed;
 
   factory GetSubModule.fromJson(Map<String, dynamic> json) => GetSubModule(
         id: json["id"],
@@ -183,12 +199,12 @@ class GetSubModule {
 
 class UserRole {
   UserRole({
-    required this.id,
-    required this.rolename,
+    this.id,
+    this.rolename,
   });
 
-  int id;
-  String rolename;
+  int? id;
+  String? rolename;
 
   factory UserRole.fromJson(Map<String, dynamic> json) => UserRole(
         id: json["id"],

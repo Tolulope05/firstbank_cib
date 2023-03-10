@@ -13,8 +13,11 @@ class AuthViewModel extends GetxController with CacheManager {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   AuthServices authServices = AuthServices();
-  LoginResponse? userResponse;
-  List<GetSubsidiary?> subsidiariesList = <GetSubsidiary?>[];
+  final Rx<LoginResponse> _userResponse = LoginResponse().obs;
+  LoginResponse? get userResponse => _userResponse.value;
+
+  final RxList<GetSubsidiary?> _subsidiariesList = <GetSubsidiary>[].obs;
+  List<GetSubsidiary?> get subsidiariesList => _subsidiariesList;
 
   // Rx<bool> isLoading = false.obs;
 
@@ -45,22 +48,25 @@ class AuthViewModel extends GetxController with CacheManager {
   // login with username and password
   Future<void> loginUser() async {
     try {
-      userResponse = await authServices.loginWithUsernameAndPassword(
+      LoginResponse resFromServer =
+          await authServices.loginWithUsernameAndPassword(
         username: usernameController.text,
         password: passwordController.text,
         corporateCode: organizationCodeController.text,
       );
 
-      if (userResponse!.success == true) {
+      if (resFromServer.success == true) {
+        _userResponse.value = resFromServer;
         _isLogged.value = true;
         //Token and session is cached
-        await saveToken(userResponse!.token);
-        await saveSession(userResponse!.session);
+        await saveToken(_userResponse.value.token);
+        await saveSession(_userResponse.value.session);
         await saveFullname(usernameController.text);
         await saveCorporateCode(organizationCodeController.text);
-        userResponse!.getSubsidiaries!.map((element) {
-          subsidiariesList.add(element);
-        });
+        // _userResponse.value.getSubsidiaries!.map((element) {
+        //   subsidiariesList.add(element);
+        // });
+        _subsidiariesList.addAll(_userResponse.value.getSubsidiaries!);
         // navigate to home screen
         usernameController.clear();
         passwordController.clear();
@@ -70,12 +76,14 @@ class AuthViewModel extends GetxController with CacheManager {
         Utils.getsnackbar(
           title: "Welcome ${getFullname()} ",
           // title: "Welcome ${userResponse!.fullname} ",
-          message: userResponse!.responseMessage,
+          message: resFromServer.responseMessage ?? "Successfully logged in",
         );
       } else {
+        await saveToken(_userResponse.value.token);
+        await saveSession(_userResponse.value.session);
         Utils.getsnackbar(
           title: "Not Succesful",
-          message: userResponse!.responseMessage,
+          message: resFromServer.responseMessage ?? "Failed to login",
         );
       }
     } catch (error) {
@@ -107,7 +115,7 @@ class AuthViewModel extends GetxController with CacheManager {
           ),
           TextButton(
             onPressed: () {
-              _logOut();
+              logOut();
             },
             child: const Text(
               "Yes",
@@ -122,7 +130,7 @@ class AuthViewModel extends GetxController with CacheManager {
   }
 
   // logout
-  void _logOut() async {
+  void logOut() async {
     _isLogged.value = false;
     LogoutResponse logoutResp = await authServices.logoutUser(
       username: "${getFullname()}@${getCorporateCode()}",
