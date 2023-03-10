@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../model/payment_type_response.dart';
-import '../services/payment_services.dart';
 import 'view_model.dart';
 
 class TransferScreenViewModel extends GetxController with CacheManager {
@@ -160,7 +159,12 @@ class TransferScreenViewModel extends GetxController with CacheManager {
         backgroundColor: Colors.green,
         colorText: Colors.white,
       );
-      Get.to(() => const ActionCenterScreen());
+      Get.to(
+        () => const ActionCenterScreen(),
+        binding: BindingsBuilder.put(
+          () => ActionCenterViewModel(),
+        ),
+      );
     } else {
       Get.snackbar(
         "Something went wrong",

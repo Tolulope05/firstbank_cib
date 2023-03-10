@@ -140,4 +140,71 @@ class Paymentservices {
       throw FetchDataException(e.toString());
     }
   }
+
+  /// THIS IS FOR ACTion Center
+  Future<SinglePaymentResponse> getSinglePaymentResp({
+    required String session,
+    required String username,
+    required int subsidiaryId,
+    required String parameter,
+    required String startDate,
+    required String endDate,
+    required bool reportPage,
+    required int page,
+    required int recordPerPage,
+    required String keyword,
+  }) async {
+    // This is for Accout summary
+    Uri url =
+        Uri.parse(ApiEndPoints.baseUrl2 + ApiEndPoints.actionCeterConfirmation);
+    Map<String, dynamic> body = {
+      "session": session,
+      "username": username,
+      "subsidiaryId": subsidiaryId,
+      "parameter": parameter,
+      "startDate": startDate,
+      "endDate": endDate,
+      "reportPage": reportPage,
+      "page": page,
+      "recordPerPage": recordPerPage,
+      "keyword": keyword,
+    };
+
+    // print(session);
+    // print(username);
+    // print(subsidiaryId);
+    // print(sourceAccount);
+    // print(beneficiaryAccount);
+    // print(amount);
+    // print(memo);
+    try {
+      http.Response response = await http.post(
+        url,
+        body: jsonEncode(body),
+        headers: ApiEndPoints.apiHeader,
+      );
+      print(response.body);
+      switch (response.statusCode) {
+        case 200:
+          // Convert the response into a map & get relevant data from the response
+          final responseBody = jsonDecode(response.body);
+          //  Deserialize into localPaymentResponse
+          final SinglePaymentResponse usersModel =
+              SinglePaymentResponse.fromJson(responseBody);
+          return usersModel;
+        case 400:
+          throw BadRequestException(response.body.toString());
+        case 403:
+          throw UnauthorisedException(response.body.toString());
+
+        default:
+          throw FetchDataException(
+              'Error occured while Communication with Server with StatusCode : ${response.statusCode}');
+      }
+    } on SocketException {
+      throw FetchDataException("No Internet connection");
+    } catch (e) {
+      throw FetchDataException(e.toString());
+    }
+  }
 }

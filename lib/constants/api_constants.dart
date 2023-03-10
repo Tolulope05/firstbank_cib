@@ -26,4 +26,7 @@ class ApiEndPoints {
 
   static const String initiatePayment =
       "/api/Payment/MakeOnScreenBulkLocalPayment";
+
+  static const String actionCeterConfirmation =
+      "/api/Payment/SearchPaymentSingle";
 }
