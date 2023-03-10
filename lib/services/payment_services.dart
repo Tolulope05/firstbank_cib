@@ -68,7 +68,7 @@ class Paymentservices {
     required bool saveBeneficiary,
     required int amount,
     required String memo,
-    required String dateTime,
+    // required String dateTime,
   }) async {
     Uri url = Uri.parse(ApiEndPoints.baseUrl2 + ApiEndPoints.initiatePayment);
     Map<String, dynamic> body = {
