@@ -367,36 +367,31 @@ String singlePaymentResponseToJson(SinglePaymentResponse data) =>
 
 class SinglePaymentResponse {
   SinglePaymentResponse({
-    this.success,
-    this.response,
-    this.responseMessage,
-    this.session,
-    this.message,
     this.totalAccounts,
     this.totalPayments,
     this.accounts,
     this.payments,
     this.tokenSerial,
+    this.success,
+    this.response,
+    this.responseMessage,
+    this.session,
+    this.message,
   });
 
-  bool? success;
-  int? response;
-  String? responseMessage;
-  String? session;
-  String? message;
   int? totalAccounts;
   int? totalPayments;
   List<Accountt>? accounts;
-  List<Payment>? payments;
+  List<Paymentt>? payments;
   String? tokenSerial;
+  bool? success;
+  int? response;
+  String? responseMessage;
+  dynamic session;
+  dynamic message;
 
   factory SinglePaymentResponse.fromJson(Map<String, dynamic> json) =>
       SinglePaymentResponse(
-        success: json["success"],
-        response: json["response"],
-        responseMessage: json["responseMessage"],
-        session: json["session"],
-        message: json["message"],
         totalAccounts: json["totalAccounts"],
         totalPayments: json["totalPayments"],
         accounts: json["accounts"] == null
@@ -405,17 +400,17 @@ class SinglePaymentResponse {
                 json["accounts"]!.map((x) => Accountt.fromJson(x))),
         payments: json["payments"] == null
             ? []
-            : List<Payment>.from(
-                json["payments"]!.map((x) => Payment.fromJson(x))),
+            : List<Paymentt>.from(
+                json["payments"]!.map((x) => Paymentt.fromJson(x))),
         tokenSerial: json["tokenSerial"],
+        success: json["success"],
+        response: json["response"],
+        responseMessage: json["responseMessage"],
+        session: json["session"],
+        message: json["message"],
       );
 
   Map<String, dynamic> toJson() => {
-        "success": success,
-        "response": response,
-        "responseMessage": responseMessage,
-        "session": session,
-        "message": message,
         "totalAccounts": totalAccounts,
         "totalPayments": totalPayments,
         "accounts": accounts == null
@@ -425,6 +420,11 @@ class SinglePaymentResponse {
             ? []
             : List<dynamic>.from(payments!.map((x) => x.toJson())),
         "tokenSerial": tokenSerial,
+        "success": success,
+        "response": response,
+        "responseMessage": responseMessage,
+        "session": session,
+        "message": message,
       };
 }
 
@@ -456,8 +456,8 @@ class Accountt {
   String? status;
   String? currency;
   double? availableBalance;
-  int? overDraftBalance;
-  int? ledgerBalance;
+  dynamic overDraftBalance;
+  dynamic ledgerBalance;
   bool? primaryAccount;
   int? telegraphicBalance;
   int? telegraphicCashBalance;
@@ -573,27 +573,27 @@ class Paymentt {
   int? accountId;
   int? approvalStatusId;
   String? approvalStatus;
-  String? approvalMessage;
+  dynamic approvalMessage;
   bool? chargeBeneficiary;
   int? paymentStatusId;
   String? paymentStatus;
   String? paymentRemark;
-  String? batchid;
+  dynamic batchid;
   String? doclink;
   bool? finalApprover;
   int? paymethodId;
   String? paymentMethod;
   int? paymentTypeId;
-  String? paymentType;
+  dynamic paymentType;
   int? initiatorId;
   bool? actionAllowed;
-  List<String>? approvers;
+  dynamic approvers;
   String? initiator;
-  String? remark;
-  String? h2HFileName;
+  dynamic remark;
+  dynamic h2HFileName;
   int? paymentSourceId;
   bool? convenienceFee;
-  String? reversal;
+  dynamic reversal;
 
   factory Paymentt.fromJson(Map<String, dynamic> json) => Paymentt(
         companyId: json["companyId"],
@@ -640,9 +640,7 @@ class Paymentt {
         paymentType: json["paymentType"],
         initiatorId: json["initiatorId"],
         actionAllowed: json["actionAllowed"],
-        approvers: json["approvers"] == null
-            ? []
-            : List<String>.from(json["approvers"]!.map((x) => x)),
+        approvers: json["approvers"],
         initiator: json["initiator"],
         remark: json["remark"],
         h2HFileName: json["h2HFileName"],
@@ -690,9 +688,7 @@ class Paymentt {
         "paymentType": paymentType,
         "initiatorId": initiatorId,
         "actionAllowed": actionAllowed,
-        "approvers": approvers == null
-            ? []
-            : List<dynamic>.from(approvers!.map((x) => x)),
+        "approvers": approvers,
         "initiator": initiator,
         "remark": remark,
         "h2HFileName": h2HFileName,

@@ -140,13 +140,7 @@ class Paymentservices {
     required String session,
     required String username,
     required int subsidiaryId,
-    required String parameter,
-    required String startDate,
-    required String endDate,
     required bool reportPage,
-    required int page,
-    required int recordPerPage,
-    required String keyword,
   }) async {
     // This is for Accout summary
     Uri url =
@@ -155,13 +149,7 @@ class Paymentservices {
       "session": session,
       "username": username,
       "subsidiaryId": subsidiaryId,
-      "parameter": parameter,
-      "startDate": startDate,
-      "endDate": endDate,
       "reportPage": reportPage,
-      "page": page,
-      "recordPerPage": recordPerPage,
-      "keyword": keyword,
     };
 
     try {

@@ -197,7 +197,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       dateTime: ownvalueDate,
       memo: ownAccountPaymentMemoController.text,
       recieverAccountNumber: selectedBeneficiaryAccount.accountNumber!,
-      recieverName: selectedBeneficiaryAccount.preferredName!,
+      recieverName: selectedBeneficiaryAccount.preferredName ?? " ",
       saveBeneficiary: saveBeneficiary,
     );
     if (initiatePaymentResponse.success == true) {

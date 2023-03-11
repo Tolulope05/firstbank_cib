@@ -1,4 +1,5 @@
 import 'package:firstbank_cib/widgets/app_button.dart';
+import 'package:firstbank_cib/widgets/shimmmer_page.dart';
 import 'package:firstbank_cib/widgets/transaction_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -470,44 +471,56 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                                     ],
                                   ),
                                   Obx(
-                                    () => ListView.builder(
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemCount: controller
-                                              .transactionHistoryResponse
-                                              .result
-                                              ?.length ??
-                                          0,
-                                      itemBuilder: (context, index) {
-                                        Result result = controller
-                                            .transactionHistoryResponse
-                                            .result![index];
-                                        bool isIncome;
-                                        if (result.drcr == "D") {
-                                          isIncome = false;
-                                        } else {
-                                          isIncome = true;
-                                        }
+                                    () => FutureBuilder(
+                                        future:
+                                            controller.getTransactionHistory(),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.connectionState ==
+                                              ConnectionState.waiting) {
+                                            return loadingShimmer();
+                                          }
+                                          return ListView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: controller
+                                                    .transactionHistoryResponse
+                                                    .result
+                                                    ?.length ??
+                                                0,
+                                            itemBuilder: (context, index) {
+                                              Result result = controller
+                                                  .transactionHistoryResponse
+                                                  .result![index];
+                                              bool isIncome;
+                                              if (result.drcr == "D") {
+                                                isIncome = false;
+                                              } else {
+                                                isIncome = true;
+                                              }
 
-                                        DateTime dateTime = DateTime.parse(
-                                          result.recordTime!.toIso8601String(),
-                                        );
-                                        String formattedDateTime =
-                                            DateFormat.yMMMMd("en_US")
-                                                .add_jm()
-                                                .format(dateTime);
+                                              DateTime dateTime =
+                                                  DateTime.parse(
+                                                result.recordTime!
+                                                    .toIso8601String(),
+                                              );
+                                              String formattedDateTime =
+                                                  DateFormat.yMMMMd("en_US")
+                                                      .add_jm()
+                                                      .format(dateTime);
 
-                                        return TransactionCard(
-                                          userName: result.narration ??
-                                              "Transaction Narration",
-                                          date: formattedDateTime,
-                                          amount: result.transAmountString!,
-                                          // status: "Processed",
-                                          isIncome: isIncome,
-                                        );
-                                      },
-                                    ),
+                                              return TransactionCard(
+                                                userName: result.narration ??
+                                                    "Transaction Narration",
+                                                date: formattedDateTime,
+                                                amount:
+                                                    result.transAmountString!,
+                                                // status: "Processed",
+                                                isIncome: isIncome,
+                                              );
+                                            },
+                                          );
+                                        }),
                                   )
 
                                   // const TransactionCard(

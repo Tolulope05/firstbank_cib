@@ -55,25 +55,27 @@ class ActionCenterCard extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                Text.rich(
-                  TextSpan(
-                    text: '$recieverName ',
-                    style: const TextStyle(
-                      color: AppColors.primaryColor,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      overflow: TextOverflow.ellipsis,
+                Flexible(
+                  child: Text.rich(
+                    TextSpan(
+                      text: '$recieverName ',
+                      style: const TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      children: <InlineSpan>[
+                        TextSpan(
+                          text: '- $recieverNumber',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xff4B4B4B),
+                          ),
+                        )
+                      ],
                     ),
-                    children: <InlineSpan>[
-                      TextSpan(
-                        text: '- $recieverNumber',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff4B4B4B),
-                        ),
-                      )
-                    ],
                   ),
                 ),
               ],

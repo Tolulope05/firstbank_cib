@@ -24,12 +24,6 @@ class ActionCenterViewModel extends GetxController with CacheManager {
       session: "${getSession()}",
       username: "${getFullname()}@${getCorporateCode()}",
       subsidiaryId: 2,
-      endDate: "2023-03-10",
-      startDate: "2023-03-01",
-      keyword: "string",
-      page: 1,
-      parameter: "string",
-      recordPerPage: 1,
       reportPage: false,
     );
 
