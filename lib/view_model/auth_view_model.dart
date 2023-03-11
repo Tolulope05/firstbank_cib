@@ -64,7 +64,8 @@ class AuthViewModel extends GetxController with CacheManager {
         await saveSession(_userResponse.value.session);
         await saveFullname(usernameController.text.trim());
         await saveCorporateCode(organizationCodeController.text.trim());
-        subsidiariesList.assignAll(_userResponse.value.getSubsidiaries!);
+        _subsidiariesList.value.assignAll(_userResponse.value.getSubsidiaries!);
+
         // navigate to home screen
         usernameController.clear();
         passwordController.clear();

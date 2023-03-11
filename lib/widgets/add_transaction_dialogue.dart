@@ -9,6 +9,7 @@ class AddTransactionDialogue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //
     return Dialog(
       clipBehavior: Clip.hardEdge,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
@@ -47,21 +48,21 @@ class AddTransactionDialogue extends StatelessWidget {
               ),
             ),
 
-            organizationTypewidget(
-              id: 1,
-              name: "Abuja Limited",
-              isSelected: false,
-            ),
-            organizationTypewidget(
-              id: 2,
-              name: "Lagos Limited",
-              isSelected: true,
-            ),
-            organizationTypewidget(
-              id: 3,
-              name: "Rivers Limited",
-              isSelected: false,
-            ),
+            // organizationTypewidget(
+            //   id: 1,
+            //   name: "Abuja Limited",
+            //   isSelected: false,
+            // ),
+            // organizationTypewidget(
+            //   id: 2,
+            //   name: "Lagos Limited",
+            //   isSelected: true,
+            // ),
+            // organizationTypewidget(
+            //   id: 3,
+            //   name: "Rivers Limited",
+            //   isSelected: false,
+            // ),
             // ListView.builder(
             //   itemBuilder: (context, index) {
             //     organizationTypewidget(
