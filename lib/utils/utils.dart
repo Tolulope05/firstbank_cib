@@ -32,9 +32,8 @@ class Utils {
     Get.snackbar(
       title,
       message,
-      backgroundColor:
-          backgroundColor ?? AppColors.primaryColor.withOpacity(0.9),
-      colorText: colorText ?? AppColors.whiteColor,
+      colorText: Colors.white,
+      backgroundColor: AppColors.primaryColorDeep,
       snackPosition: snackPosition ?? SnackPosition.BOTTOM,
     );
   }

@@ -1,12 +1,17 @@
+import 'dart:math';
+
+import 'package:firstbank_cib/constants/colors.dart';
 import 'package:firstbank_cib/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../model/model.dart';
 import '../services/services.dart';
+import 'view_model.dart';
 
 class ActionCenterViewModel extends GetxController with CacheManager {
   Paymentservices paymentservices = Paymentservices();
+  ProfileViewModel profileViewModel = Get.put(ProfileViewModel());
 
   // local payment servie call
   final Rx<SinglePaymentResponse> _localPaymentResponse =
@@ -59,16 +64,26 @@ class ActionCenterViewModel extends GetxController with CacheManager {
     }
   }
 
+  // generate 8 random int
+  int generateRandomInt() {
+    var rng = Random();
+    int rngInt = rng.nextInt(100000000);
+    print(rngInt);
+    return rngInt;
+  }
+
   approvePayment({
     required String? batchID,
     required int paymentId,
     required bool approve,
   }) async {
+    generateRandomInt();
     ApprovePaymentResponse approvalResp = await paymentservices.approvePayment(
       session: "${getSession()}",
       username: "${getFullname()}@${getCorporateCode()}",
       approve: approve,
       paymentId: paymentId,
+      subsidiaryId: profileViewModel.subsidiaryId,
       batchId: batchID,
       token: "45594039",
     );
@@ -77,12 +92,16 @@ class ActionCenterViewModel extends GetxController with CacheManager {
       Get.snackbar(
         "Success",
         "payment approved",
+        colorText: Colors.white,
+        backgroundColor: AppColors.primaryColorDeep,
       );
       Get.offAndToNamed(RoutesName.homeScreen);
     } else {
       Get.snackbar(
         "Something went",
         "payment not approved",
+        colorText: Colors.white,
+        backgroundColor: AppColors.primaryColorDeep,
       );
     }
   }

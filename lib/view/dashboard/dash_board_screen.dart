@@ -255,7 +255,7 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                                                                 .totalTransaction ==
                                                             null
                                                         ? "0"
-                                                        : "${controller.workspaceSummaryResponse.totalTransaction}",
+                                                        : "${controller.workspaceSummaryResponse.pendingTransaction}",
                                                     style: const TextStyle(
                                                       fontSize: 12,
                                                     ),

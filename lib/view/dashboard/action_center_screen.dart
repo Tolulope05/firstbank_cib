@@ -118,7 +118,6 @@ class ActionCenterScreen extends GetView<ActionCenterViewModel> {
                         }
                         return ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
-                          reverse: true,
                           shrinkWrap: true,
                           itemCount: controller
                                   .localPaymentResponse.payments?.length ??

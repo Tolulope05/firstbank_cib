@@ -136,11 +136,11 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 16, bottom: 4),
+                  padding: const EdgeInsets.only(top: 16, bottom: 4),
                   child: TextColorWrap(
                     text: "${paymentDetails.approvalStatus}",
                     textColor: AppColors.yellowColor3,
-                    color: Color(0xffECE4CD),
+                    color: const Color(0xffECE4CD),
                     textfontSize: 12,
                   ),
                 ),
@@ -457,7 +457,7 @@ class TransactionDetailsTab extends StatelessWidget {
               children: [
                 CustomCardChildPosition(
                   prefixText: "Method",
-                  suffixText: "${paymentDetails.paymentMethod}}",
+                  suffixText: "${paymentDetails.paymentMethod}",
                 ),
                 CustomCardChildPosition(
                   prefixText: "Type",

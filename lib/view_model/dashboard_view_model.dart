@@ -1,7 +1,9 @@
 import 'package:firstbank_cib/utils/routes/routes_name.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../constants/colors.dart';
 import '../model/model.dart';
 import '../services/services.dart';
 
@@ -92,6 +94,8 @@ class DashBoardviewModel extends GetxController with CacheManager {
         "Unable to fetch data",
         accountResp.message.toString(),
         snackPosition: SnackPosition.BOTTOM,
+        colorText: Colors.white,
+        backgroundColor: AppColors.primaryColorDeep,
       ); // didnt work
       isLoading.value = false;
     }
@@ -115,6 +119,8 @@ class DashBoardviewModel extends GetxController with CacheManager {
       Get.snackbar(
         "Unable to fetch transaction history",
         transactionResponse.responseMessage.toString(),
+        colorText: Colors.white,
+        backgroundColor: AppColors.primaryColorDeep,
         snackPosition: SnackPosition.BOTTOM,
       ); // didnt work
     }
@@ -133,6 +139,8 @@ class DashBoardviewModel extends GetxController with CacheManager {
     } else {
       Get.snackbar(
         "Unable to fetch history",
+        colorText: Colors.white,
+        backgroundColor: AppColors.primaryColorDeep,
         workspaceSummaryResponse.responseMessage.toString(),
         snackPosition: SnackPosition.BOTTOM,
       ); // didnt work

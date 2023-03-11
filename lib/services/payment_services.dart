@@ -236,12 +236,14 @@ class Paymentservices {
     required String? batchId,
     required String token,
     required bool approve,
+    required int subsidiaryId,
   }) async {
     // This is for Accout summary
     Uri url = Uri.parse(ApiEndPoints.baseUrl2 + ApiEndPoints.approvePayment);
     Map<String, dynamic> body = {
       "session": session,
       "username": username,
+      "subsidiaryId": subsidiaryId,
       "paymentId": [
         {
           "paymentId": paymentId,
