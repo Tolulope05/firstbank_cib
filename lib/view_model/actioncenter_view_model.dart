@@ -13,6 +13,17 @@ class ActionCenterViewModel extends GetxController with CacheManager {
       SinglePaymentResponse().obs;
   SinglePaymentResponse get localPaymentResponse => _localPaymentResponse.value;
 
+  final Rx<Paymentt> _paymentDetails = Paymentt().obs;
+  Paymentt get paymentDetails => _paymentDetails.value;
+
+  selectPayment(int payment) {
+    _paymentDetails.value = localPaymentResponse.payments![payment];
+
+    Get.toNamed(
+      RoutesName.transactionDetails,
+    );
+  }
+
   @override
   void onInit() async {
     loadSinglePaymentResp();
@@ -53,14 +64,27 @@ class ActionCenterViewModel extends GetxController with CacheManager {
     required int paymentId,
     required bool approve,
   }) async {
-    paymentservices.approvePayment(
+    ApprovePaymentResponse approvalResp = await paymentservices.approvePayment(
       session: "${getSession()}",
       username: "${getFullname()}@${getCorporateCode()}",
       approve: approve,
       paymentId: paymentId,
       batchId: batchID,
-      token: "${getToken()}",
+      token: "45594039",
     );
+
+    if (approvalResp.success == true) {
+      Get.snackbar(
+        "Success",
+        "payment approved",
+      );
+      Get.offAndToNamed(RoutesName.homeScreen);
+    } else {
+      Get.snackbar(
+        "Something went",
+        "payment not approved",
+      );
+    }
   }
 
   // account balance service call
@@ -85,12 +109,5 @@ class ActionCenterViewModel extends GetxController with CacheManager {
   //navigation logics
   navigateback() {
     Get.back();
-  }
-
-  void navigateTotransactionDetails(Paymentt? paymentt) {
-    Get.toNamed(
-      RoutesName.transactionDetails,
-      arguments: paymentt,
-    );
   }
 }

@@ -37,8 +37,7 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<ActionCenterViewModel>();
-    Paymentt? paymentDetails = Get.arguments;
-
+    final paymentDetails = controller.paymentDetails;
     // DateTime parsing
     String returnFormattedDate(DateTime dateTime) {
       // DateTime dateTime = DateTime.parse(date);
@@ -73,7 +72,7 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "- ₦ ${paymentDetails!.amount}",
+                      "- ₦ ${paymentDetails.amount}",
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w500,
@@ -136,10 +135,10 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(top: 16, bottom: 4),
                   child: TextColorWrap(
-                    text: "Awaiting Approval",
+                    text: "${paymentDetails.approvalStatus}",
                     textColor: AppColors.yellowColor3,
                     color: Color(0xffECE4CD),
                     textfontSize: 12,
@@ -199,7 +198,7 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                                 // });
                                 controller.approvePayment(
                                   approve: true,
-                                  paymentId: paymentDetails.companyId!.toInt(),
+                                  paymentId: paymentDetails.id!.toInt(),
                                   batchID: paymentDetails.batchid,
                                 );
                               },

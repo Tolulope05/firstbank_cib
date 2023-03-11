@@ -146,10 +146,7 @@ class ActionCenterScreen extends GetView<ActionCenterViewModel> {
                                 recieverNumber: controller.localPaymentResponse
                                     .payments![index].accountNumber!,
                                 onApprove: () {
-                                  controller.navigateTotransactionDetails(
-                                    controller
-                                        .localPaymentResponse.payments![index],
-                                  );
+                                  controller.selectPayment(index);
                                 },
                               ),
                             );

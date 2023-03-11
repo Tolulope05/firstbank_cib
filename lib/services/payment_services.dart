@@ -253,6 +253,8 @@ class Paymentservices {
       "token": token,
     };
 
+    print('PAYLOAD: ${jsonEncode(body)}');
+
     try {
       http.Response response = await http.post(
         url,
