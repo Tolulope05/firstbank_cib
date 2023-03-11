@@ -94,6 +94,7 @@ class ActionCenterCard extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
+                const SizedBox(width: 10),
                 Text(
                   narration,
                   style: const TextStyle(
@@ -101,6 +102,7 @@ class ActionCenterCard extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
+                  textAlign: TextAlign.right,
                 ),
               ],
             ),
