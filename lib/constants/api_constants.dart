@@ -30,4 +30,5 @@ class ApiEndPoints {
   static const String actionCeterConfirmation =
       "/api/Payment/SearchPaymentSingle";
   static const String validateAccountNum = "/api/Payment/ValidateAccountNumber";
+  static const String approvePayment = "/api/Payment/ApprovePaymentLocal";
 }

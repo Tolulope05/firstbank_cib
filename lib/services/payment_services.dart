@@ -228,4 +228,52 @@ class Paymentservices {
       throw FetchDataException(e.toString());
     }
   }
+
+  Future<ApprovePaymentResponse> approvePayment({
+    required String session,
+    required String username,
+    required List<dynamic> paymentId,
+    required String batchId,
+    required String token,
+  }) async {
+    // This is for Accout summary
+    Uri url = Uri.parse(ApiEndPoints.baseUrl2 + ApiEndPoints.approvePayment);
+    Map<String, dynamic> body = {
+      "session": session,
+      "username": username,
+      "paymentId": token,
+      "batchId": batchId,
+      "token": token,
+    };
+
+    try {
+      http.Response response = await http.post(
+        url,
+        body: jsonEncode(body),
+        headers: ApiEndPoints.apiHeader,
+      );
+      print('APPROVE PAYMENT ${response.body}');
+      switch (response.statusCode) {
+        case 200:
+          // Convert the response into a map & get relevant data from the response
+          final responseBody = jsonDecode(response.body);
+          //  Deserialize into localPaymentResponse
+          final ApprovePaymentResponse usersModel =
+              ApprovePaymentResponse.fromJson(responseBody);
+          return usersModel;
+        case 400:
+          throw BadRequestException(response.body.toString());
+        case 403:
+          throw UnauthorisedException(response.body.toString());
+
+        default:
+          throw FetchDataException(
+              'Error occured while Communication with Server with StatusCode : ${response.statusCode}');
+      }
+    } on SocketException {
+      throw FetchDataException("No Internet connection");
+    } catch (e) {
+      throw FetchDataException(e.toString());
+    }
+  }
 }

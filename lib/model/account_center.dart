@@ -222,3 +222,36 @@ class ValidateAccountResponse {
         "currency": currency,
       };
 }
+
+class ApprovePaymentResponse {
+  ApprovePaymentResponse({
+    this.success,
+    this.response,
+    this.responseMessage,
+    this.session,
+    this.message,
+  });
+
+  bool? success;
+  int? response;
+  String? responseMessage;
+  String? session;
+  String? message;
+
+  factory ApprovePaymentResponse.fromJson(Map<String, dynamic> json) =>
+      ApprovePaymentResponse(
+        success: json["success"],
+        response: json["response"],
+        responseMessage: json["responseMessage"],
+        session: json["session"],
+        message: json["message"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "success": success,
+        "response": response,
+        "responseMessage": responseMessage,
+        "session": session,
+        "message": message,
+      };
+}
