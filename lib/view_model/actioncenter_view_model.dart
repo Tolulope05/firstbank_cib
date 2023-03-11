@@ -44,7 +44,10 @@ class ActionCenterViewModel extends GetxController with CacheManager {
     Get.back();
   }
 
-  void navigateTotransactionDetails() {
-    Get.toNamed(RoutesName.transactionDetails);
+  void navigateTotransactionDetails(Paymentt? paymentt) {
+    Get.toNamed(
+      RoutesName.transactionDetails,
+      arguments: paymentt,
+    );
   }
 }
