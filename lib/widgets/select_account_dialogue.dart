@@ -1,15 +1,16 @@
 import 'package:firstbank_cib/constants/colors.dart';
+import 'package:firstbank_cib/view_model/view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../model/account_center.dart';
-
 class SelectAccountDialogue extends StatelessWidget {
-  SelectAccountDialogue({Key? key, required this.accounts}) : super(key: key);
-  List<Account> accounts;
+  const SelectAccountDialogue({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    DashBoardviewModel controller = Get.put(DashBoardviewModel());
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       child: Container(
@@ -48,14 +49,23 @@ class SelectAccountDialogue extends StatelessWidget {
               constraints: BoxConstraints.tight(const Size.fromHeight(400)),
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: accounts.length,
+                itemCount: controller.accountcenter.accounts!.length,
                 itemBuilder: (context, index) {
                   return accountTypeWidget(
-                    accountNumber: accounts[index].accountNumber ?? "",
-                    accounType: accounts[index].accountType ?? "",
-                    balance: accounts[index].availableBalance.toString(),
-                    isNaira: accounts[index].currency == "NGN" ? true : false,
-                    onTap: () => Get.back(),
+                    accountNumber: controller
+                            .accountcenter.accounts![index].accountNumber ??
+                        "",
+                    accounType:
+                        controller.accountcenter.accounts![index].accountType ??
+                            "",
+                    balance: controller
+                        .accountcenter.accounts![index].availableBalance
+                        .toString(),
+                    currency:
+                        controller.accountcenter.accounts![index].currency!,
+                    onTap: () {
+                      controller.selectAccountfromDialogue(index);
+                    },
                   );
                 },
               ),
@@ -107,7 +117,7 @@ Widget accountTypeWidget({
   required String accountNumber,
   required String accounType,
   required String balance,
-  bool isNaira = true,
+  required String currency,
   VoidCallback? onTap,
 }) {
   return GestureDetector(
@@ -133,7 +143,9 @@ Widget accountTypeWidget({
         children: [
           Center(
             child: Image.asset(
-              isNaira ? "assets/images/naira.png" : "assets/images/dollar.png",
+              currency.toUpperCase().trim() == "NGN"
+                  ? "assets/images/naira.png"
+                  : "assets/images/dollar.png", // a better implementation of this soon
               width: 32,
               height: 32,
             ),
@@ -163,7 +175,7 @@ Widget accountTypeWidget({
           ),
           Center(
             child: Text(
-              "${isNaira ? "NGN" : "USD"} $balance",
+              "$currency $balance",
               style: const TextStyle(
                 color: AppColors.primaryColor,
                 fontWeight: FontWeight.w500,

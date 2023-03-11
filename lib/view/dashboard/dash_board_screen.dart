@@ -104,10 +104,7 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                             onTap: () {
                               showDialog(
                                 context: context,
-                                builder: (context) => SelectAccountDialogue(
-                                  accounts:
-                                      controller.accountcenter.accounts ?? [],
-                                ),
+                                builder: (context) => SelectAccountDialogue(),
                               );
                             },
                             child: Row(
@@ -139,10 +136,14 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                             ),
                           ),
                         ),
-                        const Text(
-                          "Float account",
-                          style:
-                              TextStyle(color: AppColors.unselectedIconColor),
+                        Obx(
+                          () => Text(
+                            controller.selectedAccount.accountType ??
+                                "Float Account",
+                            style: const TextStyle(
+                              color: AppColors.unselectedIconColor,
+                            ),
+                          ),
                         ),
                         Obx(
                           () => Center(
@@ -151,7 +152,7 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                               children: [
                                 controller.obScureBalance.value
                                     ? Text(
-                                        "${controller.accountcenter.accounts!.first.currency ?? "NGN"} ${controller.giveCommaseparated(controller.accountcenter.accounts!.first.ledgerBalance.toString())}",
+                                        "${controller.selectedAccount.currency ?? "NGN"} ${controller.giveCommaseparated(controller.selectedAccount.ledgerBalance.toString())}",
                                         style: const TextStyle(
                                           fontSize: 24,
                                           color: AppColors.whiteColor2,
@@ -159,7 +160,7 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                                         ),
                                       )
                                     : Text(
-                                        "${controller.accountcenter.accounts!.first.currency ?? "NGN"} ${controller.obscureBalance(controller.accountcenter.accounts!.first.ledgerBalance.toString())}",
+                                        "${controller.selectedAccount.currency ?? "NGN"} ${controller.obscureBalance(controller.selectedAccount.ledgerBalance.toString())}",
                                         style: const TextStyle(
                                           fontSize: 24,
                                           color: AppColors.whiteColor2,
@@ -189,13 +190,13 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                         Obx(
                           () => controller.obScureBalance.value
                               ? Text(
-                                  "${controller.accountcenter.accounts!.first.currency ?? "NGN"} ${controller.giveCommaseparated(controller.accountcenter.accounts!.first.availableBalance.toString())} available",
+                                  "${controller.selectedAccount.currency ?? "NGN"} ${controller.giveCommaseparated(controller.selectedAccount.availableBalance.toString())} available",
                                   style: const TextStyle(
                                     color: AppColors.unselectedIconColor,
                                   ),
                                 )
                               : Text(
-                                  "${controller.accountcenter.accounts!.first.currency ?? "NGN"} ${controller.obscureBalance(controller.accountcenter.accounts!.first.availableBalance.toString())} available",
+                                  "${controller.selectedAccount.currency ?? "NGN"} ${controller.obscureBalance(controller.selectedAccount.availableBalance.toString())} available",
                                   style: const TextStyle(
                                     color: AppColors.unselectedIconColor,
                                   ),

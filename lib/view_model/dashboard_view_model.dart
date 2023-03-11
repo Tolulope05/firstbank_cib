@@ -18,6 +18,16 @@ class DashBoardviewModel extends GetxController with CacheManager {
   final Rx<AccountCenter> _accountCenter = AccountCenter().obs;
   AccountCenter get accountcenter => _accountCenter.value;
 
+  final Rx<Account> _selectedAccount = Account().obs;
+  Account get selectedAccount => _selectedAccount.value;
+
+  selectAccountfromDialogue(int index) {
+    _selectedAccount.value = _accountCenter.value.accounts![index];
+
+    _accountCenter.refresh();
+    Get.back();
+  }
+
   // Transaction History
   final Rx<TransactionHistoryResponse> _transactionHistoryResponse =
       TransactionHistoryResponse().obs;
