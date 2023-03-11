@@ -143,6 +143,8 @@ class ActionCenterScreen extends GetView<ActionCenterViewModel> {
                                         .payments![index].finalApprover!
                                     ? false
                                     : true,
+                                approvalStatus: controller.localPaymentResponse
+                                    .payments![index].approvalStatus!,
                                 recieverNumber: controller.localPaymentResponse
                                     .payments![index].accountNumber!,
                                 onApprove: () {
