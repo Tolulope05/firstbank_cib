@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 import '../constants/colors.dart';
@@ -9,7 +10,7 @@ class AddTransactionDialogue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //
+    ProfileViewModel profileController = Get.find<ProfileViewModel>();
     return Dialog(
       clipBehavior: Clip.hardEdge,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
@@ -48,34 +49,48 @@ class AddTransactionDialogue extends StatelessWidget {
               ),
             ),
 
-            // organizationTypewidget(
-            //   id: 1,
-            //   name: "Abuja Limited",
-            //   isSelected: false,
-            // ),
-            // organizationTypewidget(
-            //   id: 2,
-            //   name: "Lagos Limited",
-            //   isSelected: true,
-            // ),
-            // organizationTypewidget(
-            //   id: 3,
-            //   name: "Rivers Limited",
-            //   isSelected: false,
-            // ),
-            // ListView.builder(
-            //   itemBuilder: (context, index) {
-            //     organizationTypewidget(
-            //       id: authController.subsidiariesList[index].subsidiaryId,
-            //       name: authController.subsidiariesList[index].subsidiaryName,
-            //       isSelected: profileController.subsidiaries.subsidiaryId ==
-            //           authController.subsidiariesList[index].subsidiaryId,
-            //     );
-            //   },
-            //   itemCount: authController.subsidiariesList.length,
-            //   shrinkWrap: true,
-            //   physics: const NeverScrollableScrollPhysics(),
-            // ),
+            organizationTypewidget(
+              id: 1,
+              name: "Abuja Limited",
+              isSelected: false,
+            ),
+            organizationTypewidget(
+              id: 2,
+              name: "Lagos Limited",
+              isSelected: true,
+            ),
+            organizationTypewidget(
+              id: 3,
+              name: "Rivers Limited",
+              isSelected: false,
+            ),
+            // FutureBuilder(
+            //     future: profileController.fetchSubsidiaries(),
+            //     builder: (context, snapshot) {
+            //       if (snapshot.connectionState == ConnectionState.waiting) {
+            //         SpinKitWave(
+            //           color: AppColors.primaryColor,
+            //         );
+            //       }
+            //       return Obx(
+            //         () => ListView.builder(
+            //           itemBuilder: (context, index) {
+            //             organizationTypewidget(
+            //               id: snapshot.data![index].subsidiaryId,
+            //               name: snapshot.data![index].subsidiaryName,
+            //               isSelected: true,
+            //               // isSelected:
+            //               //     profileController.subsidiaries.subsidiaryId ==
+            //               //         profileController
+            //               //             .subsidiariesList[index].subsidiaryId,
+            //             );
+            //           },
+            //           itemCount: snapshot.data!.length,
+            //           shrinkWrap: true,
+            //           physics: const NeverScrollableScrollPhysics(),
+            //         ),
+            //       );
+            //     }),
           ],
         ),
       ),

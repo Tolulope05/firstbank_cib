@@ -85,7 +85,7 @@ class ActionCenterViewModel extends GetxController with CacheManager {
       paymentId: paymentId,
       subsidiaryId: profileViewModel.subsidiaryId,
       batchId: batchID,
-      token: "45594039",
+      token: generateRandomInt().toString(),
     );
 
     if (approvalResp.success == true) {

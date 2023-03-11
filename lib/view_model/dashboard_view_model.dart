@@ -98,6 +98,7 @@ class DashBoardviewModel extends GetxController with CacheManager {
 
     if (accountResp.success == true) {
       _accountCenter.value = accountResp;
+      _selectedAccount.value = accountResp.accounts![0]; // set default account
       isLoading.value = false;
     } else {
       Get.snackbar(
