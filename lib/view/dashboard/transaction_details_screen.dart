@@ -185,63 +185,69 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
             bottom: 20,
             child: Material(
               child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 70,
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: !isSubmitted
-                      ? Row(
-                          children: [
-                            Flexible(
-                              child: AppButton(
-                                onTap: () {
-                                  setState(() {
-                                    isSubmitted = true;
-                                  });
-                                },
-                                text: "Approve",
-                              ),
-                            ),
-                            const SizedBox(width: 20),
-                            Flexible(
-                              child: AppButton(
-                                onTap: () {},
-                                text: "Decline",
-                                textColor: AppColors.failedColor,
-                                borderColor: AppColors.failedColor,
-                                bgColor: Colors.transparent,
-                              ),
-                            ),
-                          ],
-                        )
-                      : Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: AppButton(
-                            onTap: () {
-                              setState(() {
-                                isSubmitted = false;
-                              });
-                            },
-                            bgColor: Colors.transparent,
-                            borderColor: AppColors.primaryColor,
-                            textColor: AppColors.primaryColor,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(
-                                  Icons.print_sharp,
-                                  color: AppColors.primaryColor,
-                                ),
-                                SizedBox(width: 8),
-                                Text(
-                                  "Download",
-                                  style: TextStyle(
-                                    color: AppColors.primaryColor,
-                                  ),
-                                )
-                              ],
+                width: MediaQuery.of(context).size.width,
+                height: 70,
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: !isSubmitted
+                    ? Row(
+                        children: [
+                          Flexible(
+                            child: AppButton(
+                              onTap: () {
+                                // setState(() {
+                                //   isSubmitted = true;
+                                // });
+                                controller.approvePayment(
+                                  approve: true,
+                                  paymentId: paymentDetails.companyId!.toInt(),
+                                  batchID: paymentDetails.batchid,
+                                );
+                              },
+                              text: "Approve",
                             ),
                           ),
-                        )),
+                          const SizedBox(width: 20),
+                          Flexible(
+                            child: AppButton(
+                              onTap: () {},
+                              text: "Decline",
+                              textColor: AppColors.failedColor,
+                              borderColor: AppColors.failedColor,
+                              bgColor: Colors.transparent,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: AppButton(
+                          onTap: () {
+                            setState(() {
+                              isSubmitted = false;
+                            });
+                          },
+                          bgColor: Colors.transparent,
+                          borderColor: AppColors.primaryColor,
+                          textColor: AppColors.primaryColor,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.print_sharp,
+                                color: AppColors.primaryColor,
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                "Download",
+                                style: TextStyle(
+                                  color: AppColors.primaryColor,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+              ),
             ),
           )
         ],

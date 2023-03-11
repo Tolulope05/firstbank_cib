@@ -29,14 +29,14 @@ class LocalPaymentResponse {
 
   List<BankAccount>? accounts;
   List<Beneficiary>? beneficiaries;
-  List<int>? suggestedAmount;
+  List<num>? suggestedAmount;
   List<Payment>? paymentMethod;
   List<Payment>? paymentType;
   List<BankList>? bankList;
   Limit? limit;
   String? tokenSerial;
   bool? success;
-  int? response;
+  num? response;
   String? responseMessage;
   String? session;
   dynamic message;
@@ -53,7 +53,7 @@ class LocalPaymentResponse {
                 json["beneficiaries"]!.map((x) => Beneficiary.fromJson(x))),
         suggestedAmount: json["suggestedAmount"] == null
             ? []
-            : List<int>.from(json["suggestedAmount"]!.map((x) => x)),
+            : List<num>.from(json["suggestedAmount"]!.map((x) => x)),
         paymentMethod: json["paymentMethod"] == null
             ? []
             : List<Payment>.from(
@@ -123,7 +123,7 @@ class BankAccount {
     this.bankCode,
   });
 
-  int? accountId;
+  num? accountId;
   String? accountType;
   String? accountName;
   String? preferredName;
@@ -135,8 +135,8 @@ class BankAccount {
   dynamic overDraftBalance;
   dynamic ledgerBalance;
   bool? primaryAccount;
-  int? telegraphicBalance;
-  int? telegraphicCashBalance;
+  num? telegraphicBalance;
+  num? telegraphicCashBalance;
   String? bankCode;
 
   factory BankAccount.fromJson(Map<String, dynamic> json) => BankAccount(
@@ -213,13 +213,13 @@ class Beneficiary {
   });
 
   dynamic subsidiaryName;
-  int? beneficiaryId;
+  num? beneficiaryId;
   String? alias;
   String? accountName;
   String? accountNumber;
   String? email;
   String? phoneNumber;
-  int? statusId;
+  num? statusId;
   String? status;
   dynamic error;
   String? bankCode;
@@ -264,10 +264,10 @@ class Limit {
     this.singleLimit,
   });
 
-  int? dailyLimit;
-  int? outstandingLimit;
+  num? dailyLimit;
+  num? outstandingLimit;
   bool? allowedForTransactions;
-  num? singleLimit; //single transaction limit is a double and int ??
+  num? singleLimit; //single transaction limit is a double and num ??
 
   factory Limit.fromJson(Map<String, dynamic> json) => Limit(
         dailyLimit: json["dailyLimit"],
@@ -291,7 +291,7 @@ class Payment {
     this.remark,
   });
 
-  int? id;
+  num? id;
   String? value;
   dynamic remark;
 
@@ -331,7 +331,7 @@ class InitiatePaymentResponse {
 
   dynamic paymentResponse;
   bool? success;
-  int? response;
+  num? response;
   String? responseMessage;
   dynamic session;
   String? message;
@@ -379,13 +379,13 @@ class SinglePaymentResponse {
     this.message,
   });
 
-  int? totalAccounts;
-  int? totalPayments;
+  num? totalAccounts;
+  num? totalPayments;
   List<Accountt>? accounts;
   List<Paymentt>? payments;
   String? tokenSerial;
   bool? success;
-  int? response;
+  num? response;
   String? responseMessage;
   dynamic session;
   dynamic message;
@@ -447,7 +447,7 @@ class Accountt {
     this.bankCode,
   });
 
-  int? accountId;
+  num? accountId;
   String? accountType;
   String? accountName;
   String? preferredName;
@@ -459,8 +459,8 @@ class Accountt {
   dynamic overDraftBalance;
   dynamic ledgerBalance;
   bool? primaryAccount;
-  int? telegraphicBalance;
-  int? telegraphicCashBalance;
+  num? telegraphicBalance;
+  num? telegraphicCashBalance;
   String? bankCode;
 
   factory Accountt.fromJson(Map<String, dynamic> json) => Accountt(
@@ -549,10 +549,10 @@ class Paymentt {
     this.reversal,
   });
 
-  int? companyId;
+  num? companyId;
   String? subsidiaryName;
   String? sourceAccountNumber;
-  int? id;
+  num? id;
   DateTime? requestdatetime;
   String? requestDate;
   String? requestDatetimes;
@@ -566,32 +566,32 @@ class Paymentt {
   String? bankName;
   String? banksname;
   String? bankcode;
-  int? amount;
-  int? charges;
+  num? amount;
+  num? charges;
   bool? futureTransaction;
   String? narration;
-  int? accountId;
-  int? approvalStatusId;
+  num? accountId;
+  num? approvalStatusId;
   String? approvalStatus;
   dynamic approvalMessage;
   bool? chargeBeneficiary;
-  int? paymentStatusId;
+  num? paymentStatusId;
   String? paymentStatus;
   String? paymentRemark;
   dynamic batchid;
   String? doclink;
   bool? finalApprover;
-  int? paymethodId;
+  num? paymethodId;
   String? paymentMethod;
-  int? paymentTypeId;
+  num? paymentTypeId;
   dynamic paymentType;
-  int? initiatorId;
+  num? initiatorId;
   bool? actionAllowed;
   dynamic approvers;
   String? initiator;
   dynamic remark;
   dynamic h2HFileName;
-  int? paymentSourceId;
+  num? paymentSourceId;
   bool? convenienceFee;
   dynamic reversal;
 

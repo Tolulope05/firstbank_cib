@@ -1,10 +1,10 @@
 import 'package:firstbank_cib/services/services.dart';
-import 'package:firstbank_cib/view/dashboard/action_center_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../model/payment_type_response.dart';
+import '../utils/routes/routes_name.dart';
 import 'view_model.dart';
 
 class TransferScreenViewModel extends GetxController with CacheManager {
@@ -187,7 +187,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       subsidiaryId: profileViewModel.subsidiaryId,
       session: "${getSession()}",
       username: "${getFullname()}@${getCorporateCode()}",
-      sourceAccountId: selectedSourceAccount.accountId!,
+      sourceAccountId: selectedSourceAccount.accountId!.toInt(),
       bankCode: selectedBeneficiaryAccount.bankCode ?? "011",
       amount: int.parse(beneficialAmountController.text),
       charges: 0,
@@ -197,7 +197,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       dateTime: ownvalueDate,
       memo: ownAccountPaymentMemoController.text,
       recieverAccountNumber: selectedBeneficiaryAccount.accountNumber!,
-      recieverName: selectedBeneficiaryAccount.preferredName ?? " ",
+      recieverName: selectedBeneficiaryAccount.preferredName ?? "",
       saveBeneficiary: saveBeneficiary,
     );
     if (initiatePaymentResponse.success == true) {
@@ -208,12 +208,13 @@ class TransferScreenViewModel extends GetxController with CacheManager {
         backgroundColor: Colors.green,
         colorText: Colors.white,
       );
-      Get.to(
-        () => const ActionCenterScreen(),
-        binding: BindingsBuilder.put(
-          () => ActionCenterViewModel(),
-        ),
-      );
+      // Get.to(
+      //   () => const ActionCenterScreen(),
+      //   binding: BindingsBuilder.put(
+      //     () => ActionCenterViewModel(),
+      //   ),
+      // );
+      Get.offAndToNamed(RoutesName.actionCenter);
     } else {
       Get.snackbar(
         "Something went wrong",

@@ -232,16 +232,23 @@ class Paymentservices {
   Future<ApprovePaymentResponse> approvePayment({
     required String session,
     required String username,
-    required List<dynamic> paymentId,
-    required String batchId,
+    required int paymentId,
+    required String? batchId,
     required String token,
+    required bool approve,
   }) async {
     // This is for Accout summary
     Uri url = Uri.parse(ApiEndPoints.baseUrl2 + ApiEndPoints.approvePayment);
     Map<String, dynamic> body = {
       "session": session,
       "username": username,
-      "paymentId": token,
+      "paymentId": [
+        {
+          "paymentId": paymentId,
+          "approve": approve,
+          "rejectReason": "string",
+        }
+      ],
       "batchId": batchId,
       "token": token,
     };

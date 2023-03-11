@@ -48,8 +48,22 @@ class ActionCenterViewModel extends GetxController with CacheManager {
     }
   }
 
-  // account balance service call
+  approvePayment({
+    required String? batchID,
+    required int paymentId,
+    required bool approve,
+  }) async {
+    paymentservices.approvePayment(
+      session: "${getSession()}",
+      username: "${getFullname()}@${getCorporateCode()}",
+      approve: approve,
+      paymentId: paymentId,
+      batchId: batchID,
+      token: "${getToken()}",
+    );
+  }
 
+  // account balance service call
   final Rx<double> _accountBalance = 0.00.obs;
   double get accountBalance => _accountBalance.value;
 
