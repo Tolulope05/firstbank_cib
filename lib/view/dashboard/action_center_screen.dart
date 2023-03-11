@@ -92,11 +92,11 @@ class ActionCenterScreen extends GetView<ActionCenterViewModel> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(left: 24),
                     child: Text(
-                      "Feb 28 2023",
-                      style: TextStyle(
+                      DateTime.now().toIso8601String().substring(0, 10),
+                      style: const TextStyle(
                         color: AppColors.unselectedIconColor,
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
