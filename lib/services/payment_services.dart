@@ -59,6 +59,7 @@ class Paymentservices {
     required String username,
     required int charges,
     required int sourceAccountId,
+    required int subsidiaryId,
     int? paymentMethod, // 0 = account, 1 = card
     int? paymentType, // 0 = debit, 1 = credit
     required String bankCode,
@@ -68,21 +69,21 @@ class Paymentservices {
     required bool saveBeneficiary,
     required int amount,
     required String memo,
-    // required String dateTime,
+    required String dateTime,
   }) async {
     Uri url = Uri.parse(ApiEndPoints.baseUrl2 + ApiEndPoints.initiatePayment);
     Map<String, dynamic> body = {
       "session": session,
       "username": username,
-      "subsidiaryId": 2,
+      "subsidiaryId": subsidiaryId,
       "enableMultipleDebit": true,
       "docByteArray": "string",
       "docExtension": "string",
       "request": [
         {
           "accountId": sourceAccountId,
-          "paymentMethod": paymentMethod ?? 0,
-          "paymentType": paymentType ?? 0,
+          "paymentMethod": paymentMethod,
+          "paymentType": paymentType,
           "bankCode": bankCode,
           "bankName": bankName,
           "charges": charges,
@@ -96,7 +97,7 @@ class Paymentservices {
           "narration": memo,
           "phoneNumber": null,
           "email": null,
-          "valueDate": "string"
+          "valueDate": dateTime,
         }
       ]
     };

@@ -13,6 +13,7 @@ class AppTextFieldInput extends StatefulWidget {
     this.readOnly = false,
     this.isNumberonly = false,
     this.isPassword,
+    this.onTap,
   }) : super(key: key);
   final String headerText;
   final String hintText;
@@ -23,6 +24,7 @@ class AppTextFieldInput extends StatefulWidget {
   bool? isPassword;
   bool readOnly;
   bool isNumberonly;
+  VoidCallback? onTap;
 
   @override
   State<AppTextFieldInput> createState() => _AppTextFieldInputState();
@@ -77,6 +79,7 @@ class _AppTextFieldInputState extends State<AppTextFieldInput> {
                     widget.obscureText = !widget.obscureText;
                   });
                 } else {
+                  widget.onTap!();
                   // we can pass every other function here
                 }
               },

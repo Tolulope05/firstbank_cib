@@ -2,6 +2,7 @@ import 'package:firstbank_cib/services/services.dart';
 import 'package:firstbank_cib/view/dashboard/action_center_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../model/payment_type_response.dart';
 import 'view_model.dart';
@@ -9,6 +10,8 @@ import 'view_model.dart';
 class TransferScreenViewModel extends GetxController with CacheManager {
 //Auth services callback
   AuthViewModel authViewModel = Get.find<AuthViewModel>();
+  // profile dynamic subsidiary id
+  ProfileViewModel profileViewModel = Get.find<ProfileViewModel>();
 
 // firstbank account number
   TextEditingController firstBankSourceAccountController =
@@ -25,6 +28,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       TextEditingController();
   final RxBool _saveBeneficiary = false.obs;
   bool get saveBeneficiary => _saveBeneficiary.value;
+
   void saveBeneficiaryToggle() {
     _saveBeneficiary.value = !_saveBeneficiary.value;
   }
@@ -85,10 +89,56 @@ class TransferScreenViewModel extends GetxController with CacheManager {
   TextEditingController beneficialAmountController = TextEditingController();
   TextEditingController ownAccountPaymentMemoController =
       TextEditingController();
+  final RxString _valueDate = "".obs;
+  String get ownvalueDate => _valueDate.value;
+
+  changeDateTonow() {
+    DateTime dateTime = DateTime.now();
+    String result = DateFormat("yyyy/MM/dd").format(dateTime);
+    print(result); // Output: 2023/03/10
+    _valueDate.value = result;
+  }
+
+  final Rx<int> _ownselectedPaymentType = 0.obs;
+  int get ownselectedPaymentType => _ownselectedPaymentType.value;
+
+  setOwnPaymentType(int? index) {
+    _ownselectedPaymentType.value = index ?? 0;
+    print("${_ownselectedPaymentType.value} selected");
+  }
+
+  final Rx<int> _ownselectedPaymentMethod = 0.obs;
+  int get ownselectedPaymentTMethod => _ownselectedPaymentMethod.value;
+
+  setOwnPaymentMethod(int? index) {
+    _ownselectedPaymentMethod.value = index ?? 0;
+    print("${_ownselectedPaymentMethod.value} selected");
+  }
+
+  //get Date picker
+  showDatePickerDialog() {
+    showDatePicker(
+      context: Get.context!,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 100),
+    ).then(
+      (value) {
+        if (value != null) {
+          // print(value);
+          DateTime dateTime = DateTime.parse(value.toString());
+          String result = DateFormat("yyyy/MM/dd").format(dateTime);
+          print(result); // Output: 2023/03/10
+          _valueDate.value = result;
+        }
+      },
+    );
+  }
 
   @override
   void onInit() async {
     super.onInit();
+    changeDateTonow();
     await getLocalPayment();
   }
 
@@ -138,14 +188,17 @@ class TransferScreenViewModel extends GetxController with CacheManager {
   Future<void> initiateOwnAccountPayment() async {
     InitiatePaymentResponse initiatePaymentResponse =
         await paymentservices.initiatePayment(
+      subsidiaryId: profileViewModel.subsidiaryId,
       session: "${getSession()}",
       username: "${getFullname()}@${getCorporateCode()}",
       sourceAccountId: selectedSourceAccount.accountId!,
       bankCode: selectedBeneficiaryAccount.bankCode ?? "011",
       amount: int.parse(beneficialAmountController.text),
       charges: 0,
+      paymentType: ownselectedPaymentType,
       bankName: selectedBeneficiaryAccount.bankName!,
-      // dateTime: "2023-03-10",
+      paymentMethod: ownselectedPaymentTMethod,
+      dateTime: ownvalueDate,
       memo: ownAccountPaymentMemoController.text,
       recieverAccountNumber: selectedBeneficiaryAccount.accountNumber!,
       recieverName: selectedBeneficiaryAccount.preferredName!,
