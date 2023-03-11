@@ -75,6 +75,25 @@ class TransferScreenViewModel extends GetxController with CacheManager {
   final Rx<BankAccount> _selectedBeneficiaryAccount = BankAccount().obs;
   BankAccount get selectedBeneficiaryAccount =>
       _selectedBeneficiaryAccount.value;
+
+  // get source bank list
+  Future<List<BankAccount>> getSourceBankList() async {
+    List<BankAccount> sourceBankList = [];
+    for (var i = 0; i < accountList.length; i++) {
+      sourceBankList.add(accountList[i]);
+    }
+    return sourceBankList;
+  }
+
+  // get beneficiary bank list
+  Future<List<BankAccount>> getBeneficiaryBankList() async {
+    List<BankAccount> beneficiaryBankList = [];
+    for (var i = 0; i < beneficiaryList.length; i++) {
+      beneficiaryBankList.add(beneficiaryList[i]);
+    }
+    return beneficiaryBankList;
+  }
+
   // select source by Bank account
   setSourceAccount(BankAccount bankAccount) {
     _selectedSourceAccount.value = bankAccount;
@@ -140,24 +159,6 @@ class TransferScreenViewModel extends GetxController with CacheManager {
     super.onInit();
     changeDateTonow();
     await getLocalPayment();
-  }
-
-  // get source bank list
-  Future<List<BankAccount>> getSourceBankList() async {
-    List<BankAccount> sourceBankList = [];
-    for (var i = 0; i < accountList.length; i++) {
-      sourceBankList.add(accountList[i]);
-    }
-    return sourceBankList;
-  }
-
-  // get beneficiary bank list
-  Future<List<BankAccount>> getBeneficiaryBankList() async {
-    List<BankAccount> beneficiaryBankList = [];
-    for (var i = 0; i < beneficiaryList.length; i++) {
-      beneficiaryBankList.add(beneficiaryList[i]);
-    }
-    return beneficiaryBankList;
   }
 
   //call get local payment
