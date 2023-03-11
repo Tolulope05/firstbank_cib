@@ -26,12 +26,14 @@ class CustomCardChildPosition extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
           ),
-          Text(
-            suffixText,
-            style: const TextStyle(
-              color: AppColors.primaryColor,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
+          Flexible(
+            child: Text(
+              suffixText,
+              style: const TextStyle(
+                color: AppColors.primaryColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ],

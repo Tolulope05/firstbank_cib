@@ -1,7 +1,9 @@
 import 'package:firstbank_cib/constants/colors.dart';
+import 'package:firstbank_cib/model/model.dart';
 import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../view_model/actioncenter_view_model.dart';
 import '../../widgets/approval_child_position.dart';
@@ -34,6 +36,15 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<ActionCenterViewModel>();
+    Paymentt? paymentDetails = Get.arguments;
+
+    // DateTime parsing
+    String returnFormattedDate(DateTime dateTime) {
+      // DateTime dateTime = DateTime.parse(date);
+      String formattedDateTime =
+          DateFormat.yMMMMd("en_US").add_jm().format(dateTime);
+      return formattedDateTime;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -60,9 +71,9 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      "- ₦5,129,000",
-                      style: TextStyle(
+                    Text(
+                      "- ₦ ${paymentDetails!.amount}",
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w500,
                         color: AppColors.failedColor,
@@ -78,9 +89,9 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 4),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Text(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
                         "Receiver: ",
                         style: TextStyle(
                           color: AppColors.unselectedIconColor,
@@ -88,33 +99,37 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      Text.rich(
-                        TextSpan(
-                          text: 'Layor Pan Enterprises',
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            overflow: TextOverflow.ellipsis,
+                      Flexible(
+                        child: Text.rich(
+                          TextSpan(
+                            text: paymentDetails.beneficiaryName,
+                            style: const TextStyle(
+                              color: AppColors.primaryColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            children: <InlineSpan>[
+                              TextSpan(
+                                text: ' - ${paymentDetails.accountNumber}',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xff4B4B4B),
+                                ),
+                              )
+                            ],
                           ),
-                          children: <InlineSpan>[
-                            TextSpan(
-                              text: ' - 0245728039',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xff4B4B4B),
-                              ),
-                            )
-                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
-                const Text(
-                  "Feb 28 2023",
-                  style: TextStyle(
+                Text(
+                  returnFormattedDate(
+                    paymentDetails.requestdatetime ?? DateTime.now(),
+                  ),
+                  style: const TextStyle(
                     color: AppColors.unselectedIconColor,
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
@@ -156,9 +171,9 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                 Expanded(
                   child: TabBarView(
                     controller: _tabController,
-                    children: const [
-                      TransactionDetailsTab(),
-                      ApprovalTabView(),
+                    children: [
+                      TransactionDetailsTab(paymentDetails: paymentDetails),
+                      ApprovalTabView(paymentDetails: paymentDetails),
                     ],
                   ),
                 ),
@@ -237,7 +252,9 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
 class ApprovalTabView extends StatelessWidget {
   const ApprovalTabView({
     super.key,
+    required this.paymentDetails,
   });
+  final Paymentt paymentDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -281,7 +298,9 @@ class ApprovalTabView extends StatelessWidget {
 class TransactionDetailsTab extends StatelessWidget {
   const TransactionDetailsTab({
     super.key,
+    required this.paymentDetails,
   });
+  final Paymentt paymentDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -301,8 +320,8 @@ class TransactionDetailsTab extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "Source Account",
                         style: TextStyle(
                           color: AppColors.unselectedIconColor,
@@ -313,7 +332,7 @@ class TransactionDetailsTab extends StatelessWidget {
                       Text.rich(
                         TextSpan(
                           text: 'Float Account ',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: AppColors.primaryColor,
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -321,8 +340,8 @@ class TransactionDetailsTab extends StatelessWidget {
                           ),
                           children: <InlineSpan>[
                             TextSpan(
-                              text: '- 0245728039',
-                              style: TextStyle(
+                              text: '- ${paymentDetails.sourceAccountNumber}',
+                              style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
                                 color: Color(0xff4B4B4B),
@@ -336,7 +355,8 @@ class TransactionDetailsTab extends StatelessWidget {
                 ),
                 const CustomCardChildPosition(
                   prefixText: "Available Balance",
-                  suffixText: "₦17,870,902",
+                  suffixText:
+                      "₦ 17,870,902", // TODO: get balance from api endpoint realTime
                 ),
               ],
             ),
@@ -349,18 +369,18 @@ class TransactionDetailsTab extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
-              children: const [
+              children: [
                 CustomCardChildPosition(
                   prefixText: "Payment to",
-                  suffixText: "Layor Pan Enterprises",
+                  suffixText: "${paymentDetails.beneficiaryName}",
                 ),
                 CustomCardChildPosition(
                   prefixText: "Account Number",
-                  suffixText: "0245728039",
+                  suffixText: "${paymentDetails.accountNumber}",
                 ),
                 CustomCardChildPosition(
                   prefixText: "Bank Name",
-                  suffixText: "X Bank",
+                  suffixText: "${paymentDetails.bankName}",
                 ),
               ],
             ),
@@ -373,14 +393,14 @@ class TransactionDetailsTab extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
-              children: const [
+              children: [
                 CustomCardChildPosition(
                   prefixText: "Ampunt",
-                  suffixText: "₦5,129,000",
+                  suffixText: "₦ ${paymentDetails.amount}",
                 ),
                 CustomCardChildPosition(
                   prefixText: "Fee",
-                  suffixText: "₦718",
+                  suffixText: "₦ ${paymentDetails.charges}",
                 ),
               ],
             ),
@@ -393,10 +413,10 @@ class TransactionDetailsTab extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
-              children: const [
+              children: [
                 CustomCardChildPosition(
                   prefixText: "Narration",
-                  suffixText: "Payment for Cox Communications",
+                  suffixText: "${paymentDetails.narration}",
                 ),
               ],
             ),
@@ -409,18 +429,18 @@ class TransactionDetailsTab extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
-              children: const [
+              children: [
                 CustomCardChildPosition(
                   prefixText: "Method",
-                  suffixText: "Instant Payment",
+                  suffixText: "${paymentDetails.paymentMethod}}",
                 ),
                 CustomCardChildPosition(
                   prefixText: "Type",
-                  suffixText: "Other Payment",
+                  suffixText: "${paymentDetails.paymentType ?? "N/A"}",
                 ),
                 CustomCardChildPosition(
                   prefixText: "Value Date",
-                  suffixText: "24/02/2023",
+                  suffixText: "${paymentDetails.valueDate}",
                 ),
               ],
             ),

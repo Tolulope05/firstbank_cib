@@ -158,68 +158,6 @@ class ActionCenterScreen extends GetView<ActionCenterViewModel> {
                           },
                         );
                       }),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(
-                  //     vertical: 24,
-                  //     horizontal: 24,
-                  //   ),
-                  //   child: ActionCenterCard(
-                  //     recieverName: 'Layor Pan Enterprises',
-                  //     recieverNumber: '0245728039',
-                  //     narration: 'Website Payment Installment 2',
-                  //     amount: '5,129,000.00',
-                  //     paymentMethod: 'Intant Payment',
-                  //     isApproved: false,
-                  //     onApprove: () {
-                  //       controller.navigateTotransactionDetails();
-                  //     },
-                  //   ),
-                  // ),
-                  // const Padding(
-                  //   padding: EdgeInsets.only(left: 24),
-                  //   child: Text(
-                  //     "Feb 27 2023",
-                  //     style: TextStyle(
-                  //       color: AppColors.unselectedIconColor,
-                  //       fontSize: 12,
-                  //       fontWeight: FontWeight.w400,
-                  //     ),
-                  //   ),
-                  // ),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(
-                  //     vertical: 24,
-                  //     horizontal: 24,
-                  //   ),
-                  //   child: ActionCenterCard(
-                  //     recieverName: '...on Yaga Ukechukwu',
-                  //     recieverNumber: '0245728039',
-                  //     narration: 'Refund for sales run',
-                  //     amount: '5,129,000.00',
-                  //     paymentMethod: 'Intant Payment',
-                  //     isApproved: false,
-                  //     onApprove: () {
-                  //       controller.navigateTotransactionDetails();
-                  //     },
-                  //   ),
-                  // ),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(
-                  //     vertical: 24,
-                  //     horizontal: 24,
-                  //   ),
-                  //   child: ActionCenterCard(
-                  //     recieverName: 'Bazzi Foundation',
-                  //     recieverNumber: '08342742912',
-                  //     narration: 'Website Payment Installment 2',
-                  //     amount: '250,129,000',
-                  //     paymentMethod: 'RTGS',
-                  //     isApproved: true,
-                  //     onApprove: () {
-                  //       controller.navigateTotransactionDetails();
-                  //     },
-                  //   ),
-                  // ),
                 ],
               ),
             ),
