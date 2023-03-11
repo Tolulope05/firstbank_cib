@@ -1,4 +1,5 @@
 import 'package:firstbank_cib/utils/routes/routes_name.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../model/model.dart';
@@ -31,12 +32,40 @@ class ActionCenterViewModel extends GetxController with CacheManager {
       _localPaymentResponse.value = paymentRes;
     } else {
       print("error");
-      Get.snackbar(
-        "Error",
-        paymentRes.responseMessage.toString(),
-        snackPosition: SnackPosition.BOTTOM,
-      );
+
+      Get.dialog(AlertDialog(
+        title: const Text("Opps! Something went wrong"),
+        content: Text(paymentRes.responseMessage.toString()),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text("Ok"),
+          ),
+        ],
+      ));
     }
+  }
+
+  // account balance service call
+
+  final Rx<double> _accountBalance = 0.00.obs;
+  double get accountBalance => _accountBalance.value;
+
+  Future<double> loadAccountBalance(String accountNum) async {
+    // ValidateAccountResponse paymentRes =
+    //     await paymentservices.getAccountNumberStatus(
+    //   session: "${getSession()}",
+    //   destinationAccount: "${getFullname()}@${getCorporateCode()}",
+    //   subsidiaryId: 2,
+    // );
+    // _accountBalance.value = paymentRes.; // THE VALIDATE ACCOUNT RESPONSE DOESNT HAVE ACCOUNT BALLANCE
+    await Future.delayed(const Duration(seconds: 2));
+    _accountBalance.value = localPaymentResponse.accounts!
+        .firstWhere((number) => number.accountNumber == accountNum)
+        .availableBalance as double;
+    return _accountBalance.value;
   }
 
   //navigation logics

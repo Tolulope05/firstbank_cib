@@ -2,6 +2,7 @@ import 'package:firstbank_cib/constants/colors.dart';
 import 'package:firstbank_cib/model/model.dart';
 import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -304,6 +305,8 @@ class TransactionDetailsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ActionCenterViewModel actionCenterViewModel =
+        Get.find<ActionCenterViewModel>();
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -353,10 +356,27 @@ class TransactionDetailsTab extends StatelessWidget {
                     ],
                   ),
                 ),
-                const CustomCardChildPosition(
-                  prefixText: "Available Balance",
-                  suffixText:
-                      "₦ 17,870,902", // TODO: get balance from api endpoint realTime
+                FutureBuilder(
+                  future: actionCenterViewModel
+                      .loadAccountBalance(paymentDetails.sourceAccountNumber!),
+                  builder: (_, __) {
+                    if (__.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: SpinKitThreeBounce(
+                          color: AppColors.primaryColor,
+                          size: 20,
+                        ),
+                      );
+                    }
+
+                    return Obx(
+                      () => CustomCardChildPosition(
+                        prefixText: "Available Balance",
+                        suffixText:
+                            "₦ ${actionCenterViewModel.accountBalance} ",
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

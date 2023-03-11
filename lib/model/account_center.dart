@@ -162,3 +162,63 @@ class Account {
         "bankCode": bankCode,
       };
 }
+
+// VAALIDATE ACOUNT NUMBER MODEL
+// To parse this JSON data, do
+//
+//     final validateAccountResponse = validateAccountResponseFromJson(jsonString);
+
+ValidateAccountResponse validateAccountResponseFromJson(String str) =>
+    ValidateAccountResponse.fromJson(json.decode(str));
+
+String validateAccountResponseToJson(ValidateAccountResponse data) =>
+    json.encode(data.toJson());
+
+class ValidateAccountResponse {
+  ValidateAccountResponse({
+    this.message,
+    this.nameEnqRef,
+    this.allowedForTransaction,
+    this.valid,
+    this.response,
+    this.responseMessage,
+    this.endpointConnected,
+    this.accountName,
+    this.currency,
+  });
+
+  dynamic message;
+  dynamic nameEnqRef;
+  bool? allowedForTransaction;
+  bool? valid;
+  int? response;
+  String? responseMessage;
+  bool? endpointConnected;
+  String? accountName;
+  String? currency;
+
+  factory ValidateAccountResponse.fromJson(Map<String, dynamic> json) =>
+      ValidateAccountResponse(
+        message: json["message"],
+        nameEnqRef: json["nameEnqRef"],
+        allowedForTransaction: json["allowedForTransaction"],
+        valid: json["valid"],
+        response: json["response"],
+        responseMessage: json["responseMessage"],
+        endpointConnected: json["endpointConnected"],
+        accountName: json["accountName"],
+        currency: json["currency"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "message": message,
+        "nameEnqRef": nameEnqRef,
+        "allowedForTransaction": allowedForTransaction,
+        "valid": valid,
+        "response": response,
+        "responseMessage": responseMessage,
+        "endpointConnected": endpointConnected,
+        "accountName": accountName,
+        "currency": currency,
+      };
+}
