@@ -11,7 +11,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
 //Auth services callback
   AuthViewModel authViewModel = Get.find<AuthViewModel>();
   // profile dynamic subsidiary id
-  ProfileViewModel profileViewModel = Get.find<ProfileViewModel>();
+  ProfileViewModel profileViewModel = Get.put(ProfileViewModel());
 
 // firstbank account number
   TextEditingController firstBankSourceAccountController =
@@ -65,8 +65,10 @@ class TransferScreenViewModel extends GetxController with CacheManager {
   final Rx<LocalPaymentResponse> _localPaymentResponse =
       LocalPaymentResponse().obs;
   LocalPaymentResponse get localPaymentResponse => _localPaymentResponse.value;
-  List<BankAccount> accountList = [];
-  List<BankAccount> beneficiaryList = [];
+
+  // making account dynamic
+  final RxList<BankAccount> _accountList = <BankAccount>[].obs;
+  List<BankAccount> get accountList => _accountList;
 
   /// OWN ACCOUNT LOGICS
   // select source by account number
@@ -78,25 +80,19 @@ class TransferScreenViewModel extends GetxController with CacheManager {
 
   // get source bank list
   Future<List<BankAccount>> getSourceBankList() async {
-    List<BankAccount> sourceBankList = [];
-    for (var i = 0; i < accountList.length; i++) {
-      sourceBankList.add(accountList[i]);
-    }
-    return sourceBankList;
+    return accountList;
   }
 
   // get beneficiary bank list
   Future<List<BankAccount>> getBeneficiaryBankList() async {
-    List<BankAccount> beneficiaryBankList = [];
-    for (var i = 0; i < beneficiaryList.length; i++) {
-      beneficiaryBankList.add(beneficiaryList[i]);
-    }
-    return beneficiaryBankList;
+    return accountList;
   }
 
   // select source by Bank account
   setSourceAccount(BankAccount bankAccount) {
     _selectedSourceAccount.value = bankAccount;
+    // remvove the element from the list
+    accountList.remove(bankAccount);
     print("${_selectedSourceAccount.value.accountName} selected");
   }
 
@@ -170,8 +166,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
     );
     if (localPayResp.success == true) {
       _localPaymentResponse.value = localPayResp;
-      accountList = localPayResp.accounts!;
-      beneficiaryList = localPayResp.accounts!;
+      _accountList.value = localPayResp.accounts!;
     } else {
       Get.snackbar(
         "Error",
