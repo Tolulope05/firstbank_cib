@@ -208,7 +208,13 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                           const SizedBox(width: 20),
                           Flexible(
                             child: AppButton(
-                              onTap: () {},
+                              onTap: () {
+                                controller.approvePayment(
+                                  approve: false,
+                                  paymentId: paymentDetails.id!.toInt(),
+                                  batchID: paymentDetails.batchid,
+                                );
+                              },
                               text: "Decline",
                               textColor: AppColors.failedColor,
                               borderColor: AppColors.failedColor,

@@ -91,7 +91,7 @@ class ActionCenterViewModel extends GetxController with CacheManager {
     if (approvalResp.success == true) {
       Get.snackbar(
         "Success",
-        "payment approved",
+        "Payment ${approve ? "Approved" : "Declined"}",
         colorText: Colors.white,
         backgroundColor: AppColors.primaryColorDeep,
       );
