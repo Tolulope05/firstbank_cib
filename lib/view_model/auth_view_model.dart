@@ -91,7 +91,7 @@ class AuthViewModel extends GetxController with CacheManager {
     } catch (error) {
       String errorMessage = error.toString();
       Utils.getsnackbar(title: "Failed to login..", message: errorMessage);
-      throw Exception(errorMessage);
+      isLoading.value = false;
     }
     isLoading.value = false;
   }

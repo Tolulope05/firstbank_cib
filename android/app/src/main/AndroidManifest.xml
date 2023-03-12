@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.firstbank_cib">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="firstbank_cib"
         android:name="${applicationName}"
