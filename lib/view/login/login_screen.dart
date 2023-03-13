@@ -65,7 +65,7 @@ class Logincreen extends GetView<LoginViewModel> {
             ],
           ),
           Positioned(
-            top: 71,
+            top: 50,
             left: 20,
             right: 20,
             child: SizedBox(
