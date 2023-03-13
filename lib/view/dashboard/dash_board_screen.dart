@@ -250,17 +250,19 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                                                 future: controller
                                                     .getWorkspaceSummary(),
                                                 builder: (context, snapshot) {
-                                                  return Center(
-                                                      child: Text(
-                                                    controller.workspaceSummaryResponse
-                                                                .totalTransaction ==
-                                                            null
-                                                        ? "0"
-                                                        : "${controller.workspaceSummaryResponse.pendingTransaction}",
-                                                    style: const TextStyle(
-                                                      fontSize: 12,
-                                                    ),
-                                                  ));
+                                                  return Obx(
+                                                    () => Center(
+                                                        child: Text(
+                                                      controller.workspaceSummaryResponse
+                                                                  .totalTransaction ==
+                                                              null
+                                                          ? "0"
+                                                          : "${controller.workspaceSummaryResponse.pendingTransaction}",
+                                                      style: const TextStyle(
+                                                        fontSize: 12,
+                                                      ),
+                                                    )),
+                                                  );
                                                 }),
                                           ),
                                         ),
