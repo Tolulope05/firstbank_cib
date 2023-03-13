@@ -556,6 +556,7 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
               controller: controller.firstBankAmountAccountController,
               headerText: 'Amount',
               hintText: 'NGN',
+              isNumberonly: true,
             ),
           ),
           Padding(
@@ -823,6 +824,7 @@ class OtherBankTabview extends GetView<TransferScreenViewModel> {
               controller: controller.otherBankAmountAccountController,
               headerText: 'Amount',
               hintText: 'NGN',
+              isNumberonly: true,
             ),
           ),
           Padding(
@@ -1063,6 +1065,7 @@ class InternationalBankTabview extends GetView<TransferScreenViewModel> {
               controller: controller.internationalBankAmountAccountController,
               headerText: 'Amount',
               hintText: 'NGN',
+              isNumberonly: true,
             ),
           ),
           Padding(
