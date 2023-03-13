@@ -52,17 +52,17 @@ class AddTransactionDialogue extends StatelessWidget {
             organizationTypewidget(
               id: 1,
               name: "Abuja Limited",
-              isSelected: false,
+              // isSelected: false,
             ),
             organizationTypewidget(
               id: 2,
               name: "Lagos Limited",
-              isSelected: true,
+              // isSelected: true,
             ),
             organizationTypewidget(
               id: 3,
               name: "Rivers Limited",
-              isSelected: false,
+              // isSelected: false,
             ),
             // FutureBuilder(
             //     future: profileController.fetchSubsidiaries(),
@@ -101,7 +101,7 @@ class AddTransactionDialogue extends StatelessWidget {
 Widget organizationTypewidget({
   required String? name,
   required int? id,
-  required bool isSelected,
+  // required bool isSelected,
 }) {
   ProfileViewModel profileController = Get.find<ProfileViewModel>();
   return InkWell(
@@ -147,14 +147,14 @@ Widget organizationTypewidget({
             ],
           ),
           const Spacer(),
-          isSelected
-              ? const Center(
-                  child: Icon(
-                    Icons.check_outlined,
-                    color: AppColors.yellowColor3,
-                  ),
-                )
-              : SizedBox.shrink(),
+          // isSelected
+          //     ? const Center(
+          //         child: Icon(
+          //           Icons.check_outlined,
+          //           color: AppColors.yellowColor3,
+          //         ),
+          //       )
+          //     : SizedBox.shrink(),
         ],
       ),
     ),
