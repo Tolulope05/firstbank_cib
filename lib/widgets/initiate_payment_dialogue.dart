@@ -1,4 +1,5 @@
 import 'package:firstbank_cib/constants/colors.dart';
+import 'package:firstbank_cib/view_model/transfer_screen_view_model.dart';
 import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ class InitiatePaymentDialogue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TransferScreenViewModel controller = Get.find<TransferScreenViewModel>();
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       child: Container(
@@ -59,11 +61,26 @@ class InitiatePaymentDialogue extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 24),
-              child: AppButton(
-                onTap: () => onTap(),
-                text: "Verify transaction",
+            Obx(
+              () => Padding(
+                padding: const EdgeInsets.only(top: 24),
+                child: controller.isOwnAccountPaymentLoading
+                    ? AppButton(
+                        onTap: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: const [
+                            CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                      )
+                    : AppButton(
+                        onTap: () => onTap(),
+                        text: "Verify transaction",
+                      ),
               ),
             )
           ],

@@ -180,8 +180,12 @@ class TransferScreenViewModel extends GetxController with CacheManager {
     }
   }
 
+  final RxBool _isOwnAccountPaymentLoading = false.obs;
+  bool get isOwnAccountPaymentLoading => _isOwnAccountPaymentLoading.value;
+
   // call initiate payment
   Future<void> initiateOwnAccountPayment() async {
+    _isOwnAccountPaymentLoading.value = true;
     InitiatePaymentResponse initiatePaymentResponse =
         await paymentservices.initiatePayment(
       subsidiaryId: profileViewModel.subsidiaryId,
@@ -201,6 +205,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       saveBeneficiary: saveBeneficiary,
     );
     if (initiatePaymentResponse.success == true) {
+      _isOwnAccountPaymentLoading.value = false;
       Get.snackbar(
         "Success",
         initiatePaymentResponse.responseMessage.toString(),
@@ -216,6 +221,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       // );
       Get.offAndToNamed(RoutesName.actionCenter);
     } else {
+      _isOwnAccountPaymentLoading.value = false;
       Get.snackbar(
         "Something went wrong",
         initiatePaymentResponse.responseMessage.toString(),

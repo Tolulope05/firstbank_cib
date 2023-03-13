@@ -456,8 +456,39 @@ class OwnAccountTabView extends GetView<TransferScreenViewModel> {
               onTap: () {
                 showDialog(
                   context: context,
-                  builder: (context) => InitiatePaymentDialogue(
-                      onTap: () => controller.initiateOwnAccountPayment()),
+                  builder: (context) => AlertDialog(
+                    title: const Text('Are you sure you want to pay?'),
+                    content: const Text('This process cannot be reversed.'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text(
+                          'Cancel',
+                          style: TextStyle(color: AppColors.failedColor),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          showDialog(
+                            context: context,
+                            builder: (context) => InitiatePaymentDialogue(
+                              onTap: () =>
+                                  controller.initiateOwnAccountPayment(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Pay',
+                          style: TextStyle(
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 );
               },
               text: 'Initiate Payment',
