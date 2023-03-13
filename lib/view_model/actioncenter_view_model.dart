@@ -72,12 +72,19 @@ class ActionCenterViewModel extends GetxController with CacheManager {
     return rngInt;
   }
 
+  final RxBool _isLoadingTrue = false.obs;
+  bool get isLoadingTrue => _isLoadingTrue.value;
+  final RxBool _isLoadingFalse = false.obs;
+  bool get isLoadingFalse => _isLoadingFalse.value;
+
   approvePayment({
     required String? batchID,
     required int paymentId,
     required bool approve,
   }) async {
     generateRandomInt();
+    approve ? _isLoadingTrue.value = true : _isLoadingFalse.value = true;
+
     ApprovePaymentResponse approvalResp = await paymentservices.approvePayment(
       session: "${getSession()}",
       username: "${getFullname()}@${getCorporateCode()}",
@@ -89,6 +96,8 @@ class ActionCenterViewModel extends GetxController with CacheManager {
     );
 
     if (approvalResp.success == true) {
+      _isLoadingTrue.value = false;
+      _isLoadingFalse.value = false;
       Get.snackbar(
         "Success",
         "Payment ${approve ? "Approved" : "Declined"}",
@@ -97,6 +106,8 @@ class ActionCenterViewModel extends GetxController with CacheManager {
       );
       Get.offAndToNamed(RoutesName.homeScreen);
     } else {
+      _isLoadingTrue.value = false;
+      _isLoadingFalse.value = false;
       Get.snackbar(
         "Something went",
         "payment not approved",

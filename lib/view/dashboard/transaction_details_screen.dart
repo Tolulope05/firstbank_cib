@@ -188,40 +188,75 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                 height: 70,
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: !isSubmitted
-                    ? Row(
-                        children: [
-                          Flexible(
-                            child: AppButton(
-                              onTap: () {
-                                // setState(() {
-                                //   isSubmitted = true;
-                                // });
-                                controller.approvePayment(
-                                  approve: true,
-                                  paymentId: paymentDetails.id!.toInt(),
-                                  batchID: paymentDetails.batchid,
-                                );
-                              },
-                              text: "Approve",
+                    ? Obx(
+                        () => Row(
+                          children: [
+                            Flexible(
+                              child: controller.isLoadingTrue
+                                  ? AppButton(
+                                      onTap: () {},
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: const [
+                                          CircularProgressIndicator(
+                                            color: Colors.white,
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : AppButton(
+                                      onTap: () {
+                                        // setState(() {
+                                        //   isSubmitted = true;
+                                        // });
+                                        controller.approvePayment(
+                                          approve: true,
+                                          paymentId: paymentDetails.id!.toInt(),
+                                          batchID: paymentDetails.batchid,
+                                        );
+                                      },
+                                      text: "Approve",
+                                    ),
                             ),
-                          ),
-                          const SizedBox(width: 20),
-                          Flexible(
-                            child: AppButton(
-                              onTap: () {
-                                controller.approvePayment(
-                                  approve: false,
-                                  paymentId: paymentDetails.id!.toInt(),
-                                  batchID: paymentDetails.batchid,
-                                );
-                              },
-                              text: "Decline",
-                              textColor: AppColors.failedColor,
-                              borderColor: AppColors.failedColor,
-                              bgColor: Colors.transparent,
+                            const SizedBox(width: 20),
+                            Flexible(
+                              child: controller.isLoadingFalse
+                                  ? AppButton(
+                                      onTap: () {},
+                                      textColor: AppColors.failedColor,
+                                      borderColor: AppColors.failedColor,
+                                      bgColor: Colors.transparent,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: const [
+                                          CircularProgressIndicator(
+                                            color: Colors.red,
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : AppButton(
+                                      onTap: () {
+                                        controller.approvePayment(
+                                          approve: false,
+                                          paymentId: paymentDetails.id!.toInt(),
+                                          batchID: paymentDetails.batchid,
+                                        );
+                                      },
+                                      text: "Decline",
+                                      textColor: AppColors.failedColor,
+                                      borderColor: AppColors.failedColor,
+                                      bgColor: Colors.transparent,
+                                    ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       )
                     : Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8),
