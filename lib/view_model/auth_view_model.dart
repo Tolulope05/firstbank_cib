@@ -104,7 +104,7 @@ class AuthViewModel extends GetxController with CacheManager {
                 onPressed: () async {
                   LogoutResponse logoutResp = await authServices.logoutUser(
                     username:
-                        "${usernameController.text}@${organizationCodeController.text}",
+                        "${usernameController.text.trim()}@${organizationCodeController.text.trim()}",
                     session: getSession() ?? "string",
                   );
                   Get.back();
