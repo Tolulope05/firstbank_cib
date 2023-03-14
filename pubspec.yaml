@@ -11,7 +11,6 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.2
-  dropdown_search: ^5.0.6
   flutter:
     sdk: flutter
   flutter_datetime_picker: ^1.5.1

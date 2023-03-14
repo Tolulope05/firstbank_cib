@@ -2,11 +2,10 @@ import 'package:firstbank_cib/utils/utils.dart';
 import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 
 import '../../constants/colors.dart';
-import '../../model/model.dart';
 import '../../view_model/transfer_screen_view_model.dart';
+import '../../widgets/select_payment_account_dialogue.dart';
 import '../../widgets/text_field_input.dart';
 import '../../widgets/view_payment_dialogue.dart';
 
@@ -118,41 +117,24 @@ class OwnAccountTabView extends GetView<TransferScreenViewModel> {
               right: 16.0,
               left: 16.0,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 8.0),
-                  child: Text(
-                    "Source account",
-                    style: TextStyle(
-                      color: AppColors.textColor2,
-                      fontSize: 12,
-                    ),
+            child: Obx(
+              () => AppTextFieldInput(
+                controller: controller.ownBankSourceAccountController,
+                headerText: "Source Account",
+                hintText: controller.selectedSourceAccounthintText,
+                readOnly: true,
+                suffixIcon: InkWell(
+                  onTap: () {
+                    Get.dialog(const SelectPaymentAccountDialogue(
+                      selector: 1,
+                    ));
+                  },
+                  child: const RotatedBox(
+                    quarterTurns: 45,
+                    child: Icon(Icons.chevron_right),
                   ),
                 ),
-                DropdownSearch<BankAccount>(
-                  asyncItems: (String filter) => controller.getSourceBankList(),
-                  itemAsString: (BankAccount u) =>
-                      "${u.accountName!} - ${u.accountNumber!}",
-                  onChanged: (BankAccount? data) =>
-                      controller.setSourceAccount(data!),
-                  dropdownDecoratorProps: const DropDownDecoratorProps(
-                    baseStyle: TextStyle(
-                      color: AppColors.textColor2,
-                      fontSize: 14,
-                    ),
-                    dropdownSearchDecoration: InputDecoration(
-                      hintText: "Select Account",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(4),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
           Padding(
@@ -161,41 +143,26 @@ class OwnAccountTabView extends GetView<TransferScreenViewModel> {
               right: 16.0,
               left: 16.0,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 8.0),
-                  child: Text(
-                    "Account to credit",
-                    style: TextStyle(
-                      color: AppColors.textColor2,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-                DropdownSearch<BankAccount>(
-                  asyncItems: (String filter) =>
-                      controller.getBeneficiaryBankList(),
-                  itemAsString: (BankAccount u) => u.accountNumber!,
-                  onChanged: (BankAccount? data) =>
-                      controller.setBeneficiaryAccount(data!),
-                  dropdownDecoratorProps: const DropDownDecoratorProps(
-                    baseStyle: TextStyle(
-                      color: AppColors.textColor2,
-                      fontSize: 14,
-                    ),
-                    dropdownSearchDecoration: InputDecoration(
-                      hintText: "012345678",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(4),
-                        ),
+            child: Obx(
+              () => AppTextFieldInput(
+                controller: controller.ownBankBeneficiaryAccountController,
+                headerText: "Account to credit",
+                hintText: controller.selectedBeneficiaryAccounthintText,
+                readOnly: true,
+                suffixIcon: InkWell(
+                  onTap: () {
+                    Get.dialog(
+                      const SelectPaymentAccountDialogue(
+                        selector: 2,
                       ),
-                    ),
+                    );
+                  },
+                  child: const RotatedBox(
+                    quarterTurns: 45,
+                    child: Icon(Icons.chevron_right),
                   ),
                 ),
-              ],
+              ),
             ),
           ),
           Padding(
@@ -219,7 +186,7 @@ class OwnAccountTabView extends GetView<TransferScreenViewModel> {
             ),
             child: AppTextFieldInput(
               controller: controller.ownAccountPaymentMemoController,
-              headerText: 'Payment memo',
+              headerText: 'Payment Description',
               hintText: '',
             ),
           ),
@@ -599,85 +566,87 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
             ),
             child: AppTextFieldInput(
               controller: controller.firstBankPaymentMemoController,
-              headerText: 'Payment memo',
+              headerText: 'Payment Description',
               hintText: '',
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 24,
-              right: 16.0,
-              left: 16.0,
-            ),
-            child: AppTextFieldInput(
-              controller: controller.firstBankPaymentTypeController,
-              headerText: 'Payment Type',
-              hintText: 'Select option',
-              suffixIcon: const RotatedBox(
-                quarterTurns: 45,
-                child: Icon(Icons.chevron_right),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 24,
-              right: 18.0,
-              left: 18.0,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 8.0),
-                  child: Text(
-                    "Payment method",
-                    style: TextStyle(
-                      color: AppColors.textColor2,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-                Row(
-                  children: [
-                    Radio(
-                      value: 1,
-                      groupValue: 2,
-                      fillColor: MaterialStateColor.resolveWith(
-                          (states) => AppColors.unselectedIconColor),
-                      onChanged: (value) {},
-                    ),
-                    const Text(
-                      'Instant Payment',
-                      style: TextStyle(
-                        color: AppColors.textColor2,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Radio(
-                      value: 2,
-                      groupValue: 2,
-                      fillColor: MaterialStateColor.resolveWith(
-                        (states) => AppColors.yellowColor3,
-                      ),
-                      onChanged: (value) {},
-                    ),
-                    const Text(
-                      'RTGS',
-                      style: TextStyle(
-                        color: AppColors.textColor2,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          // START
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     top: 24,
+          //     right: 16.0,
+          //     left: 16.0,
+          //   ),
+          //   child: AppTextFieldInput(
+          //     controller: controller.firstBankPaymentTypeController,
+          //     headerText: 'Payment Type',
+          //     hintText: 'Select option',
+          //     suffixIcon: const RotatedBox(
+          //       quarterTurns: 45,
+          //       child: Icon(Icons.chevron_right),
+          //     ),
+          //   ),
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     top: 24,
+          //     right: 18.0,
+          //     left: 18.0,
+          //   ),
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: <Widget>[
+          //       const Padding(
+          //         padding: EdgeInsets.only(bottom: 8.0),
+          //         child: Text(
+          //           "Payment method",
+          //           style: TextStyle(
+          //             color: AppColors.textColor2,
+          //             fontSize: 12,
+          //           ),
+          //         ),
+          //       ),
+          //       Row(
+          //         children: [
+          //           Radio(
+          //             value: 1,
+          //             groupValue: 2,
+          //             fillColor: MaterialStateColor.resolveWith(
+          //                 (states) => AppColors.unselectedIconColor),
+          //             onChanged: (value) {},
+          //           ),
+          //           const Text(
+          //             'Instant Payment',
+          //             style: TextStyle(
+          //               color: AppColors.textColor2,
+          //               fontSize: 12,
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //       Row(
+          //         children: [
+          //           Radio(
+          //             value: 2,
+          //             groupValue: 2,
+          //             fillColor: MaterialStateColor.resolveWith(
+          //               (states) => AppColors.yellowColor3,
+          //             ),
+          //             onChanged: (value) {},
+          //           ),
+          //           const Text(
+          //             'RTGS',
+          //             style: TextStyle(
+          //               color: AppColors.textColor2,
+          //               fontSize: 12,
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // END
           Padding(
             padding: const EdgeInsets.only(
               top: 12,
@@ -867,7 +836,7 @@ class OtherBankTabview extends GetView<TransferScreenViewModel> {
             ),
             child: AppTextFieldInput(
               controller: controller.otherBankPaymentMemoController,
-              headerText: 'Payment memo',
+              headerText: 'Payment Description',
               hintText: '',
             ),
           ),
@@ -1108,7 +1077,7 @@ class InternationalBankTabview extends GetView<TransferScreenViewModel> {
             ),
             child: AppTextFieldInput(
               controller: controller.internationalBankPaymentMemoController,
-              headerText: 'Payment memo',
+              headerText: 'Payment Description',
               hintText: '',
             ),
           ),

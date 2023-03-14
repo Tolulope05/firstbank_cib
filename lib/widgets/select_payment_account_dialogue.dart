@@ -3,14 +3,14 @@ import 'package:firstbank_cib/view_model/view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SelectAccountDialogue extends StatelessWidget {
-  const SelectAccountDialogue({
-    Key? key,
-  }) : super(key: key);
+class SelectPaymentAccountDialogue extends StatelessWidget {
+  const SelectPaymentAccountDialogue({Key? key, required this.selector})
+      : super(key: key);
+  final int selector;
 
   @override
   Widget build(BuildContext context) {
-    DashBoardviewModel controller = Get.put(DashBoardviewModel());
+    TransferScreenViewModel controller = Get.put(TransferScreenViewModel());
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       child: Container(
@@ -49,22 +49,18 @@ class SelectAccountDialogue extends StatelessWidget {
               constraints: BoxConstraints.tight(const Size.fromHeight(400)),
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: controller.accountcenter.accounts!.length,
+                itemCount: controller.accountList.length,
                 itemBuilder: (context, index) {
                   return accountTypeWidget(
-                    accountNumber: controller
-                            .accountcenter.accounts![index].accountNumber ??
-                        "",
+                    accountNumber:
+                        controller.accountList[index].accountName ?? "",
                     accounType:
-                        controller.accountcenter.accounts![index].accountType ??
-                            "",
-                    balance: controller
-                        .accountcenter.accounts![index].availableBalance
+                        controller.accountList[index].accountNumber ?? "",
+                    balance: controller.accountList[index].availableBalance
                         .toString(),
-                    currency:
-                        controller.accountcenter.accounts![index].currency!,
+                    currency: controller.accountList[index].currency!,
                     onTap: () {
-                      controller.selectAccountfromDialogue(index);
+                      controller.selectAccountfromDialogue(index, selector);
                     },
                   );
                 },
@@ -137,15 +133,15 @@ Widget accountTypeWidget({
               ),
             ),
           ),
-          Center(
-            child: Text(
-              "$currency $balance",
-              style: const TextStyle(
-                color: AppColors.primaryColor,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
+          // Center(
+          //   child: Text(
+          //     "$currency $balance",
+          //     style: const TextStyle(
+          //       color: AppColors.primaryColor,
+          //       fontWeight: FontWeight.w500,
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     ),

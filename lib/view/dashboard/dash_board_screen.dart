@@ -104,7 +104,8 @@ class DashBoardScreen extends GetView<DashBoardviewModel> {
                             onTap: () {
                               showDialog(
                                 context: context,
-                                builder: (context) => SelectAccountDialogue(),
+                                builder: (context) =>
+                                    const SelectAccountDialogue(),
                               );
                             },
                             child: Row(

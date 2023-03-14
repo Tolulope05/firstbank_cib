@@ -70,6 +70,10 @@ class TransferScreenViewModel extends GetxController with CacheManager {
   final RxList<BankAccount> _accountList = <BankAccount>[].obs;
   List<BankAccount> get accountList => _accountList;
 
+  // NEW STUFF TODAY
+  // final Rx<BankAccount> _selectedAccount = BankAccount().obs;
+  // BankAccount get selectedAccount => _selectedAccount.value;
+
   /// OWN ACCOUNT LOGICS
   // select source by account number
   final Rx<BankAccount> _selectedSourceAccount = BankAccount().obs;
@@ -77,28 +81,41 @@ class TransferScreenViewModel extends GetxController with CacheManager {
   final Rx<BankAccount> _selectedBeneficiaryAccount = BankAccount().obs;
   BankAccount get selectedBeneficiaryAccount =>
       _selectedBeneficiaryAccount.value;
+  final RxString _selectedSourceAccounthintText = "Select Account".obs;
+  String get selectedSourceAccounthintText =>
+      _selectedSourceAccounthintText.value;
+  final RxString _selectedBeneficiaryAccounthintText = "01234567".obs;
+  String get selectedBeneficiaryAccounthintText =>
+      _selectedBeneficiaryAccounthintText.value;
+  //
+  TextEditingController ownBankSourceAccountController =
+      TextEditingController();
+  TextEditingController ownBankBeneficiaryAccountController =
+      TextEditingController();
 
-  // get source bank list
-  Future<List<BankAccount>> getSourceBankList() async {
-    return accountList;
-  }
+  selectAccountfromDialogue(int index, int selector) {
+    switch (selector) {
+      case 1:
+        // source account
+        _selectedSourceAccount.value = _accountList[index];
+        _selectedSourceAccounthintText.value =
+            "${_accountList[index].accountName} - ${_accountList[index].accountNumber}";
+        print("${_selectedSourceAccount.value.accountNumber} selected");
+        _accountList.remove(_selectedSourceAccount.value);
+        _accountList.refresh();
+        break;
+      case 2:
+        // beneficiary account
+        _selectedBeneficiaryAccount.value = _accountList[index];
+        _selectedBeneficiaryAccounthintText.value =
+            "${_accountList[index].accountNumber}";
+        print("${_selectedBeneficiaryAccount.value.accountNumber} selected");
+        _accountList.refresh();
+        break;
+      default:
+    }
 
-  // get beneficiary bank list
-  Future<List<BankAccount>> getBeneficiaryBankList() async {
-    return accountList;
-  }
-
-  // select source by Bank account
-  setSourceAccount(BankAccount bankAccount) {
-    _selectedSourceAccount.value = bankAccount;
-    // remvove the element from the list
-    accountList.remove(bankAccount);
-    print("${_selectedSourceAccount.value.accountName} selected");
-  }
-
-  setBeneficiaryAccount(BankAccount bankAccount) {
-    _selectedBeneficiaryAccount.value = bankAccount;
-    print("${_selectedBeneficiaryAccount.value.accountNumber} selected");
+    Get.back();
   }
 
   TextEditingController beneficialAmountController = TextEditingController();
@@ -213,12 +230,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
         backgroundColor: Colors.green,
         colorText: Colors.white,
       );
-      // Get.to(
-      //   () => const ActionCenterScreen(),
-      //   binding: BindingsBuilder.put(
-      //     () => ActionCenterViewModel(),
-      //   ),
-      // );
+      // redirect to action center
       Get.offAndToNamed(RoutesName.actionCenter);
     } else {
       _isAccountPaymentLoading.value = false;
