@@ -59,7 +59,7 @@ class ApprovalTokenDialogue extends StatelessWidget {
                   controller.approvalTokenController.text = value;
                   Get.back();
                   controller.approvePayment(
-                    approve: true,
+                    approve: isApproved,
                     paymentId: controller.paymentDetails.id!.toInt(),
                     batchID: controller.paymentDetails.batchid,
                   );

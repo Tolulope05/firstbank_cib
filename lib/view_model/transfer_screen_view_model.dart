@@ -254,7 +254,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       subsidiaryId: profileViewModel.subsidiaryId,
       session: "${getSession()}",
       username: "${getFullname()}@${getCorporateCode()}",
-      sourceAccountId: selectedSourceAccountFB.accountId!.toInt(),
+      sourceAccountId: selectedSourceAccount.accountId!.toInt(),
       bankCode: selectedBeneficiaryAccount.bankCode ?? "011",
       amount: int.parse(beneficialAmountController.text),
       charges: 0,
