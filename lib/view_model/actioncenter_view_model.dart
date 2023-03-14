@@ -13,6 +13,8 @@ class ActionCenterViewModel extends GetxController with CacheManager {
   Paymentservices paymentservices = Paymentservices();
   ProfileViewModel profileViewModel = Get.put(ProfileViewModel());
 
+  TextEditingController approvalTokenController = TextEditingController();
+
   // local payment servie call
   final Rx<SinglePaymentResponse> _localPaymentResponse =
       SinglePaymentResponse().obs;
@@ -92,7 +94,7 @@ class ActionCenterViewModel extends GetxController with CacheManager {
       paymentId: paymentId,
       subsidiaryId: profileViewModel.subsidiaryId,
       batchId: batchID,
-      token: generateRandomInt().toString(),
+      token: approvalTokenController.text.removeAllWhitespace,
     );
 
     if (approvalResp.success == true) {

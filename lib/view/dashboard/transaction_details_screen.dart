@@ -212,6 +212,7 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                                         // setState(() {
                                         //   isSubmitted = true;
                                         // });
+
                                         controller.approvePayment(
                                           approve: true,
                                           paymentId: paymentDetails.id!.toInt(),
