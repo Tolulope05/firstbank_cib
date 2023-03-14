@@ -180,12 +180,12 @@ class TransferScreenViewModel extends GetxController with CacheManager {
     }
   }
 
-  final RxBool _isOwnAccountPaymentLoading = false.obs;
-  bool get isOwnAccountPaymentLoading => _isOwnAccountPaymentLoading.value;
+  final RxBool _isAccountPaymentLoading = false.obs;
+  bool get isAccountPaymentLoading => _isAccountPaymentLoading.value;
 
-  // call initiate payment
+  // call initiate payment now
   Future<void> initiateOwnAccountPayment() async {
-    _isOwnAccountPaymentLoading.value = true;
+    _isAccountPaymentLoading.value = true;
     InitiatePaymentResponse initiatePaymentResponse =
         await paymentservices.initiatePayment(
       subsidiaryId: profileViewModel.subsidiaryId,
@@ -205,7 +205,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       saveBeneficiary: saveBeneficiary,
     );
     if (initiatePaymentResponse.success == true) {
-      _isOwnAccountPaymentLoading.value = false;
+      _isAccountPaymentLoading.value = false;
       Get.snackbar(
         "Success",
         initiatePaymentResponse.responseMessage.toString(),
@@ -221,7 +221,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       // );
       Get.offAndToNamed(RoutesName.actionCenter);
     } else {
-      _isOwnAccountPaymentLoading.value = false;
+      _isAccountPaymentLoading.value = false;
       Get.snackbar(
         "Something went wrong",
         initiatePaymentResponse.responseMessage.toString(),
@@ -231,8 +231,4 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       );
     }
   }
-
-  /**  DateTime now = DateTime.now();
-  String formattedDate = DateFormat('yyyy-MM-dd').format(now.add(Duration(days: 1148)));
-  print(formattedDate); // Output: "2023-03-10" */
 }

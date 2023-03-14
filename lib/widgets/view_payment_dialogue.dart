@@ -1,12 +1,12 @@
 import 'package:firstbank_cib/constants/colors.dart';
-import 'package:firstbank_cib/view_model/transfer_screen_view_model.dart';
 import 'package:firstbank_cib/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class InitiatePaymentDialogue extends StatelessWidget {
-  const InitiatePaymentDialogue({Key? key, required this.onTap})
-      : super(key: key);
+import '../view_model/view_model.dart';
+
+class ViewPaymentDialogue extends StatelessWidget {
+  const ViewPaymentDialogue({Key? key, required this.onTap}) : super(key: key);
   final VoidCallback onTap;
 
   @override
@@ -64,7 +64,7 @@ class InitiatePaymentDialogue extends StatelessWidget {
             Obx(
               () => Padding(
                 padding: const EdgeInsets.only(top: 24),
-                child: controller.isOwnAccountPaymentLoading
+                child: controller.isAccountPaymentLoading
                     ? AppButton(
                         onTap: () {},
                         child: Row(

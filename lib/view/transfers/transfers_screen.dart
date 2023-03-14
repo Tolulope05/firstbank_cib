@@ -1,6 +1,5 @@
 import 'package:firstbank_cib/utils/utils.dart';
 import 'package:firstbank_cib/widgets/app_button.dart';
-import 'package:firstbank_cib/widgets/initiate_payment_dialogue.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -9,6 +8,7 @@ import '../../constants/colors.dart';
 import '../../model/model.dart';
 import '../../view_model/transfer_screen_view_model.dart';
 import '../../widgets/text_field_input.dart';
+import '../../widgets/view_payment_dialogue.dart';
 
 class TransfersScreen extends StatefulWidget {
   const TransfersScreen({Key? key}) : super(key: key);
@@ -224,210 +224,211 @@ class OwnAccountTabView extends GetView<TransferScreenViewModel> {
             ),
           ),
           //START
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 24,
-              right: 18.0,
-              left: 18.0,
-            ),
-            child: Obx(
-              () => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 8.0),
-                    child: Text(
-                      "Payment Type",
-                      style: TextStyle(
-                        color: AppColors.textColor2,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Row(
-                        children: [
-                          Radio(
-                            value: 0,
-                            groupValue: controller.ownselectedPaymentType,
-                            fillColor: MaterialStateColor.resolveWith(
-                                (states) => AppColors.yellowColor3),
-                            onChanged: (value) {
-                              controller.setOwnPaymentType(value!);
-                            },
-                          ),
-                          const Text(
-                            'Salary Payment',
-                            style: TextStyle(
-                              color: AppColors.textColor2,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Radio(
-                            value: 2,
-                            groupValue: controller.ownselectedPaymentType,
-                            fillColor: MaterialStateColor.resolveWith(
-                              (states) => AppColors.yellowColor3,
-                            ),
-                            onChanged: (value) {
-                              controller.setOwnPaymentType(value!);
-                            },
-                          ),
-                          const Text(
-                            'Vendor Payment',
-                            style: TextStyle(
-                              color: AppColors.textColor2,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        value: 3,
-                        groupValue: controller.ownselectedPaymentType,
-                        fillColor: MaterialStateColor.resolveWith(
-                          (states) => AppColors.yellowColor3,
-                        ),
-                        onChanged: (value) {
-                          controller.setOwnPaymentType(value!);
-                        },
-                      ),
-                      const Text(
-                        'Other Payment',
-                        style: TextStyle(
-                          color: AppColors.textColor2,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 24,
-              right: 18.0,
-              left: 18.0,
-            ),
-            child: Obx(
-              () => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 8.0),
-                    child: Text(
-                      "Payment method",
-                      style: TextStyle(
-                        color: AppColors.textColor2,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Row(
-                        children: [
-                          Radio(
-                            value: 0,
-                            groupValue: controller.ownselectedPaymentTMethod,
-                            fillColor: MaterialStateColor.resolveWith(
-                                (states) => AppColors.yellowColor3),
-                            onChanged: (value) {
-                              controller.setOwnPaymentMethod(value!);
-                            },
-                          ),
-                          const Text(
-                            'Instant Payment',
-                            style: TextStyle(
-                              color: AppColors.textColor2,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Radio(
-                            value: 1,
-                            groupValue: controller.ownselectedPaymentTMethod,
-                            fillColor: MaterialStateColor.resolveWith(
-                              (states) => AppColors.yellowColor3,
-                            ),
-                            onChanged: (value) {
-                              controller.setOwnPaymentMethod(value!);
-                            },
-                          ),
-                          const Text(
-                            'PAPPS',
-                            style: TextStyle(
-                              color: AppColors.textColor2,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Row(
-                        children: [
-                          Radio(
-                            value: 2,
-                            groupValue: controller.ownselectedPaymentTMethod,
-                            fillColor: MaterialStateColor.resolveWith(
-                                (states) => AppColors.yellowColor3),
-                            onChanged: (value) {
-                              controller.setOwnPaymentMethod(value!);
-                            },
-                          ),
-                          const Text(
-                            'BULK NIP',
-                            style: TextStyle(
-                              color: AppColors.textColor2,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Radio(
-                            value: 3,
-                            groupValue: controller.ownselectedPaymentTMethod,
-                            fillColor: MaterialStateColor.resolveWith(
-                              (states) => AppColors.yellowColor3,
-                            ),
-                            onChanged: (value) {
-                              controller.setOwnPaymentMethod(value!);
-                            },
-                          ),
-                          const Text(
-                            'RTGS',
-                            style: TextStyle(
-                              color: AppColors.textColor2,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     top: 24,
+          //     right: 18.0,
+          //     left: 18.0,
+          //   ),
+          //   child: Obx(
+          //     () => Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: <Widget>[
+          //         const Padding(
+          //           padding: EdgeInsets.only(bottom: 8.0),
+          //           child: Text(
+          //             "Payment Type",
+          //             style: TextStyle(
+          //               color: AppColors.textColor2,
+          //               fontSize: 12,
+          //             ),
+          //           ),
+          //         ),
+          //         Row(
+          //           children: [
+          //             Row(
+          //               children: [
+          //                 Radio(
+          //                   value: 0,
+          //                   groupValue: controller.ownselectedPaymentType,
+          //                   fillColor: MaterialStateColor.resolveWith(
+          //                       (states) => AppColors.yellowColor3),
+          //                   onChanged: (value) {
+          //                     controller.setOwnPaymentType(value!);
+          //                   },
+          //                 ),
+          //                 const Text(
+          //                   'Salary Payment',
+          //                   style: TextStyle(
+          //                     color: AppColors.textColor2,
+          //                     fontSize: 12,
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //             Row(
+          //               children: [
+          //                 Radio(
+          //                   value: 2,
+          //                   groupValue: controller.ownselectedPaymentType,
+          //                   fillColor: MaterialStateColor.resolveWith(
+          //                     (states) => AppColors.yellowColor3,
+          //                   ),
+          //                   onChanged: (value) {
+          //                     controller.setOwnPaymentType(value!);
+          //                   },
+          //                 ),
+          //                 const Text(
+          //                   'Vendor Payment',
+          //                   style: TextStyle(
+          //                     color: AppColors.textColor2,
+          //                     fontSize: 12,
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //           ],
+          //         ),
+          //         Row(
+          //           children: [
+          //             Radio(
+          //               value: 3,
+          //               groupValue: controller.ownselectedPaymentType,
+          //               fillColor: MaterialStateColor.resolveWith(
+          //                 (states) => AppColors.yellowColor3,
+          //               ),
+          //               onChanged: (value) {
+          //                 controller.setOwnPaymentType(value!);
+          //               },
+          //             ),
+          //             const Text(
+          //               'Other Payment',
+          //               style: TextStyle(
+          //                 color: AppColors.textColor2,
+          //                 fontSize: 12,
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     top: 24,
+          //     right: 18.0,
+          //     left: 18.0,
+          //   ),
+          //   child: Obx(
+          //     () => Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: <Widget>[
+          //         const Padding(
+          //           padding: EdgeInsets.only(bottom: 8.0),
+          //           child: Text(
+          //             "Payment method",
+          //             style: TextStyle(
+          //               color: AppColors.textColor2,
+          //               fontSize: 12,
+          //             ),
+          //           ),
+          //         ),
+          //         Row(
+          //           children: [
+          //             Row(
+          //               children: [
+          //                 Radio(
+          //                   value: 0,
+          //                   groupValue: controller.ownselectedPaymentTMethod,
+          //                   fillColor: MaterialStateColor.resolveWith(
+          //                       (states) => AppColors.yellowColor3),
+          //                   onChanged: (value) {
+          //                     controller.setOwnPaymentMethod(value!);
+          //                   },
+          //                 ),
+          //                 const Text(
+          //                   'Instant Payment',
+          //                   style: TextStyle(
+          //                     color: AppColors.textColor2,
+          //                     fontSize: 12,
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //             Row(
+          //               children: [
+          //                 Radio(
+          //                   value: 1,
+          //                   groupValue: controller.ownselectedPaymentTMethod,
+          //                   fillColor: MaterialStateColor.resolveWith(
+          //                     (states) => AppColors.yellowColor3,
+          //                   ),
+          //                   onChanged: (value) {
+          //                     controller.setOwnPaymentMethod(value!);
+          //                   },
+          //                 ),
+          //                 const Text(
+          //                   'PAPPS',
+          //                   style: TextStyle(
+          //                     color: AppColors.textColor2,
+          //                     fontSize: 12,
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //           ],
+          //         ),
+          //         Row(
+          //           children: [
+          //             Row(
+          //               children: [
+          //                 Radio(
+          //                   value: 2,
+          //                   groupValue: controller.ownselectedPaymentTMethod,
+          //                   fillColor: MaterialStateColor.resolveWith(
+          //                       (states) => AppColors.yellowColor3),
+          //                   onChanged: (value) {
+          //                     controller.setOwnPaymentMethod(value!);
+          //                   },
+          //                 ),
+          //                 const Text(
+          //                   'BULK NIP',
+          //                   style: TextStyle(
+          //                     color: AppColors.textColor2,
+          //                     fontSize: 12,
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //             Row(
+          //               children: [
+          //                 Radio(
+          //                   value: 3,
+          //                   groupValue: controller.ownselectedPaymentTMethod,
+          //                   fillColor: MaterialStateColor.resolveWith(
+          //                     (states) => AppColors.yellowColor3,
+          //                   ),
+          //                   onChanged: (value) {
+          //                     controller.setOwnPaymentMethod(value!);
+          //                   },
+          //                 ),
+          //                 const Text(
+          //                   'RTGS',
+          //                   style: TextStyle(
+          //                     color: AppColors.textColor2,
+          //                     fontSize: 12,
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          // END
           Padding(
             padding: const EdgeInsets.only(
               top: 12,
@@ -474,7 +475,7 @@ class OwnAccountTabView extends GetView<TransferScreenViewModel> {
                           Navigator.pop(context);
                           showDialog(
                             context: context,
-                            builder: (context) => InitiatePaymentDialogue(
+                            builder: (context) => ViewPaymentDialogue(
                               onTap: () =>
                                   controller.initiateOwnAccountPayment(),
                             ),
