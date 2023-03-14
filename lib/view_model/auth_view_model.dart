@@ -78,6 +78,48 @@ class AuthViewModel extends GetxController with CacheManager {
           // title: "Welcome ${userResponse!.fullname} ",
           message: resFromServer.responseMessage ?? "Successfully logged in",
         );
+      } else if (resFromServer.responseMessage ==
+          "You are already logged in.") {
+        Get.dialog(
+          AlertDialog(
+            title: const Text(
+              "Already Logged In",
+              style: TextStyle(color: AppColors.failedColor),
+            ),
+            content:
+                const Text("You are already logged in. Do you want to logout?"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: const Text(
+                  "No",
+                  style: TextStyle(
+                    color: AppColors.blackColor,
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () async {
+                  LogoutResponse logoutResp = await authServices.logoutUser(
+                    username:
+                        "${usernameController.text}@${organizationCodeController.text}",
+                    session: getSession() ?? "string",
+                  );
+                  Get.back();
+                },
+                child: const Text(
+                  "Yes",
+                  style: TextStyle(
+                    color: AppColors.failedColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          barrierDismissible: false,
+        );
       } else {
         _isLogged.value = false;
         await saveToken(_userResponse.value.token);
