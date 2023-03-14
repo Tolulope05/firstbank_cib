@@ -13,26 +13,6 @@ class TransferScreenViewModel extends GetxController with CacheManager {
   // profile dynamic subsidiary id
   ProfileViewModel profileViewModel = Get.put(ProfileViewModel());
 
-// firstbank account number
-  TextEditingController firstBankSourceAccountController =
-      TextEditingController();
-  TextEditingController firstBankBeneficialAccountController =
-      TextEditingController();
-  TextEditingController firstBankBeneficialAccountnameController =
-      TextEditingController();
-  TextEditingController firstBankPaymentTypeController =
-      TextEditingController();
-  TextEditingController firstBankAmountAccountController =
-      TextEditingController();
-  TextEditingController firstBankPaymentMemoController =
-      TextEditingController();
-  final RxBool _saveBeneficiary = false.obs;
-  bool get saveBeneficiary => _saveBeneficiary.value;
-
-  void saveBeneficiaryToggle() {
-    _saveBeneficiary.value = !_saveBeneficiary.value;
-  }
-
   // other account number
   TextEditingController otherBankSourceAccountController =
       TextEditingController();
@@ -61,21 +41,14 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       TextEditingController();
 
   Paymentservices paymentservices = Paymentservices();
-  // local payment servie call
-  final Rx<LocalPaymentResponse> _localPaymentResponse =
-      LocalPaymentResponse().obs;
-  LocalPaymentResponse get localPaymentResponse => _localPaymentResponse.value;
 
   // making account dynamic
   final RxList<BankAccount> _accountList = <BankAccount>[].obs;
   List<BankAccount> get accountList => _accountList;
-
-  // NEW STUFF TODAY
-  // final Rx<BankAccount> _selectedAccount = BankAccount().obs;
-  // BankAccount get selectedAccount => _selectedAccount.value;
+  final RxList<Beneficiary> _beneficiarylist = <Beneficiary>[].obs;
+  List<Beneficiary> get beneficiarylist => _beneficiarylist;
 
   /// OWN ACCOUNT LOGICS
-  // select source by account number
   final Rx<BankAccount> _selectedSourceAccount = BankAccount().obs;
   BankAccount get selectedSourceAccount => _selectedSourceAccount.value;
   final Rx<BankAccount> _selectedBeneficiaryAccount = BankAccount().obs;
@@ -92,7 +65,39 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       TextEditingController();
   TextEditingController ownBankBeneficiaryAccountController =
       TextEditingController();
+  TextEditingController beneficialAmountController = TextEditingController();
+  TextEditingController ownAccountPaymentMemoController =
+      TextEditingController();
+  final RxString _valueDate = "".obs;
+  String get ownvalueDate => _valueDate.value;
 
+// FIRST BANK TAB LOGICS
+  TextEditingController firstBankSourceAccountController =
+      TextEditingController();
+  TextEditingController firstBankBeneficialAccountController =
+      TextEditingController();
+  TextEditingController firstBankBeneficialAccountnameController =
+      TextEditingController();
+  TextEditingController firstBankPaymentTypeController =
+      TextEditingController();
+  TextEditingController firstBankAmountAccountController =
+      TextEditingController();
+  TextEditingController firstBankPaymentMemoController =
+      TextEditingController();
+  final RxBool _saveBeneficiary = false.obs;
+  bool get saveBeneficiary => _saveBeneficiary.value;
+
+  void saveBeneficiaryToggle() {
+    _saveBeneficiary.value = !_saveBeneficiary.value;
+  }
+
+  final Rx<BankAccount> _selectedSourceAccountFB = BankAccount().obs;
+  BankAccount get selectedSourceAccountFB => _selectedSourceAccountFB.value;
+  final RxString _selectedSourceAccounthintTextFB = "Select Account".obs;
+  String get selectedSourceAccounthintTextFB =>
+      _selectedSourceAccounthintTextFB.value;
+
+  //get account list
   selectAccountfromDialogue(int index, int selector) {
     switch (selector) {
       case 1:
@@ -112,17 +117,19 @@ class TransferScreenViewModel extends GetxController with CacheManager {
         print("${_selectedBeneficiaryAccount.value.accountNumber} selected");
         _accountList.refresh();
         break;
+
+      case 3:
+        _selectedSourceAccountFB.value = _accountList[index];
+        _selectedSourceAccounthintTextFB.value =
+            "${_accountList[index].accountName} - ${_accountList[index].accountNumber}";
+        print("${_selectedSourceAccountFB.value.accountNumber} selected");
+        break;
+
       default:
     }
 
     Get.back();
   }
-
-  TextEditingController beneficialAmountController = TextEditingController();
-  TextEditingController ownAccountPaymentMemoController =
-      TextEditingController();
-  final RxString _valueDate = "".obs;
-  String get ownvalueDate => _valueDate.value;
 
   changeDateTonow() {
     DateTime dateTime = DateTime.now();
@@ -182,8 +189,9 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       subsidiaryId: 2,
     );
     if (localPayResp.success == true) {
-      _localPaymentResponse.value = localPayResp;
-      _accountList.value = localPayResp.accounts!;
+      _accountList.value = localPayResp.accounts!; // set own account list
+      _beneficiarylist.value =
+          localPayResp.beneficiaries!; // set FB account list
     } else {
       Get.snackbar(
         "Error",

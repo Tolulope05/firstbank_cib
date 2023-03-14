@@ -118,20 +118,29 @@ class OwnAccountTabView extends GetView<TransferScreenViewModel> {
               left: 16.0,
             ),
             child: Obx(
-              () => AppTextFieldInput(
-                controller: controller.ownBankSourceAccountController,
-                headerText: "Source Account",
-                hintText: controller.selectedSourceAccounthintText,
-                readOnly: true,
-                suffixIcon: InkWell(
-                  onTap: () {
-                    Get.dialog(const SelectPaymentAccountDialogue(
+              () => GestureDetector(
+                onTap: () {
+                  Get.dialog(
+                    const SelectPaymentAccountDialogue(
                       selector: 1,
-                    ));
-                  },
-                  child: const RotatedBox(
-                    quarterTurns: 45,
-                    child: Icon(Icons.chevron_right),
+                    ),
+                  );
+                },
+                child: AppTextFieldInput(
+                  controller: controller.ownBankSourceAccountController,
+                  headerText: "Source Account",
+                  hintText: controller.selectedSourceAccounthintText,
+                  readOnly: true,
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      Get.dialog(const SelectPaymentAccountDialogue(
+                        selector: 1,
+                      ));
+                    },
+                    child: const RotatedBox(
+                      quarterTurns: 45,
+                      child: Icon(Icons.chevron_right),
+                    ),
                   ),
                 ),
               ),
@@ -144,22 +153,31 @@ class OwnAccountTabView extends GetView<TransferScreenViewModel> {
               left: 16.0,
             ),
             child: Obx(
-              () => AppTextFieldInput(
-                controller: controller.ownBankBeneficiaryAccountController,
-                headerText: "Account to credit",
-                hintText: controller.selectedBeneficiaryAccounthintText,
-                readOnly: true,
-                suffixIcon: InkWell(
-                  onTap: () {
-                    Get.dialog(
-                      const SelectPaymentAccountDialogue(
-                        selector: 2,
-                      ),
-                    );
-                  },
-                  child: const RotatedBox(
-                    quarterTurns: 45,
-                    child: Icon(Icons.chevron_right),
+              () => GestureDetector(
+                onTap: () {
+                  Get.dialog(
+                    const SelectPaymentAccountDialogue(
+                      selector: 2,
+                    ),
+                  );
+                },
+                child: AppTextFieldInput(
+                  controller: controller.ownBankBeneficiaryAccountController,
+                  headerText: "Account to credit",
+                  hintText: controller.selectedBeneficiaryAccounthintText,
+                  readOnly: true,
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      Get.dialog(
+                        const SelectPaymentAccountDialogue(
+                          selector: 2,
+                        ),
+                      );
+                    },
+                    child: const RotatedBox(
+                      quarterTurns: 45,
+                      child: Icon(Icons.chevron_right),
+                    ),
                   ),
                 ),
               ),
@@ -488,13 +506,25 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
               right: 16.0,
               left: 16.0,
             ),
-            child: AppTextFieldInput(
-              controller: controller.firstBankSourceAccountController,
-              headerText: 'Source Account',
-              hintText: 'Select Account',
-              suffixIcon: const RotatedBox(
-                quarterTurns: 45,
-                child: Icon(Icons.chevron_right),
+            child: Obx(
+              () => AppTextFieldInput(
+                controller: controller.firstBankSourceAccountController,
+                headerText: 'Source Account',
+                hintText: controller.selectedSourceAccounthintTextFB,
+                readOnly: true,
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    Get.dialog(
+                      const SelectPaymentAccountDialogue(
+                        selector: 3,
+                      ),
+                    );
+                  },
+                  child: const RotatedBox(
+                    quarterTurns: 45,
+                    child: Icon(Icons.chevron_right),
+                  ),
+                ),
               ),
             ),
           ),
@@ -749,6 +779,9 @@ class OtherBankTabview extends GetView<TransferScreenViewModel> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<TransferScreenViewModel>();
+    return const Center(
+      child: Text("Other Bank Tab"),
+    );
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -988,6 +1021,9 @@ class InternationalBankTabview extends GetView<TransferScreenViewModel> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<TransferScreenViewModel>();
+    return const Center(
+      child: Text("International Bank Tab"),
+    );
     return SingleChildScrollView(
       child: Column(
         children: [
