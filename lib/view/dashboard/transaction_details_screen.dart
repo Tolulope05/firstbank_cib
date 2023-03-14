@@ -1,6 +1,7 @@
 import 'package:firstbank_cib/constants/colors.dart';
 import 'package:firstbank_cib/model/model.dart';
 import 'package:firstbank_cib/widgets/app_button.dart';
+import 'package:firstbank_cib/widgets/approval_token_dialogue.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -209,14 +210,10 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                                     )
                                   : AppButton(
                                       onTap: () {
-                                        // setState(() {
-                                        //   isSubmitted = true;
-                                        // });
-
-                                        controller.approvePayment(
-                                          approve: true,
-                                          paymentId: paymentDetails.id!.toInt(),
-                                          batchID: paymentDetails.batchid,
+                                        Get.dialog(
+                                          const ApprovalTokenDialogue(
+                                            isApproved: true,
+                                          ),
                                         );
                                       },
                                       text: "Approve",
@@ -244,10 +241,10 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen>
                                     )
                                   : AppButton(
                                       onTap: () {
-                                        controller.approvePayment(
-                                          approve: false,
-                                          paymentId: paymentDetails.id!.toInt(),
-                                          batchID: paymentDetails.batchid,
+                                        Get.dialog(
+                                          const ApprovalTokenDialogue(
+                                            isApproved: false,
+                                          ),
                                         );
                                       },
                                       text: "Decline",

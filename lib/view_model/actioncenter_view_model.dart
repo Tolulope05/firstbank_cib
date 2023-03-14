@@ -66,14 +66,6 @@ class ActionCenterViewModel extends GetxController with CacheManager {
     }
   }
 
-  // generate 8 random int
-  int generateRandomInt() {
-    var rng = Random();
-    int rngInt = rng.nextInt(100000000);
-    print(rngInt);
-    return rngInt;
-  }
-
   final RxBool _isLoadingTrue = false.obs;
   bool get isLoadingTrue => _isLoadingTrue.value;
   final RxBool _isLoadingFalse = false.obs;
@@ -84,7 +76,6 @@ class ActionCenterViewModel extends GetxController with CacheManager {
     required int paymentId,
     required bool approve,
   }) async {
-    generateRandomInt();
     approve ? _isLoadingTrue.value = true : _isLoadingFalse.value = true;
 
     ApprovePaymentResponse approvalResp = await paymentservices.approvePayment(
@@ -98,6 +89,7 @@ class ActionCenterViewModel extends GetxController with CacheManager {
     );
 
     if (approvalResp.success == true) {
+      approvalTokenController.clear();
       _isLoadingTrue.value = false;
       _isLoadingFalse.value = false;
       Get.snackbar(
@@ -108,6 +100,7 @@ class ActionCenterViewModel extends GetxController with CacheManager {
       );
       Get.offAndToNamed(RoutesName.homeScreen);
     } else {
+      approvalTokenController.clear();
       _isLoadingTrue.value = false;
       _isLoadingFalse.value = false;
       Get.snackbar(
