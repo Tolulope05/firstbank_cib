@@ -96,6 +96,15 @@ class TransferScreenViewModel extends GetxController with CacheManager {
   final RxString _selectedSourceAccounthintTextFB = "Select Account".obs;
   String get selectedSourceAccounthintTextFB =>
       _selectedSourceAccounthintTextFB.value;
+  final Rx<Beneficiary> _selectedbeneficiaryFB = Beneficiary().obs;
+  Beneficiary get selectedbeneficiaryFB => _selectedbeneficiaryFB.value;
+  final RxString _selectedBeneficiaryAccountnum = "01234567".obs;
+  String get selectedBeneficiaryAccountnum =>
+      _selectedBeneficiaryAccountnum.value;
+  final RxString _selectedBeneficiaryName = " ".obs;
+  String get selectedBeneficiaryName => _selectedBeneficiaryName.value;
+  final RxString _valueDateFB = "".obs;
+  String get ownvalueDateFB => _valueDate.value;
 
   //get account list
   selectAccountfromDialogue(int index, int selector) {
@@ -131,11 +140,20 @@ class TransferScreenViewModel extends GetxController with CacheManager {
     Get.back();
   }
 
+  selectBeneficiaryFromDialogue(int index) {
+    _selectedbeneficiaryFB.value = _beneficiarylist[index];
+    _selectedBeneficiaryAccountnum.value =
+        "${_beneficiarylist[index].accountNumber}";
+    _selectedBeneficiaryName.value = "${_beneficiarylist[index].accountName}";
+    Get.back();
+  }
+
   changeDateTonow() {
     DateTime dateTime = DateTime.now();
     String result = DateFormat("yyyy/MM/dd").format(dateTime);
     print(result); // Output: 2023/03/10
     _valueDate.value = result;
+    _valueDateFB.value = result;
   }
 
   final Rx<int> _ownselectedPaymentType = 0.obs;
@@ -169,6 +187,26 @@ class TransferScreenViewModel extends GetxController with CacheManager {
           String result = DateFormat("yyyy/MM/dd").format(dateTime);
           print(result); // Output: 2023/03/10
           _valueDate.value = result;
+        }
+      },
+    );
+  }
+
+  //get Date picker
+  showDatePickerDialogFB() {
+    showDatePicker(
+      context: Get.context!,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 100),
+    ).then(
+      (value) {
+        if (value != null) {
+          // print(value);
+          DateTime dateTime = DateTime.parse(value.toString());
+          String result = DateFormat("yyyy/MM/dd").format(dateTime);
+          print(result); // Output: 2023/03/10
+          _valueDateFB.value = result;
         }
       },
     );
@@ -216,7 +254,7 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       subsidiaryId: profileViewModel.subsidiaryId,
       session: "${getSession()}",
       username: "${getFullname()}@${getCorporateCode()}",
-      sourceAccountId: selectedSourceAccount.accountId!.toInt(),
+      sourceAccountId: selectedSourceAccountFB.accountId!.toInt(),
       bankCode: selectedBeneficiaryAccount.bankCode ?? "011",
       amount: int.parse(beneficialAmountController.text),
       charges: 0,
@@ -227,6 +265,49 @@ class TransferScreenViewModel extends GetxController with CacheManager {
       memo: ownAccountPaymentMemoController.text,
       recieverAccountNumber: selectedBeneficiaryAccount.accountNumber!,
       recieverName: selectedBeneficiaryAccount.preferredName ?? "",
+      saveBeneficiary: saveBeneficiary,
+    );
+    if (initiatePaymentResponse.success == true) {
+      _isAccountPaymentLoading.value = false;
+      Get.snackbar(
+        "Success",
+        initiatePaymentResponse.responseMessage.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+      // redirect to action center
+      Get.offAndToNamed(RoutesName.actionCenter);
+    } else {
+      _isAccountPaymentLoading.value = false;
+      Get.snackbar(
+        "Something went wrong",
+        initiatePaymentResponse.responseMessage.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
+  Future<void> initiateToFirstBankAccountPayment() async {
+    _isAccountPaymentLoading.value = true;
+    InitiatePaymentResponse initiatePaymentResponse =
+        await paymentservices.initiatePayment(
+      subsidiaryId: profileViewModel.subsidiaryId,
+      session: "${getSession()}",
+      username: "${getFullname()}@${getCorporateCode()}",
+      sourceAccountId: selectedSourceAccountFB.accountId!.toInt(),
+      bankCode: selectedbeneficiaryFB.bankCode ?? "011",
+      amount: int.parse(firstBankAmountAccountController.text),
+      charges: 0,
+      paymentType: ownselectedPaymentType,
+      bankName: selectedbeneficiaryFB.bankName!,
+      paymentMethod: ownselectedPaymentTMethod,
+      dateTime: ownvalueDateFB,
+      memo: firstBankPaymentMemoController.text,
+      recieverAccountNumber: selectedbeneficiaryFB.accountNumber!,
+      recieverName: selectedbeneficiaryFB.accountName ?? "",
       saveBeneficiary: saveBeneficiary,
     );
     if (initiatePaymentResponse.success == true) {

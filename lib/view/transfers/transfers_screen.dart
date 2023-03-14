@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
 import '../../view_model/transfer_screen_view_model.dart';
+import '../../widgets/select_beneficiary_dialogue.dart';
 import '../../widgets/select_payment_account_dialogue.dart';
 import '../../widgets/text_field_input.dart';
 import '../../widgets/view_payment_dialogue.dart';
@@ -538,14 +539,37 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Flexible(
-                  child: AppTextFieldInput(
-                    controller: controller.firstBankBeneficialAccountController,
-                    headerText: 'Account Number',
-                    hintText: '0123456789',
+                  child: Obx(
+                    () => AppTextFieldInput(
+                      controller:
+                          controller.firstBankBeneficialAccountController,
+                      headerText: 'Account Number',
+                      hintText: controller.selectedBeneficiaryAccountnum,
+                      readOnly: true,
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          Get.dialog(
+                            const SelectBeneficiaryDialogue(
+                              selector: 3,
+                            ),
+                          );
+                        },
+                        child: const RotatedBox(
+                          quarterTurns: 45,
+                          child: Icon(Icons.chevron_right),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Get.dialog(
+                      const SelectBeneficiaryDialogue(
+                        selector: 3,
+                      ),
+                    );
+                  },
                   child: Container(
                     margin: const EdgeInsets.only(left: 8, top: 20),
                     padding: const EdgeInsets.all(16),
@@ -569,10 +593,13 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
               right: 16.0,
               left: 16.0,
             ),
-            child: AppTextFieldInput(
-              controller: controller.firstBankBeneficialAccountnameController,
-              headerText: 'Accout name',
-              hintText: '',
+            child: Obx(
+              () => AppTextFieldInput(
+                readOnly: true,
+                controller: controller.firstBankBeneficialAccountnameController,
+                headerText: 'Accout Name',
+                hintText: controller.selectedBeneficiaryName,
+              ),
             ),
           ),
           Padding(
@@ -683,11 +710,18 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
               right: 16.0,
               left: 16.0,
             ),
-            child: AppTextFieldInput(
-              controller: controller.firstBankPaymentTypeController,
-              headerText: 'Value Date',
-              hintText: '24/02/2023',
-              suffixIcon: const Icon(Icons.calendar_month_rounded),
+            child: Obx(
+              () => AppTextFieldInput(
+                controller: controller.firstBankPaymentTypeController,
+                headerText: 'Value Date',
+                hintText: controller.ownvalueDateFB,
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    controller.showDatePickerDialogFB();
+                  },
+                  child: const Icon(Icons.calendar_month_rounded),
+                ),
+              ),
             ),
           ),
           Padding(
@@ -719,35 +753,35 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 24,
-              right: 16.0,
-              left: 16.0,
-            ),
-            child: AppButton(
-              onTap: () {},
-              bgColor: Colors.transparent,
-              borderColor: AppColors.primaryColor,
-              textColor: AppColors.primaryColor,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(
-                    Icons.add_to_photos_rounded,
-                    color: AppColors.primaryColor,
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    "Add another transaction",
-                    style: TextStyle(
-                      color: AppColors.primaryColor,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     top: 24,
+          //     right: 16.0,
+          //     left: 16.0,
+          //   ),
+          //   child: AppButton(
+          //     onTap: () {},
+          //     bgColor: Colors.transparent,
+          //     borderColor: AppColors.primaryColor,
+          //     textColor: AppColors.primaryColor,
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: const [
+          //         Icon(
+          //           Icons.add_to_photos_rounded,
+          //           color: AppColors.primaryColor,
+          //         ),
+          //         SizedBox(width: 8),
+          //         Text(
+          //           "Add another transaction",
+          //           style: TextStyle(
+          //             color: AppColors.primaryColor,
+          //           ),
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.only(
               top: 24,
@@ -757,10 +791,42 @@ class FirstBankTabview extends GetView<TransferScreenViewModel> {
             ),
             child: AppButton(
               onTap: () {
-                // showDialog(
-                //   context: context,
-                // builder: (context) => const InitiatePaymentDialogue(),
-                // );
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Are you sure you want to pay?'),
+                    content: const Text('This process cannot be reversed.'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text(
+                          'Cancel',
+                          style: TextStyle(color: AppColors.failedColor),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          showDialog(
+                            context: context,
+                            builder: (context) => ViewPaymentDialogue(
+                              onTap: () => controller
+                                  .initiateToFirstBankAccountPayment(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Pay',
+                          style: TextStyle(
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
               },
               text: 'Initiate Payment',
             ),
