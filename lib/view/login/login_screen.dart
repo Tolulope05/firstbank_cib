@@ -69,21 +69,21 @@ class Logincreen extends GetView<LoginViewModel> {
             left: 20,
             right: 20,
             child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.7,
+              height: 453 + 68,
               child: PageView(controller: controller.pageController, children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.asset(
                       "assets/images/login_1.png",
-                      height: MediaQuery.of(context).size.height * 0.5,
+                      height: 453,
                       width: 324,
                     ),
                     const Text(
                       "Welcome to our corporate banking app!",
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 20,
+                        fontSize: 24,
                         color: AppColors.blackColor,
                       ),
                       textAlign: TextAlign.center,
