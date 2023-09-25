@@ -5,7 +5,7 @@ class FirstBank extends TestProject {
   video() {
     return {
       "title": "First Bank App",
-      "description": "An interview app",
+      "description": "First Bank Interview Project",
       "day": 2,
       "developer": "https://github.com/Tolulope05"
     }
